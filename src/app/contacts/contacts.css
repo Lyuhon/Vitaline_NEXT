@@ -1,0 +1,227 @@
+.contacts_wrap {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1050px;
+    margin: 0 auto;
+    margin-top: 60px;
+    margin-bottom: 50px;
+}
+
+h1.contact_title {
+    font-size: 25px;
+    font-weight: 550;
+    line-height: 24.7px;
+    margin-bottom: 30px;
+}
+
+.info_italic {
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 500;
+    line-height: 18px;
+    margin-bottom: 40px;
+}
+
+.contacts-social-links {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contacts_insta,
+.contacts_telegram,
+.tg_chat_btn {
+    color: #fff;
+    border-radius: 15px;
+    padding: 15px 20px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 22px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+
+    transition: transform 0.3s;
+}
+
+.contacts_insta:hover,
+.contacts_telegram:hover,
+.tg_chat_btn:hover {
+    transform: scale(1.03);
+}
+
+.contacts_insta {
+    background: linear-gradient(90deg, #ff9b47 0%, #d53871 26.41%, #5f3ed1 100%);
+}
+
+.contacts_telegram {
+    background: linear-gradient(180deg, #2aabee 0%, #229ed9 100%);
+}
+
+.contacts_telegram img {
+    width: 23px;
+}
+
+
+.contact-info .address_block {
+    margin-bottom: 50px;
+}
+
+.contact-info .address_block strong {
+    font-size: 20px;
+    /* font-weight: 400; */
+    font-weight: 600;
+    line-height: 19.9px;
+}
+
+.contact-info .address_block p {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 19.9px;
+}
+
+.phone_to_connect {
+    margin-bottom: 50px;
+}
+
+.phone_to_connect strong {
+    display: inline-block;
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 19.9px;
+}
+
+.phone_to_connect p {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 24px;
+
+}
+
+.support-info .store-image img {
+    border-radius: 20px;
+    margin-bottom: 23px;
+}
+
+.support_bottom_block h2 {
+    font-size: 20px;
+    font-weight: 550;
+    line-height: 22px;
+    margin-bottom: 20px;
+}
+
+.support_bottom_block {
+    border: 2px solid rgba(20, 37, 0, 0.1);
+    border-radius: 20px;
+    padding: 15px 30px 13px 30px;
+}
+
+.support_bottom_block .tg_chat_btn {
+    background: linear-gradient(90deg, #27A6E6 0%, #4FC274 52%, #77DE00 100%);
+    border-radius: 15px;
+    width: 50%;
+    white-space: nowrap;
+}
+
+.support_bottom_block_inner_wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.support_bottom_block_inner_wrap .support-contacts {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 19.8px;
+}
+
+
+
+
+
+
+
+
+.map_wrapper {
+    max-width: 1185px;
+    border-radius: 20px;
+    margin: 0 auto;
+    background: #fcfcf7;
+    margin-bottom: 80px;
+}
+
+.map_wrapper iframe {
+    border-radius: 20px;
+}
+
+
+@media only screen and (max-width: 768px) {
+    .contacts_page .contacts_wrap {
+        flex-direction: column;
+    }
+
+    .contacts_page {
+        padding: 0 26px;
+    }
+
+    h1.contact_title {
+        text-align: center;
+        font-size: 30px;
+        line-height: 30px;
+    }
+
+    .store-image.mobile_visible {
+        margin-bottom: 35px;
+    }
+
+    .contacts_page .address_block {
+        text-align: center;
+    }
+
+    .contacts_page .address_block p,
+    .contacts_page .address_block strong {
+        font-size: 17px;
+    }
+
+    .contacts_page .phone_to_connect,
+    p.info_italic {
+        text-align: center;
+    }
+
+    .contacts_page .phone_to_connect p {
+        font-size: 17px;
+    }
+
+    .contacts-social-links {
+        width: 100%;
+        margin-bottom: 40px;
+    }
+
+    .contacts_insta,
+    .contacts_telegram,
+    .tg_chat_btn {
+        padding: 11px 15px;
+        width: 100%;
+    }
+
+    .support_bottom_block_inner_wrap {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    }
+
+    .support_bottom_block h2 {
+        text-align: center;
+    }
+
+    .support_bottom_block_inner_wrap .support-contacts {
+        display: none;
+    }
+
+    .support_bottom_block .tg_chat_btn {
+        width: 100%;
+    }
+}

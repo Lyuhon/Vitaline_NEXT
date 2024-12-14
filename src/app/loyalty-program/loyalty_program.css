@@ -1,0 +1,128 @@
+.loyalty_program_page {
+    max-width: 1180px;
+    margin: 0 auto;
+    margin-bottom: 60px;
+    margin-top: 60px;
+}
+
+.loyalty_hero {
+    border-radius: 20px;
+    background-image: url(https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Group-92654852-1.png);
+    background-size: cover;
+    height: 130px;
+    background-position: center;
+    margin-bottom: 50px;
+}
+
+.loyalty_program_page h1 {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 36px;
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 100px;
+    margin-bottom: 100px;
+}
+
+.step h3 {
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 30px;
+    margin-bottom: 15px;
+}
+
+.step p {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 22px;
+}
+
+.loyalty_program_page .info {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.loyalty_program_page .info img {
+    border-radius: 20px;
+    width: 25%;
+}
+
+.loyalty_program_page .info .big_info {
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 27.5px;
+    margin-bottom: 50px;
+}
+
+.loyalty_program_page .info .regular_inf {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 22px;
+    margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+    .loyalty_program_page {
+        padding: 0 22px;
+    }
+
+    .loyalty_program_page h1 {
+        font-weight: 500;
+        margin-bottom: 30px;
+    }
+
+    .loyalty_hero {
+        height: 90px;
+        margin-bottom: 30px;
+    }
+
+    .steps {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
+    .step h3 {
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 24px;
+    }
+
+    .step p {
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 18px;
+    }
+
+    .loyalty_program_page .info .big_info {
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 16.5px;
+        margin-bottom: 40px;
+    }
+
+    .loyalty_program_page .info .regular_inf {
+        font-size: 15px;
+        font-weight: 300;
+        line-height: 16.5px;
+    }
+
+    .info img {
+        display: none;
+    }
+
+    .loyalty_info_hero {
+        border-radius: 20px;
+        background-image: url(https://nuxt.vitaline.uz/wp-content/uploads/2024/12/image-5.png);
+        background-size: cover;
+        height: 130px;
+        background-position: center;
+        margin-bottom: 40px;
+    }
+}

@@ -1,0 +1,14 @@
+.cat_list_ppp {
+    max-width: 1180px;
+    margin: 0 auto;
+    margin-bottom: 60px;
+    margin-top: 60px;
+    border-radius: 30px;
+}
+
+.cat_list_ppp h1 {
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 30px;
+    margin-bottom: 40px;
+}

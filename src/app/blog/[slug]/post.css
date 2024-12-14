@@ -1,0 +1,202 @@
+.single_post_wrapper {
+    max-width: 1180px;
+    margin: 0 auto;
+    margin-bottom: 60px;
+    margin-top: 60px;
+}
+
+.single_post_wrapper h1 {
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 36px;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.single_post_wrapper .post_hero {
+    border-radius: 20px;
+    background-size: cover !important;
+    background-position: center !important;
+    height: 450px;
+
+    margin-bottom: 50px;
+}
+
+.post_hero_gradient {
+    background: linear-gradient(to top, rgb(0 0 0 / 46%) 20%, rgba(0, 0, 0, 0) 100%);
+    border-radius: 20px;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    padding: 20px 30px;
+    height: 100%;
+}
+
+.single_post_wrapper .single_post_meta {
+    color: #fff;
+}
+
+/* Адпативность */
+@media only screen and (max-width: 768px) {
+    .single_post_wrapper {
+        padding: 0 22px;
+    }
+
+    .single_post_wrapper .post_hero {
+        height: 200px;
+    }
+
+    .post_hero_gradient {
+        padding: 15px 25px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Заголовки h1-h6 одного размера */
+.post_full_content h1,
+.post_full_content h2,
+.post_full_content h3,
+.post_full_content h4,
+.post_full_content h5,
+.post_full_content h6 {
+    font-size: 20px;
+    /* Одинаковый размер для всех заголовков */
+    font-weight: bold;
+    /* Жирный шрифт для заголовков */
+    margin-top: 20px;
+    /* Отступ сверху */
+    margin-bottom: 10px;
+    /* Отступ снизу */
+    color: #000;
+    /* Цвет заголовков */
+}
+
+.post_full_content p {
+    margin-bottom: 16px;
+    /* Отступ снизу для абзацев */
+}
+
+.post_full_content b,
+.post_full_content strong {
+    font-weight: bold;
+    /* Жирный текст */
+    color: #000;
+    /* Цвет для жирного текста */
+}
+
+.post_full_content ul {
+    padding-left: 20px;
+    /* Отступ слева для списка */
+    margin-bottom: 16px;
+    /* Отступ снизу */
+}
+
+.post_full_content li {
+    list-style-type: disc;
+    /* Используем обычные маркеры */
+    margin-bottom: 8px;
+    /* Отступ снизу для элементов списка */
+}
+
+.post_full_content table {
+    width: 100%;
+    /* Ширина таблицы 100% от родителя */
+    border-collapse: collapse;
+    /* Убираем промежутки между ячейками */
+    margin-bottom: 16px;
+    /* Отступ снизу */
+}
+
+.post_full_content table th,
+.post_full_content table td {
+    padding: 8px;
+    /* Внутренний отступ ячеек */
+    border: 1px solid #ddd;
+    /* Легкая граница для ячеек */
+    text-align: left;
+    /* Выравнивание текста по левому краю */
+}
+
+.post_full_content table th {
+    background-color: #f4f4f4;
+    /* Цвет фона для заголовков таблицы */
+    font-weight: bold;
+    /* Заголовки таблицы жирным */
+}
+
+.post_full_content a {
+    color: #007bff;
+    /* Синий цвет для ссылок */
+    text-decoration: none;
+    /* Убираем подчеркивание */
+}
+
+.post_full_content a:hover {
+    text-decoration: underline;
+    /* Подчеркивание на hover */
+}
+
+.post_full_content img {
+    max-width: 100%;
+    height: auto;
+    /* Сохраняем пропорции */
+    display: block;
+    /* Убираем лишние отступы вокруг изображения */
+    margin-bottom: 15px;
+    /* Отступ снизу */
+    border-radius: 10px;
+}
+
+.post_full_content a {
+    color: #FF7900;
+}
+
+.post_full_content blockquote {
+    border-left: 4px solid #ddd;
+    /* Левый бордер для цитат */
+    padding-left: 16px;
+    /* Внутренний отступ с левой стороны */
+    margin: 16px 0;
+    /* Отступ сверху и снизу */
+    font-style: italic;
+    /* Курсивный стиль */
+    color: #555;
+    /* Цвет цитаты */
+}
+
+.post_full_content hr {
+    border: 0;
+    border-top: 2px solid #ddd;
+    /* Горизонтальная линия */
+    margin: 32px 0;
+    /* Отступ сверху и снизу */
+}
+
+.post_full_content code {
+    font-family: 'Courier New', Courier, monospace;
+    /* Моноширинный шрифт для кода */
+    background-color: #f4f4f4;
+    /* Легкий фон */
+    padding: 4px 8px;
+    /* Внутренние отступы */
+    border-radius: 4px;
+    /* Скругленные углы */
+    color: #d6336c;
+    /* Цвет текста */
+}
+
+.post_full_content figure:first-of-type {
+    display: none;
+}

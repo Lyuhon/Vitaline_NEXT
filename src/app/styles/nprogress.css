@@ -1,0 +1,21 @@
+/* src/styles/nprogress.css */
+#nprogress {
+    pointer-events: none;
+}
+
+#nprogress .bar {
+    background: #29d;
+    /* Цвет полоски */
+    height: 3px;
+    /* Высота полоски */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1031;
+}
+
+#nprogress .peg {
+    display: none;
+    /* Скрываем анимацию на конце полоски */
+}

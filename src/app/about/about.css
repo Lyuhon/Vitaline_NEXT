@@ -1,0 +1,165 @@
+.about_page {
+    max-width: 1180px;
+    margin: 0 auto;
+    margin-bottom: 60px;
+    margin-top: 60px;
+}
+
+.about_page .abot_vitaline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+
+    margin-bottom: 100px;
+}
+
+.about_page .abot_vitaline img {
+    border-radius: 15px;
+}
+
+.about_page .abot_vitaline .about_image {
+    width: 40%;
+}
+
+
+.about_page .abot_vitaline .about_descript {
+    width: 60%;
+}
+
+.about_descript h1 {
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 30px;
+    margin-bottom: 35px;
+}
+
+.about_page p {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 22px;
+
+    margin-bottom: 20px;
+}
+
+.about_page .accent_t {
+    color: #FF7900;
+}
+
+.key_adv h2 {
+    font-size: 30px;
+    font-weight: 550;
+    line-height: 33px;
+    margin-bottom: 50px;
+}
+
+.key_adv_image_text_block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+
+    margin-bottom: 60px;
+}
+
+.key_adv .key_adv_image {
+    width: 40%;
+    border-radius: 15px;
+}
+
+.additional_key_adv {
+    max-width: 800px;
+    margin: 0 auto;
+    margin-bottom: 100px;
+
+    text-align: center;
+}
+
+
+
+.abot_vitaline_bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+
+    margin-bottom: 60px;
+}
+
+.about_descript_bottom {
+    width: 60%;
+}
+
+.about_image_bottom {
+    width: 40%;
+}
+
+@media only screen and (max-width: 768px) {
+    .about_page {
+        padding: 0 22px;
+    }
+
+    .about_page p {
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 17px;
+
+        margin-bottom: 20px;
+    }
+
+    .about_image h1 {
+        text-align: center;
+        font-size: 30px;
+        font-weight: 500;
+        line-height: 30px;
+        margin-bottom: 25px;
+    }
+
+    .abot_vitaline,
+    .key_adv_image_text_block,
+    .abot_vitaline_bottom {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .about_page .abot_vitaline {
+        gap: 30px;
+        margin-bottom: 10px;
+    }
+
+    .about_page .abot_vitaline .about_image,
+    .about_page .abot_vitaline .about_descript,
+    .key_adv .key_adv_image,
+    .about_descript_bottom,
+    .about_image_bottom {
+        width: 100%;
+    }
+
+    .key_adv_image_text_block {
+        margin-bottom: 30px;
+    }
+
+    .key_adv h2 {
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 20px;
+        text-align: center;
+        padding: 0 30px;
+        margin-bottom: 0px;
+    }
+
+    .additional_key_adv {
+        margin-bottom: 50px;
+    }
+
+    .additional_key_adv p {
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 22px;
+    }
+
+    .abot_vitaline_bottom {
+        flex-direction: column-reverse;
+        margin-bottom: 40px;
+    }
+}

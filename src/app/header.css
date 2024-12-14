@@ -1,0 +1,290 @@
+/* 1 секция */
+.header__top-bar {
+    background-color: #EBFFA380;
+}
+
+.header__top-bar-content {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 5px 10px 0 10px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .delivery_block {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    gap: 15px;
+
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 12px;
+}
+
+header .delivery_image {
+    width: 56px;
+}
+
+header .delivery_block b {
+    font-weight: 600;
+}
+
+.header__app-download {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 10px;
+    color: #000;
+    text-decoration: none;
+}
+
+.header__app-download img {
+    width: 20px;
+}
+
+
+
+
+
+
+/* 2 секция */
+.header__main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    max-width: 1220px;
+    padding: 25px 15px;
+    margin: 0 auto;
+}
+
+.header__logo__info {
+    display: flex;
+    gap: 21px;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 13px;
+
+    width: 35%;
+}
+
+.header__logo__info img {
+    width: 180px;
+}
+
+.header__search_and_contacts {
+    width: 70%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 17px;
+}
+
+.search_block {
+    display: flex;
+}
+
+.header__search_and_contacts input {
+    font-size: 14px;
+    height: 27px;
+    padding: 5px 10px;
+    border: 1.5px solid #FF7900;
+    border-radius: 10px;
+    margin-right: 15px;
+    outline: #EDEDED;
+    width: 360px;
+}
+
+.header__search_and_contacts button {
+    height: 27px;
+    width: 70px;
+    background: #FF7900;
+    border: none;
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header__contacts {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 7px;
+}
+
+.header__availability,
+.header__phone {
+    display: block;
+}
+
+.header__phone {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 13px;
+}
+
+.header__availability {
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 10px;
+    color: #555555;
+}
+
+.header__menu {
+    display: flex;
+    align-items: center;
+}
+
+.product_nav_button {
+    display: flex;
+    gap: 11px;
+    align-items: center;
+    justify-content: space-between;
+    width: fit-content;
+
+    padding: 11px 19px;
+    padding-right: 25px;
+    border-radius: 10px;
+    background-color: #FF7900;
+
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 15px;
+    margin-right: 40px;
+    cursor: pointer;
+}
+
+.product_nav_button img {
+    width: 11px;
+}
+
+
+
+.menu_block_link_ist {
+    display: flex;
+    gap: 20px;
+}
+
+.menu_block_link_ist a {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 15px;
+
+    text-decoration: none;
+    color: #000;
+    transition: all 0.3s;
+}
+
+.menu_block_link_ist a:hover {
+    color: #FF7900;
+    transform: scale(1.05);
+}
+
+
+
+
+
+
+
+
+
+/*3 секция*/
+.header__navigation {
+    max-width: 1240px;
+    padding: 15px 30px;
+    border-radius: 10px;
+    background-color: #EBFFA380;
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__user-section {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.header__cart img {
+    width: 15px;
+}
+
+.header__favorites img,
+.header__account-link img {
+    width: 20px;
+}
+
+.header__account-link {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    width: fit-content;
+    margin-right: 10px;
+
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 13px;
+    color: #000;
+    text-decoration: none;
+
+    white-space: nowrap;
+}
+
+
+@media only screen and (max-width: 768px) {
+    .header__main {
+        padding: 22px;
+    }
+
+    .header__logo__info img {
+        margin-left: 20px;
+    }
+
+    .product_nav_button {
+        margin-right: 0px;
+    }
+
+    .header__account-link {
+        margin-right: 0px;
+    }
+
+    .header__cart img {
+        width: 14px;
+    }
+
+
+    .header__navigation {
+        justify-content: space-between;
+        padding: 0 22px;
+        background-color: #fff;
+    }
+
+
+
+    .header__search_and_contacts input {
+        width: 140px;
+        height: 37px;
+        border-width: 2px;
+    }
+
+    .header__search_and_contacts button {
+        width: 37px;
+        height: 37px;
+    }
+}
