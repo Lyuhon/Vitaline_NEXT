@@ -1,4 +1,5 @@
 import React from "react";
+import Link from 'next/link'
 
 const HomeCategories = () => {
     return (
@@ -7,29 +8,29 @@ const HomeCategories = () => {
             <div className="home_categories_section_heading">
                 <div className="general_heading_block">
                     <h2>Популярные категории</h2>
-                    <a className="section_read_more" href="/shop">
+                    <Link className="section_read_more" href="/shop">
                         Вся продукция
-                    </a>
+                    </Link>
                 </div>
                 <div className="orange_heading_divider"></div>
             </div>
 
             {/* Облако категорий */}
             <div className="cats_cloud">
-                <a href="#">Омега 3</a>
-                <a href="#">Кальций</a>
-                <a href="#">Цинк</a>
-                <a href="#">Коллаген</a>
-                <a href="#">Магний</a>
-                <a href="#">Витамин C</a>
-                <a href="#">Мультивитамины</a>
-                <a href="#">Минералы</a>
-                <a href="#">Пробиотики</a>
+                <Link href="#">Омега 3</Link>
+                <Link href="#">Кальций</Link>
+                <Link href="#">Цинк</Link>
+                <Link href="#">Коллаген</Link>
+                <Link href="#">Магний</Link>
+                <Link href="#">Витамин C</Link>
+                <Link href="#">Мультивитамины</Link>
+                <Link href="#">Минералы</Link>
+                <Link href="#">Пробиотики</Link>
             </div>
 
             {/* Сетка категорий */}
             <div className="cats_grid">
-                <a
+                <Link
                     href="/sportivnoe-pitanie/"
                     className="cats_grid_item"
                     style={{
@@ -40,8 +41,8 @@ const HomeCategories = () => {
                     }}
                 >
                     <span>Спортивное питание</span>
-                </a>
-                <a
+                </Link>
+                <Link
                     href="/dlya-mozga/"
                     className="cats_grid_item"
                     style={{
@@ -52,8 +53,8 @@ const HomeCategories = () => {
                     }}
                 >
                     <span>Для мозга и памяти</span>
-                </a>
-                <a
+                </Link>
+                <Link
                     href="/zdorovyj-son/"
                     className="cats_grid_item"
                     style={{
@@ -64,8 +65,8 @@ const HomeCategories = () => {
                     }}
                 >
                     <span>Здоровый сон</span>
-                </a>
-                <a
+                </Link>
+                <Link
                     href="/immunnaya-sistema/"
                     className="cats_grid_item"
                     style={{
@@ -76,8 +77,8 @@ const HomeCategories = () => {
                     }}
                 >
                     <span>Иммунитет</span>
-                </a>
-                <a
+                </Link>
+                <Link
                     href="/dlya-beremennyh/"
                     className="cats_grid_item"
                     style={{
@@ -88,8 +89,8 @@ const HomeCategories = () => {
                     }}
                 >
                     <span>Беременным и кормящим</span>
-                </a>
-                <a
+                </Link>
+                <Link
                     href="/detskoe-zdorove/"
                     className="/detskoe-zdorove/"
                     style={{
@@ -100,8 +101,8 @@ const HomeCategories = () => {
                     }}
                 >
                     <span>Детские витамины</span>
-                </a>
-                <a
+                </Link>
+                <Link
                     href="/kozha-nogti-i-volosy/"
                     className="cats_grid_item"
                     style={{
@@ -112,8 +113,8 @@ const HomeCategories = () => {
                     }}
                 >
                     <span>Волосы, ногти и кожа</span>
-                </a>
-                <a
+                </Link>
+                <Link
                     href="/mineraly/"
                     className="cats_grid_item"
                     style={{
@@ -124,8 +125,8 @@ const HomeCategories = () => {
                     }}
                 >
                     <span>Минералы</span>
-                </a>
-                <a
+                </Link>
+                <Link
                     href="/kosti-i-sustavykalczii/"
                     className="cats_grid_item"
                     style={{
@@ -136,8 +137,8 @@ const HomeCategories = () => {
                     }}
                 >
                     <span>Кости и суставы</span>
-                </a>
-                <a
+                </Link>
+                <Link
                     href="/muzhskoe-zdorove/"
                     className="cats_grid_item"
                     style={{
@@ -148,8 +149,8 @@ const HomeCategories = () => {
                     }}
                 >
                     <span>Энергия</span>
-                </a>
-                <a
+                </Link>
+                <Link
                     href="/antioksidanty/"
                     className="cats_grid_item"
                     style={{
@@ -160,8 +161,8 @@ const HomeCategories = () => {
                     }}
                 >
                     <span>Антиоксиданты</span>
-                </a>
-                <a
+                </Link>
+                <Link
                     href="/aminokisloty/"
                     className="cats_grid_item"
                     style={{
@@ -172,8 +173,8 @@ const HomeCategories = () => {
                     }}
                 >
                     <span>Аминокислоты</span>
-                </a>
-                <a
+                </Link>
+                <Link
                     href="/product-tag/b-comlex/"
                     className="cats_grid_item"
                     style={{
@@ -184,7 +185,7 @@ const HomeCategories = () => {
                     }}
                 >
                     <span>Комплексы</span>
-                </a>
+                </Link>
             </div>
         </section>
     );

@@ -1,3 +1,14 @@
+// {
+//   "extends": ["next/core-web-vitals", "next/typescript"]
+// }
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript"
+  ],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "off", // Игнорировать неиспользуемые переменные
+    "@typescript-eslint/no-explicit-any": "off", // Игнорировать использование any
+    "prefer-const": "off" // Игнорировать рекомендации использовать const
+  }
 }

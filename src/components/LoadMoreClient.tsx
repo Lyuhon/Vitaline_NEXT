@@ -3,6 +3,7 @@
 
 import { useState } from 'react';
 import { ProductNode } from '@/lib/fetchProductsByCategory';
+import Link from 'next/link'
 
 interface LoadMoreClientProps {
     initialProducts: ProductNode[];
@@ -19,7 +20,7 @@ export default function LoadMoreClient({ initialProducts, initialEndCursor, init
 
     const formatPrice = (price?: string): string => {
         if (!price) return 'Цена не указана';
-        let p = price.replace('&nbsp;', ' ').replace('UZS', 'сӯм');
+        const p = price.replace('&nbsp;', ' ').replace('UZS', 'сӯм');
         return p;
     };
 
@@ -71,21 +72,21 @@ export default function LoadMoreClient({ initialProducts, initialEndCursor, init
         <>
             {products.map((p) => (
                 <div className="product_item" key={p.id}>
-                    <a href={`/product/${p.slug}`}>
+                    <Link href={`/product/${p.slug}`}>
                         <img
                             className="product_item__image"
                             src={p.image?.sourceUrl || '/images/products/default.jpg'}
                             alt={p.image?.altText || p.name}
                         />
-                    </a>
+                    </Link>
 
                     <div className="product_meta_box">
-                        <a href="#" className="product_item__brand"></a>
+                        <Link href="#" className="product_item__brand"></Link>
                         <div className="line_highlight"></div>
 
-                        <a href={`/product/${p.slug}`} className="product_item__name">
+                        <Link href={`/product/${p.slug}`} className="product_item__name">
                             {p.name}
-                        </a>
+                        </Link>
 
                         <span className="product_item__price">
                             {formatPrice(p.price)}

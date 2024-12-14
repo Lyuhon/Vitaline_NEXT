@@ -1,7 +1,8 @@
 // src/app/about/page.tsx
+import Image from 'next/image'
 import React from 'react';
 import './about.css';
-import YandexMap from '@/components/YandexMap'; // Импортируем компонент карты
+// import YandexMap from '@/components/YandexMap'; // Импортируем компонент карты
 
 export const generateMetadata = () => {
     return {
