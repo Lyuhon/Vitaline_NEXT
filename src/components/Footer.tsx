@@ -1,5 +1,6 @@
 // src/app/components/Footer.tsx
 import Consultation from "@/components/Consultation";
+import Link from 'next/link'
 
 export default function Footer() {
     return (
@@ -22,18 +23,18 @@ export default function Footer() {
                             <p className="work_shop_info">Адрес: Удобенчат, г. Ташкент</p>
 
                             <div className="social-media">
-                                <a href="https://www.instagram.com/vitaline.uz/">
+                                <Link href="https://www.instagram.com/vitaline.uz/">
                                     <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Rectangle-85.svg" alt="Instagram" />
-                                </a>
-                                <a href="https://t.me/vitalineuz_admin">
+                                </Link>
+                                <Link href="https://t.me/vitalineuz_admin">
                                     <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Rectangle-86.svg" alt="Telegram" />
-                                </a>
-                                <a href="https://wa.me/message/4LJSJMNTMHQOC1">
+                                </Link>
+                                <Link href="https://wa.me/message/4LJSJMNTMHQOC1">
                                     <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Rectangle-87.svg" alt="WhatsApp" />
-                                </a>
-                                <a href="https://www.facebook.com/vitalineuz">
+                                </Link>
+                                <Link href="https://www.facebook.com/vitalineuz">
                                     <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Rectangle-84.svg" alt="Facebook" />
-                                </a>
+                                </Link>
                             </div>
                         </div>
 
@@ -41,16 +42,16 @@ export default function Footer() {
                             <h4>Покупателям</h4>
                             <ul>
                                 <li>
-                                    <a href="/about">О нас</a>
+                                    <Link href="/about">О нас</Link>
                                 </li>
                                 <li>
-                                    <a href="/shop">Магазин</a>
+                                    <Link href="/shop">Магазин</Link>
                                 </li>
                                 <li>
-                                    <a href="#">Доставка</a>
+                                    <Link href="#">Доставка</Link>
                                 </li>
                                 <li>
-                                    <a href="/contacts">Контакты</a>
+                                    <Link href="/contacts">Контакты</Link>
                                 </li>
                             </ul>
                         </div>
@@ -59,16 +60,16 @@ export default function Footer() {
                             <h4>Личный кабинет</h4>
                             <ul>
                                 <li>
-                                    <a href="#">Мой профиль</a>
+                                    <Link href="#">Мой профиль</Link>
                                 </li>
                                 <li>
-                                    <a href="#">Избранное</a>
+                                    <Link href="#">Избранное</Link>
                                 </li>
                                 <li>
-                                    <a href="/cart">Корзина</a>
+                                    <Link href="/cart">Корзина</Link>
                                 </li>
                                 <li>
-                                    <a href="/profile/points">Мои баллы</a>
+                                    <Link href="/profile/points">Мои баллы</Link>
                                 </li>
                             </ul>
                         </div>
@@ -77,13 +78,13 @@ export default function Footer() {
                             <h4>Полезное</h4>
                             <ul>
                                 <li>
-                                    <a href="/blog">Блог</a>
+                                    <Link href="/blog">Блог</Link>
                                 </li>
                                 <li>
-                                    <a href="#">Готовые схемы</a>
+                                    <Link href="#">Готовые схемы</Link>
                                 </li>
                                 <li>
-                                    <a href="/loyalty-program">Программа лояльности</a>
+                                    <Link href="/loyalty-program">Программа лояльности</Link>
                                 </li>
                             </ul>
                         </div>

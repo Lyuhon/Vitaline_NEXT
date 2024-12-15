@@ -2,10 +2,11 @@
 import { Metadata } from "next";
 import './promos.css';
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+// Функция для генерации метаданных
+export async function generateMetadata(): Promise<Metadata> {
     return {
         title: "Промоакции - Vitaline.uz",
-        description: `Читайте полезные посты на нашем блоге.`,
+        description: "Читайте полезные посты на нашем блоге.",
     };
 }
 

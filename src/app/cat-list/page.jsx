@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Metadata } from "next";
 import './s.css'
 
 const endpoint = "https://nuxt.vitaline.uz/graphql";

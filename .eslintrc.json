@@ -9,6 +9,8 @@
   "rules": {
     "@typescript-eslint/no-unused-vars": "off", // Игнорировать неиспользуемые переменные
     "@typescript-eslint/no-explicit-any": "off", // Игнорировать использование any
-    "prefer-const": "off" // Игнорировать рекомендации использовать const
+    "prefer-const": "off", // Игнорировать рекомендации использовать const
+    "@next/next/no-img-element": "off",
+    "@next/next/no-sync-scripts": "off"
   }
 }

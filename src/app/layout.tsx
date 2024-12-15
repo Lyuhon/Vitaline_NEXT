@@ -4,6 +4,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import PageTransition from '@/components/PageTransition';
 import { Metadata } from 'next';
+// import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'Главная',

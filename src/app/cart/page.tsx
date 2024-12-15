@@ -1,5 +1,6 @@
 // src/app/cart/page.tsx
 import React from 'react';
+import Link from 'next/link'
 import './cart.css';
 
 export const generateMetadata = () => {
@@ -20,7 +21,7 @@ const CartPageEmpty = () => {
             </div>
 
             <div className="cart_epmty_info">
-                <p>Воспользуйтесь <a href="/shop">каталогом продукции</a> или поиском, чтобы найти всё что нужно. </p>
+                <p>Воспользуйтесь <Link href="/shop">каталогом продукции</Link> или поиском, чтобы найти всё что нужно. </p>
 
                 <p>Если в корзине были товары, войдите в <b>Личный Кабинет,</b> чтобы посмотреть список.</p>
             </div>
@@ -258,7 +259,7 @@ const CartPageFull = () => {
 
                             <p className="terms">
                                 Нажимая на кнопку, вы соглашаетесь и принимаете
-                                <a href="#">правила покупки</a> и <a href="#">условия возврата</a>.
+                                <Link href="#">правила покупки</Link> и <Link href="#">условия возврата</Link>.
                             </p>
                         </div>
 

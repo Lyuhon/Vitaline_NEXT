@@ -41,8 +41,19 @@ type Product = {
 };
 
 // Функция для генерации метаданных
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-    const product: Product = await fetchSingleProduct(params.slug);
+// export async function generateMetadata({ params }: { params: { slug: string } }) {
+//     const product: Product = await fetchSingleProduct(params.slug);
+
+//     return {
+//         title: `${product.name} - Купить в Ташкенте`,
+//         description: product.shortDescription || 'Детали товара, доступного для покупки в Ташкенте.',
+//     };
+// }
+
+// Функция для генерации метаданных
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params; // Ожидание params
+    const product: Product = await fetchSingleProduct(slug);
 
     return {
         title: `${product.name} - Купить в Ташкенте`,
@@ -51,8 +62,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 
-export default async function ProductPage({ params }: { params: { slug: string } }) {
-    const product: Product = await fetchSingleProduct(params.slug);
+export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params; // Ожидание params
+    const product: Product = await fetchSingleProduct(slug);
 
     const mainImage = product.image?.sourceUrl || '/images/default-product.png';
     const mainImageAlt = product.image?.altText || product.name;
@@ -164,7 +176,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
                                         <div className="quantity-button" data-qty-action="decrement">
 
                                             <svg width="12" height="2" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M11 1.00002H1" stroke="#7A7680" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M11 1.00002H1" stroke="#7A7680" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
 
                                         </div>
@@ -172,8 +184,8 @@ export default async function ProductPage({ params }: { params: { slug: string }
                                         <div className="quantity-button" data-qty-action="increment">
 
                                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M6.00033 1V11" stroke="#7A7680" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M11 6.00002H1" stroke="#7A7680" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M6.00033 1V11" stroke="#7A7680" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                                <path d="M11 6.00002H1" stroke="#7A7680" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
 
                                         </div>

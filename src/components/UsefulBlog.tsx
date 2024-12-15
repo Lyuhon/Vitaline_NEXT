@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { fetchBlogPosts } from "@/lib/fetchBlogSection";
+import Link from 'next/link'
 
 // Интерфейс для типов данных поста
 interface BlogPost {
@@ -33,22 +34,22 @@ const UsefulBlog: React.FC = () => {
             <div className="home_categories_section_heading">
                 <div className="general_heading_block">
                     <h2>Полезный блог</h2>
-                    <a className="section_read_more" href="/blog">
+                    <Link className="section_read_more" href="/blog">
                         Все статьи
-                    </a>
+                    </Link>
                 </div>
                 <div className="orange_heading_divider"></div>
             </div>
 
             {/* Облако категорий */}
             <div className="cats_cloud">
-                <a href="#">Красота</a>
-                <a href="#">Здоровье</a>
-                <a href="#">Фитнес</a>
-                <a href="#">Питание</a>
-                <a href="#">Самочувствие</a>
-                <a href="#">События</a>
-                <a href="#">Новости</a>
+                <Link href="#">Красота</Link>
+                <Link href="#">Здоровье</Link>
+                <Link href="#">Фитнес</Link>
+                <Link href="#">Питание</Link>
+                <Link href="#">Самочувствие</Link>
+                <Link href="#">События</Link>
+                <Link href="#">Новости</Link>
             </div>
 
             {/* Список постов */}
@@ -61,14 +62,14 @@ const UsefulBlog: React.FC = () => {
                             backgroundImage: `url(${post.featuredImage?.node?.sourceUrl || "/images/default.jpg"})`,
                         }}
                     >
-                        <a href={`/blog/${post.slug}`} className="list_blog_item">
+                        <Link href={`/blog/${post.slug}`} className="list_blog_item">
                             <div className="blog_post_title">{post.title}</div>
 
                             <div className="read_more_svg">
                                 <img alt="" src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Rectangle-60.svg" />
                                 <span>Открыть статью</span>
                             </div>
-                        </a>
+                        </Link>
                     </div>
                 ))}
             </div>

@@ -2,6 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import '@/app/header.css'; // Файл для стилей хедера
+import Image from 'next/image'
 
 const Header = () => {
     return (
@@ -10,10 +11,12 @@ const Header = () => {
             <div className="header__top-bar pc_visible">
                 <div className="header__top-bar-content">
                     <div className="delivery_block">
-                        <img
+                        <Image
                             className="delivery_image"
                             src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/front-view-male-courier-green-uniform-holding-food-delivery-box-pink-desk_140725-33524-removebg-preview-1-1.png"
                             alt="Доставщик"
+                            width={500}
+                            height={500}
                         />
                         <span className="header__delivery-info">
                             <b>Бесплатная доставка</b> – при покупке свыше <b>600 000 сум</b>
@@ -21,9 +24,11 @@ const Header = () => {
                     </div>
                     <a href="#" className="header__app-download">
                         <span>Скачать приложение Vitaline</span>
-                        <img
+                        <Image
                             src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/3643758-gadget-handphone-mobile-phone-smartphone_113400-1-1.svg"
                             alt="Скачать приложение"
+                            width={500}
+                            height={500}
                         />
                     </a>
                 </div>
@@ -33,10 +38,12 @@ const Header = () => {
             <div className="header__main pc_visible">
                 <div className="header__logo__info">
                     <Link href="/">
-                        <img
+                        <Image
                             src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/8e3bc2dcd6d2b7628adf6e926f325187.png"
                             alt="Vitaline Logo"
                             className="header__logo-image"
+                            width={500}
+                            height={500}
                         />
                     </Link>
                     <span>Интернет-магазин витаминов и БАДов от лучших мировых брендов</span>
@@ -46,18 +53,22 @@ const Header = () => {
                     <div className="search_block">
                         <input type="text" placeholder="Поиск товаров" className="header__search-input" />
                         <button className="header__search-button">
-                            <img
+                            <Image
                                 src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/searcher_magnifyng_glass_search_locate_find_icon_123813-1.svg"
                                 alt="Лупа"
+                                width={20}
+                                height={20}
                             />
                         </button>
                     </div>
 
                     <div className="header__contacts">
                         <div className="header__contacts_icon">
-                            <img
+                            <Image
                                 src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/phone_call_speaker_icon_143531-1.svg"
                                 alt="Телефон"
+                                width={20}
+                                height={20}
                             />
                         </div>
 
@@ -73,9 +84,11 @@ const Header = () => {
             <nav className="header__navigation pc_visible">
                 <div className="header__menu">
                     <div className="product_nav_button">
-                        <img
+                        <Image
                             src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/preferences_desktop_apps_icon_180940-1.svg"
                             alt="Продукция"
+                            width={20}
+                            height={20}
                         />
                         <span>Продукция</span>
                     </div>
@@ -91,22 +104,28 @@ const Header = () => {
 
                 <div className="header__user-section">
                     <Link href="/account" className="header__account-link">
-                        <img
+                        <Image
                             src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/avatar_male_man_people_person_profile_user_icon_123199-1.svg"
                             alt="Личный кабинет"
+                            width={20}
+                            height={20}
                         />
                         <span>Личный кабинет</span>
                     </Link>
                     <Link href="/favorites" className="header__favorites">
-                        <img
+                        <Image
                             src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/3643770-favorite-heart-like-likes-love-loved_113432-1.svg"
                             alt="Избранное"
+                            width={20}
+                            height={20}
                         />
                     </Link>
                     <Link href="/cart" className="header__cart">
-                        <img
+                        <Image
                             src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/РЎРРѕР№_1-1.svg"
                             alt="Корзина"
+                            width={20}
+                            height={20}
                         />
                     </Link>
                 </div>
@@ -121,40 +140,46 @@ const Header = () => {
                 <a href='#footer_nav' className="mobile_links_button">
 
                     <svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <line x1="1.5" y1="1.5" x2="18.5" y2="1.5" stroke="#FF7900" stroke-width="3" stroke-linecap="round" />
-                        <line x1="1.5" y1="8.5" x2="18.5" y2="8.5" stroke="#FF7900" stroke-width="3" stroke-linecap="round" />
-                        <line x1="1.5" y1="15.5" x2="18.5" y2="15.5" stroke="#FF7900" stroke-width="3" stroke-linecap="round" />
+                        <line x1="1.5" y1="1.5" x2="18.5" y2="1.5" stroke="#FF7900" strokeWidth="3" strokeLinecap="round" />
+                        <line x1="1.5" y1="8.5" x2="18.5" y2="8.5" stroke="#FF7900" strokeWidth="3" strokeLinecap="round" />
+                        <line x1="1.5" y1="15.5" x2="18.5" y2="15.5" stroke="#FF7900" strokeWidth="3" strokeLinecap="round" />
                     </svg>
 
                 </a>
 
                 <div className="header__logo__info">
                     <Link href="/">
-                        <img
+                        <Image
                             src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/8e3bc2dcd6d2b7628adf6e926f325187.png"
                             alt="Vitaline Logo"
                             className="header__logo-image"
+                            width={240}
+                            height={100}
                         />
                     </Link>
                 </div>
 
                 <div className="header__user-section">
                     <Link href="/account" className="header__account-link">
-                        <img
+                        <Image
                             src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/avatar_male_man_people_person_profile_user_icon_123199-1.svg"
                             alt="Личный кабинет"
+                            width={20}
+                            height={20}
                         />
                     </Link>
                     {/* <Link href="/favorites" className="header__favorites">
-                        <img
+                        <Image
                             src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/3643770-favorite-heart-like-likes-love-loved_113432-1.svg"
                             alt="Избранное"
                         />
                     </Link> */}
                     <Link href="/cart" className="header__cart">
-                        <img
+                        <Image
                             src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/РЎРРѕР№_1-1.svg"
                             alt="Корзина"
+                            width={20}
+                            height={20}
                         />
                     </Link>
                 </div>
@@ -164,24 +189,28 @@ const Header = () => {
             {/* Навигация */}
             <nav className="header__navigation mobile_visible">
 
-                <a href="/shop" className="header__menu">
+                <Link href="/shop" className="header__menu">
                     <div className="product_nav_button">
-                        <img
+                        <Image
                             src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/preferences_desktop_apps_icon_180940-1.svg"
                             alt="Продукция"
+                            width={20}
+                            height={20}
                         />
                         <span>Продукция</span>
                     </div>
-                </a>
+                </Link>
 
                 <div className="header__search_and_contacts">
 
                     <div className="search_block">
                         <input type="text" placeholder="Поиск товаров" className="header__search-input" />
                         <button className="header__search-button">
-                            <img
+                            <Image
                                 src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/searcher_magnifyng_glass_search_locate_find_icon_123813-1.svg"
                                 alt="Лупа"
+                                width={20}
+                                height={20}
                             />
                         </button>
                     </div>

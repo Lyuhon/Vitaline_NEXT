@@ -5,15 +5,20 @@ import { notFound } from 'next/navigation';
 import LoadMoreClient from '@/components/LoadMoreClient';
 import './shop.css';
 
-export default async function CategoryPage({ params }: { params: { category: string } }) {
-    const { category } = params;
+export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
+    // Дожидаемся params перед использованием
+    const { category } = await params;
 
     const categoryName = await fetchCategoryName(category);
     if (!categoryName) {
         notFound();
     }
 
-    const { nodes: initialProducts, endCursor: initialEndCursor, hasNextPage: initialHasNextPage } = await fetchProductsByCategory(category);
+    const {
+        nodes: initialProducts,
+        endCursor: initialEndCursor,
+        hasNextPage: initialHasNextPage,
+    } = await fetchProductsByCategory(category);
 
     return (
         <div className="shop_page">
@@ -23,9 +28,7 @@ export default async function CategoryPage({ params }: { params: { category: str
                 </div>
 
                 <div className="products_side">
-                    <h1 className="shop_page_title">
-                        {categoryName}
-                    </h1>
+                    <h1 className="shop_page_title">{categoryName}</h1>
 
                     <div className="shop_page_prod_grid">
                         {/* Передаем начальные товары в клиентский компонент */}

@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link'
 
 interface Props {
     productName: string;
@@ -57,7 +58,7 @@ export default function ProductInteractionsClient({ productName, productPrice, p
                         <h3 style={{ fontSize: '20px', fontWeight: 600, marginBlock: '15px' }}>Оригинальный товар</h3>
 
                         <p>Товары, доступные на Vitaline, поставляются напрямую от брендов или авторизованных дистрибьюторов в США. Они хранятся и отправляются непосредственно с
-                            <a style={{ display: 'inlineBlock', padding: '0 5px', color: '#64B704', textDecoration: 'underline' }} href="/about-vitaline/#warehouse">наших  складов с климат-контролем и сертификацией GMP.</a>
+                            <Link style={{ display: 'inlineBlock', padding: '0 5px', color: '#64B704', textDecoration: 'underline' }} href="/about-vitaline/#warehouse">наших  складов с климат-контролем и сертификацией GMP.</Link>
                             Vitaline не допускает сторонних реселлеров на свой веб-сайт.</p>
 
                         <span onClick={() => setAuthPopupOpen(false)} style={{ cursor: 'pointer', fontSize: '18px', fontWeight: 'bold', position: 'absolute', top: '10px', right: '10px' }}>×</span>
