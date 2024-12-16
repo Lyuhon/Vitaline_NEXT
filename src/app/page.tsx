@@ -4,6 +4,8 @@ import ProductsSection from '../components/ProductsSection';
 import HomeCategories from '../components/HomeCategories';
 import HomeAdvantages from '../components/HomeAdvantages';
 import UsefulBlog from '../components/UsefulBlog';
+// import CurrencyCahnger from '@/components/CurrencyCahnger';
+
 
 import HomeSlider from "@/components/HomeSlider";
 
@@ -15,17 +17,20 @@ export default async function Page() {
   return (
     <>
 
-      <HomeSlider />
+      <div className="home_page_content">
+        <HomeSlider />
 
-      <ProductsSection products={products} />
-      {/* Здесь вы можете добавить другие секции вашей главной страницы */}
+        <ProductsSection products={products} />
 
+        <HomeCategories />
 
-      <HomeCategories />
+        <HomeAdvantages />
 
-      <HomeAdvantages />
+        <UsefulBlog />
 
-      <UsefulBlog />
+        {/* <CurrencyCahnger /> */}
+      </div>
+
     </>
   );
 }

@@ -75,15 +75,16 @@ header .delivery_block b {
     font-weight: 400;
     line-height: 13px;
 
-    width: 35%;
+    width: 40%;
 }
 
 .header__logo__info img {
+    min-width: 180px;
     width: 180px;
 }
 
 .header__search_and_contacts {
-    width: 70%;
+    width: 60%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -247,13 +248,31 @@ header .delivery_block b {
 }
 
 
+.header__search-button img {
+    width: 14px;
+}
+
 @media only screen and (max-width: 768px) {
+    header.header {
+        position: fixed;
+        top: 0;
+        z-index: 99999999;
+        box-shadow: 0px 5px 15px 0px #00000017;
+        background: #fff;
+    }
+
+    body {
+        padding-top: 1px;
+        margin-top: 70px;
+    }
+
     .header__main {
         padding: 22px;
     }
 
     .header__logo__info img {
         margin-left: 20px;
+        min-width: unset;
     }
 
     .product_nav_button {
@@ -287,4 +306,160 @@ header .delivery_block b {
         width: 37px;
         height: 37px;
     }
+
+}
+
+.temp-dn {
+    display: none;
+}
+
+
+.like_herb.header__main.mobile_visible {
+    /* box-shadow: 0px 5px 15px 0px #0000000D; */
+}
+
+.like_herb.header__main {
+    gap: 10px;
+}
+
+.like_herb .header__logo__info img {
+    padding: 0 5px 0 5px;
+    margin: 0px;
+    min-width: 120px;
+}
+
+.like_herb .header__search_and_contacts input {
+    height: 30px;
+}
+
+.like_herb .header__search_and_contacts input {
+    margin: 0px;
+    width: 100%;
+}
+
+.like_herb a.mobile_links_button svg {
+    min-width: 23px;
+}
+
+.like_herb .header__cart img {
+    width: 20px;
+}
+
+
+
+
+/* POPUP */
+/* Попап для поиска */
+/* Анимация появления (Fade-In) */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Анимация исчезновения (Fade-Out) */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+
+/* Стиль для попапа */
+.search-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: 9999;
+    overflow-y: auto;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+.search-popup.hidden {
+    animation: fadeOut 0.3s ease-in forwards;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.search-popup-content {
+    /* padding: 20px; */
+    background-color: #fff;
+}
+
+.search-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-popup-content-shdow-block {
+    box-shadow: 0px 5px 15px 0px #00000017;
+    background: #fff;
+    padding: 22px;
+
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+.search-pop_content {
+    padding: 22px;
+    margin-top: 80px;
+}
+
+.search-pop_content h3 {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 23px;
+    margin-bottom: 20px;
+}
+
+.pop_search_tags {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(1, 1fr);
+}
+
+.pop_search_tags a {
+    background-color: #F5F5F5;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 17px;
+}
+
+.search-popup-input {
+    height: 34px;
+    border-width: 2px;
+    border: 2px solid #FF7900;
+    font-size: 14px;
+    width: 100%;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.close-popup {
+    margin-left: 10px;
+    background: none;
+    border: none;
+    color: #FF7900;
+    font-size: 16px;
+    cursor: pointer;
 }

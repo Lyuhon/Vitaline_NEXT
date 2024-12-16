@@ -1,0 +1,295 @@
+.loyalty_program_page {
+    max-width: 1180px;
+    margin: 0 auto;
+    margin-bottom: 60px;
+    margin-top: 60px;
+}
+
+.loyalty_hero {
+    border-radius: 20px;
+    background-image: url(https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Group-92654852-1.png);
+    background-size: cover;
+    height: 130px;
+    background-position: center;
+    margin-bottom: 50px;
+}
+
+.loyalty_program_page h1 {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 36px;
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 100px;
+    margin-bottom: 100px;
+}
+
+.step h3 {
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 30px;
+    margin-bottom: 15px;
+}
+
+.step p {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 22px;
+}
+
+.loyalty_program_page .info {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.loyalty_program_page .info img {
+    border-radius: 20px;
+    width: 25%;
+}
+
+.loyalty_program_page .info .big_info {
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 27.5px;
+    margin-bottom: 50px;
+}
+
+.loyalty_program_page .info .regular_inf {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 22px;
+    margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+    .loyalty_program_page {
+        padding: 0 22px;
+    }
+
+    .loyalty_program_page h1 {
+        font-weight: 500;
+        margin-bottom: 30px;
+    }
+
+    .loyalty_hero {
+        height: 90px;
+        margin-bottom: 30px;
+    }
+
+    .steps {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
+    .step h3 {
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 24px;
+    }
+
+    .step p {
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 18px;
+    }
+
+    .loyalty_program_page .info .big_info {
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 16.5px;
+        margin-bottom: 40px;
+    }
+
+    .loyalty_program_page .info .regular_inf {
+        font-size: 15px;
+        font-weight: 300;
+        line-height: 16.5px;
+    }
+
+    .info img {
+        display: none;
+    }
+
+    .loyalty_info_hero {
+        border-radius: 20px;
+        background-image: url(https://nuxt.vitaline.uz/wp-content/uploads/2024/12/image-5.png);
+        background-size: cover;
+        height: 130px;
+        background-position: center;
+        margin-bottom: 40px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+.align_center_900 {
+    max-width: 1180px;
+    margin: 0 auto;
+    margin-bottom: 60px;
+    margin-top: 60px;
+}
+
+.align_center_h3 {
+    text-align: left;
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 30px;
+    margin-bottom: 30px;
+}
+
+.img_added_by_Lyuhon {
+    border-radius: 10px;
+}
+
+
+
+
+.div-text_added {
+    font-size: 20px;
+    line-height: 23px;
+    font-weight: 300;
+    line-height: 22px;
+}
+
+.div-text_added p {
+    margin-bottom: 20px;
+    line-height: 23px;
+}
+
+.hr_added_by_Lyuhon {
+    margin-bottom: 40px;
+}
+
+.wharehouse_description {
+    width: 90%;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.wharehouse_item_desc h4 {
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.wharehouse_items_list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+@media (max-width: 480px) {
+    .div-text_added {
+        font-size: 20px;
+        line-height: 23px;
+    }
+
+    .align_center_700 {
+        margin: 15px;
+    }
+
+    .align_center_h3 {
+        font-size: 23px;
+    }
+
+    .wharehouse_description {
+        width: 100%;
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+
+    .wharehouse_items_list {
+        gap: 20px;
+    }
+}
+
+.icon {
+    padding: 15px;
+    border-radius: 50%;
+    background-color: #1caf1c;
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    box-shadow: -1px -2px 192px -19px rgba(28, 175, 28, 1);
+    -webkit-box-shadow: -1px -2px 192px -19px rgba(28, 175, 28, 1);
+    -moz-box-shadow: -1px -2px 192px -19px rgba(28, 175, 28, 1);
+}
+
+.icon img {
+    min-width: 30px;
+    height: 30px;
+}
+
+
+
+.wharehouse_item {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.warehouse {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+.warehouse .pc_img {
+    width: 100%;
+}
+
+h3 b {
+    font-weight: 700;
+}
+
+@media only screen and (min-width: 768px) {
+    .mob_img {
+        display: none;
+    }
+
+    img.pc_img {
+        border-radius: 12px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .warehouse {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        margin-top: -40px;
+    }
+
+    .pc_img {
+        display: none;
+    }
+
+    .mob_img {
+        width: 100%;
+    }
+
+    h3 b {
+        text-align: center;
+    }
+
+    .wharehouse_item_desc p {
+        margin-bottom: 0px;
+    }
+}

@@ -35,7 +35,6 @@ const ContactsPage = () => {
                     <div className='phone_to_connect'>
                         <p><strong>Телефон для связи:</strong></p>
                         <p>+998 90 906 69 99</p>
-                        <p>+998 91 166 00 90</p>
                     </div>
 
                     <p className="info_italic">
@@ -73,7 +72,6 @@ const ContactsPage = () => {
 
                             <div className="support-contacts">
                                 <p>+998 90 906 69 99</p>
-                                <p>+998 91 166 00 90</p>
                             </div>
                         </div>
 

@@ -22,6 +22,7 @@
 body {
   color: var(--foreground);
   background: var(--background);
+  background-color: #fff;
   /* font-family: Arial, Helvetica, sans-serif; */
 }
 
@@ -190,7 +191,9 @@ legend {
 
 
 
-
+/* .content-wrapper {
+  min-height: 400px;
+} */
 
 /*Home - 1: Слайдер*/
 .home_slider {
@@ -917,6 +920,12 @@ footer .links-column ul {
 
 @media only screen and (max-width: 768px) {
 
+  /*Home*/
+  .home_page_content>section {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
   /*Home - 1: Слайдер*/
   .home_slider {
     max-width: 1200px;
@@ -945,12 +954,12 @@ footer .links-column ul {
   }
 
   .home_slider .swiper-button-next {
-    right: 20px;
+    right: 10px;
     padding-left: 2px;
   }
 
   .home_slider .swiper-button-prev {
-    left: 20px;
+    left: 10px;
     padding-right: 2px;
   }
 

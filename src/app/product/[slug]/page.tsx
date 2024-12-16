@@ -4,6 +4,8 @@ import { fetchRelatedProducts } from '@/lib/fetchRelatedProducts';
 import ProductInteractionsClient from '@/components/ProductInteractionsClient';
 import ProductGalleryClient from '@/components/ProductGalleryClient';
 import SKUCopy from "@/components/SKUCopy";
+// import CurrencyCahnger from '@/components/CurrencyCahnger';
+
 import Link from 'next/link';
 import './product.css';
 
@@ -315,6 +317,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 productPrice={formattedPrice}
                 productImage={mainImage}
             />
+
+            {/* <CurrencyCahnger /> */}
+
         </div>
     );
 }

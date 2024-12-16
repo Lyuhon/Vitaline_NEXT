@@ -1,16 +1,14 @@
 // src/app/components/Header.tsx
+
 'use client';
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import '@/app/header.css'; // Файл для стилей хедера
-import Image from 'next/image';
+import Image from 'next/image'
 
 const Header = () => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-    const [isPopupVisible, setIsPopupVisible] = useState<boolean>(false); // Состояние для показа попапа
-    const [isClosing, setIsClosing] = useState<boolean>(false); // Состояние для анимации закрытия
-
 
     // Проверка авторизации пользователя
     useEffect(() => {
@@ -20,16 +18,8 @@ const Header = () => {
         }
     }, []);
 
-    // Обработчик закрытия попапа с анимацией
-    const closePopup = () => {
-        setIsClosing(true); // Добавляем состояние для анимации
-        setTimeout(() => {
-            setIsPopupVisible(false);
-            setIsClosing(false); // Сбрасываем состояние
-        }, 300); // Длительность анимации совпадает с CSS
-    };
 
-    return (<>
+    return (
         <header className="header">
             {/* Верхняя полоса */}
             <div className="header__top-bar pc_visible">
@@ -160,44 +150,17 @@ const Header = () => {
 
 
 
-            {/* Хедер */}
+            {/* Тестовый хедер */}
             <div className="like_herb header__main mobile_visible">
-                <a href="#footer_nav" className="mobile_links_button">
-                    <svg
-                        width="20"
-                        height="17"
-                        viewBox="0 0 20 17"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <line
-                            x1="1.5"
-                            y1="1.5"
-                            x2="18.5"
-                            y2="1.5"
-                            stroke="#FF7900"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                        />
-                        <line
-                            x1="1.5"
-                            y1="8.5"
-                            x2="18.5"
-                            y2="8.5"
-                            stroke="#FF7900"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                        />
-                        <line
-                            x1="1.5"
-                            y1="15.5"
-                            x2="18.5"
-                            y2="15.5"
-                            stroke="#FF7900"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                        />
+
+                <a href='#footer_nav' className="mobile_links_button">
+
+                    <svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <line x1="1.5" y1="1.5" x2="18.5" y2="1.5" stroke="#FF7900" strokeWidth="2" strokeLinecap="round" />
+                        <line x1="1.5" y1="8.5" x2="18.5" y2="8.5" stroke="#FF7900" strokeWidth="2" strokeLinecap="round" />
+                        <line x1="1.5" y1="15.5" x2="18.5" y2="15.5" stroke="#FF7900" strokeWidth="2" strokeLinecap="round" />
                     </svg>
+
                 </a>
 
                 <div className="header__logo__info">
@@ -213,16 +176,13 @@ const Header = () => {
                 </div>
 
                 <div className="header__search_and_contacts">
+
                     <div className="search_block">
-                        <input
-                            id="mobile_search_call"
-                            type="text"
-                            placeholder="Поиск товаров"
-                            className="header__search-input"
-                            onClick={() => setIsPopupVisible(true)}
-                        />
+                        <input id="mobile_search_call" type="text" placeholder="Поиск товаров" className="header__search-input" />
                     </div>
+
                 </div>
+
 
                 <div className="header__user-section">
                     <Link href="/cart" className="header__cart">
@@ -234,105 +194,8 @@ const Header = () => {
                         />
                     </Link>
                 </div>
+
             </div>
-
-            {/* Попап поиска с анимацией */}
-            {isPopupVisible && (
-                <div className={`search-popup ${isClosing ? 'hidden' : ''}`}>
-                    <div className="search-popup-content">
-
-                        <div className="search-popup-content-shdow-block">
-                            <div className="search-popup-header">
-                                <input
-                                    type="text"
-                                    placeholder="Поиск товаров"
-                                    className="search-popup-input"
-                                    autoFocus
-                                />
-                                <button className="close-popup" onClick={closePopup}>
-                                    Закрыть
-                                </button>
-                            </div>
-                        </div>
-
-
-                        <div className="search-pop_content">
-                            <div className="trending-now">
-                                <h3>Популярные категории</h3>
-                                <div className="pop_search_tags">
-                                    <Link href="/categories/sport">
-                                        <div>🏋️‍♂️ Спорт питание</div>
-                                    </Link>
-                                    <Link href="/categories/digestion">
-                                        <div>🥣 Для пищеварения</div>
-                                    </Link>
-                                    <Link href="/categories/kids-health">
-                                        <div>🍼 Детское здоровье</div>
-                                    </Link>
-                                    <Link href="/categories/vitamin-d3">
-                                        <div>🔧 Витамин Д3</div>
-                                    </Link>
-                                    <Link href="/categories/skin-hair-nails">
-                                        <div>💅 Кожа, ногти, волосы</div>
-                                    </Link>
-                                    <Link href="/categories/food-products">
-                                        <div>🧃 Продукты питания</div>
-                                    </Link>
-                                    <Link href="/categories/weight-loss">
-                                        <div>🍽️ Для похудения</div>
-                                    </Link>
-                                    <Link href="/categories/cosmetics">
-                                        <div>💄 Косметика</div>
-                                    </Link>
-                                    <Link href="/categories/supplements">
-                                        <div>🍵 Пищевые добавки</div>
-                                    </Link>
-                                    <Link href="/categories/pregnancy">
-                                        <div>🤰 Для беременных</div>
-                                    </Link>
-                                    <Link href="/categories/fish-oil">
-                                        <div>🐟 Рыбий жир, омега</div>
-                                    </Link>
-                                    <Link href="/categories/multivitamins">
-                                        <div>💊 Мультивитамины</div>
-                                    </Link>
-                                    <Link href="/categories/eye-health">
-                                        <div>👁️ Препараты для глаз</div>
-                                    </Link>
-                                    <Link href="/categories/women-health">
-                                        <div>🙋‍♀️ Женское здоровье</div>
-                                    </Link>
-                                    <Link href="/categories/greens-superfoods">
-                                        <div>🥬 Зелень и суперфуды</div>
-                                    </Link>
-                                </div>
-                            </div>
-
-                            {/* <div className="browse">
-                                <h3>Browse</h3>
-                                <div className="browse-grid">
-                                    <div>Specials!</div>
-                                    <div>Brands of the Week</div>
-                                    <div>Sales & Offers</div>
-                                    <div>Try</div>
-                                    <div>New</div>
-                                    <div>Best Sellers</div>
-                                    <div>Conditions</div>
-                                    <div>Supplements</div>
-                                    <div>Grocery</div>
-                                    <div>Bath & PersonalCare</div>
-                                    <div>Sports</div>
-                                    <div>Beauty</div>
-                                    <div>Pets</div>
-                                    <div>Baby & Kids</div>
-                                    <div>Home</div>
-                                </div>
-                            </div> */}
-                        </div>
-
-                    </div>
-                </div>
-            )}
 
 
 
@@ -417,8 +280,7 @@ const Header = () => {
 
             </nav>
 
-        </header >
-    </>
+        </header>
     );
 };
 
