@@ -259,6 +259,67 @@ const Header = () => {
                         <div className="search-pop_content">
                             <div className="trending-now">
                                 <h3>Популярные категории</h3>
+
+                                <div className="text_like_iherb_cats">
+                                    <div className="cat_like_items">
+
+                                        <div className="cat_like_single">
+
+                                            <span>Пищевые добавки</span>
+                                            <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Supplements_v2-копццция.png" alt="" />
+
+                                        </div>
+
+                                        <div className="cat_like_single">
+
+                                            <span>Спорт</span>
+                                            <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Sports_v2-копи234я.png" alt="" />
+
+                                        </div>
+
+                                        <div className="cat_like_single">
+
+                                            <span>Пищевые добавки</span>
+                                            <img src="https://cloudinary.images-iherb.com/image/upload/f_auto,q_auto:eco/images/cms/homepage/L1%20Categories/Supplements_v2.png" alt="" />
+
+                                        </div>
+
+                                        <div className="cat_like_single">
+
+                                            <span>Спорт</span>
+                                            <img src="https://cloudinary.images-iherb.com/image/upload/f_auto,q_auto:eco/images/cms/homepage/L1%20Categories/Sports_v2.png" alt="" />
+
+                                        </div>
+                                        <div className="cat_like_single">
+
+                                            <span>Спортивное питание</span>
+                                            <img src="https://cloudinary.images-iherb.com/image/upload/f_auto,q_auto:eco/images/cms/homepage/L1%20Categories/Sports_v2.png" alt="" />
+
+                                        </div>
+
+                                        <div className="cat_like_single">
+
+                                            <span>Спортивное питание</span>
+                                            <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/6-12.png" alt="" />
+
+                                        </div>
+
+                                        <div className="cat_like_single">
+
+                                            <span>Красота и здоровье</span>
+                                            <img src="https://cloudinary.images-iherb.com/image/upload/f_auto,q_auto:eco/images/cms/homepage/L1%20Categories/Beauty_v2.png" alt="" />
+
+                                        </div>
+
+                                        <div className="cat_like_single">
+
+                                            <span>Продукты питания</span>
+                                            <img src="https://cloudinary.images-iherb.com/image/upload/f_auto,q_auto:eco/images/cms/homepage/L1%20Categories/Grocery_v2.png" alt="" />
+
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div className="pop_search_tags">
                                     <Link href="/categories/sport">
                                         <div>🏋️‍♂️ Спорт питание</div>
