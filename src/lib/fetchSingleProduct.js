@@ -25,6 +25,7 @@ const query = gql`
       ... on SimpleProduct {
         price
         stockStatus
+        stockQuantity
       }
       productCategories {
         nodes {

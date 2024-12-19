@@ -263,7 +263,84 @@ const Header = () => {
                                 <div className="text_like_iherb_cats">
                                     <div className="cat_like_items">
 
+                                        {/* <div className="cat_like_single">
+                                            <span>Магний</span>
+                                            <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/9-7.png" alt="" />
+                                        </div>
+
                                         <div className="cat_like_single">
+                                            <span>Беременным</span>
+                                            <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/10-3.png" alt="" />
+                                        </div>
+
+                                        <div className="cat_like_single">
+                                            <span>Женщинам</span>
+                                            <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/12-2.png" alt="" />
+                                        </div>
+
+                                        <div className="cat_like_single">
+                                            <span>Мужчинам</span>
+                                            <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/11.png" alt="" />
+                                        </div>
+
+                                        <div className="cat_like_single">
+                                            <span>Витамины C</span>
+                                            <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/8-7.png" alt="" />
+                                        </div>
+
+                                        <div className="cat_like_single">
+                                            <span>Витамины D3</span>
+                                            <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/7-9.png" alt="" />
+                                        </div> */}
+
+                                        <div className="cat_like_single">
+                                            <span>Женщинам</span>
+                                            <div className="icon_s">
+                                                👩
+                                            </div>
+                                        </div>
+
+                                        <div className="cat_like_single">
+                                            <span>Мужчинам</span>
+                                            <div className="icon_s">
+                                                🧔
+                                            </div>
+                                        </div>
+
+                                        <div className="cat_like_single">
+                                            <span>Беременным</span>
+                                            <div className="icon_s">
+                                                🤰
+                                            </div>
+                                        </div>
+
+                                        <div className="cat_like_single">
+                                            <span>Рыбий жир</span>
+                                            <div className="icon_s">
+                                                🐟
+                                            </div>
+                                        </div>
+
+                                        <div className="cat_like_single">
+                                            <span>Спорт пит</span>
+                                            <div className="icon_s">
+                                                🏋️‍♂️
+                                            </div>
+                                        </div>
+
+                                        <div className="cat_like_single">
+                                            <span>Косметика</span>
+                                            <div className="icon_s">
+                                                💄
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+                                        {/* <div className="cat_like_single">
 
                                             <span>Пищевые добавки</span>
                                             <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Supplements_v2-копццция.png" alt="" />
@@ -316,7 +393,7 @@ const Header = () => {
                                             <span>Продукты питания</span>
                                             <img src="https://cloudinary.images-iherb.com/image/upload/f_auto,q_auto:eco/images/cms/homepage/L1%20Categories/Grocery_v2.png" alt="" />
 
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
 

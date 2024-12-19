@@ -1,8 +1,9 @@
-// src/app/layout.tsx
+// // src/app/layout.tsx
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import PageTransition from '@/components/PageTransition';
+// import AnimatedWrapper from '@/components/animation/AnimatedWrapper';
 
 import { Metadata } from 'next';
 // import Script from 'next/script';
@@ -30,15 +31,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <Header />
+        {/* <AnimatedWrapper> */}
         <PageTransition>
           {/* <div id="page-transition-wrapper" className="content-wrapper page-transition"> */}
           <div className="content-wrapper">
             {children}
           </div>
         </PageTransition>
+        {/* </AnimatedWrapper> */}
         <Footer />
         <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
       </body>
     </html >
   );
 }
+
+
+

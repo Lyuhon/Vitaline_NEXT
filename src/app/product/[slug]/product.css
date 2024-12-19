@@ -200,6 +200,7 @@
 
 .value_block .quantity-block svg {
     width: 10px;
+    pointer-events: none;
 }
 
 .value_block .quantity-button {
@@ -228,6 +229,19 @@
     width: 30px;
 }
 
+.full_desc_info {
+    position: relative;
+    /* Убедитесь, что блок имеет контекст позиционирования */
+    overflow-x: auto;
+    /* Включаем горизонтальную прокрутку для больших таблиц */
+    max-width: 100%;
+    /* Ограничиваем ширину блока */
+    word-wrap: break-word;
+}
+
+.full_desc_info table {
+    margin-top: 20px;
+}
 
 .full_desc_info .heading_block {
     display: inline-block;
@@ -257,6 +271,19 @@
 
     margin-bottom: 35px;
 }
+
+.product_buttons_block,
+.value_block {
+    user-select: none;
+    /* Отключает выделение текста */
+    -webkit-user-select: none;
+    /* Для браузеров на основе WebKit */
+    -moz-user-select: none;
+    /* Для Firefox */
+    -ms-user-select: none;
+    /* Для старых версий IE */
+}
+
 
 .add_to_cart {
     font-size: 16px;
@@ -719,4 +746,63 @@ button:hover {
     .full_desc_info .heading_block {
         margin-top: 30px;
     }
+
+    .product_item .add_to_cart {
+        padding: 6px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+.quantity-button,
+.quantity-button.dis_increment {
+    transition: background-color 0.3s;
+}
+
+.quantity-button.dis_increment {
+    cursor: auto;
+    background-color: #f1f2f4;
+    position: relative;
+}
+
+@media only screen and (min-width: 768px) {
+    .quantity-button.dis_increment:after {
+        content: 'Максимальное количество';
+        display: inline-block;
+        font-size: 12px;
+        line-height: 12px;
+        position: absolute;
+        left: 50px;
+        width: fit-content;
+        white-space: nowrap;
+        color: #e00303;
+        padding: 5px 8px;
+        border-radius: 20px;
+        background-color: #ff00002b;
+        opacity: 0;
+        animation: fadeIn 0.5s forwards;
+    }
+
+    /* Анимация для изменения opacity */
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+}
+
+.desc_table_fix {
+    max-width: 100%;
+    overflow: auto;
 }

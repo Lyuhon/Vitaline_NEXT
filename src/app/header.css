@@ -487,3 +487,8 @@ header .delivery_block b {
 .cat_like_single img {
     width: 30px;
 }
+
+.cat_like_single .icon_s {
+    font-size: 30px;
+    line-height: 30px;
+}

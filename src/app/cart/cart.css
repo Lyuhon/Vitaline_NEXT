@@ -43,7 +43,7 @@
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
+    gap: 15px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -127,6 +127,16 @@
 
 .value_block .quantity-block svg {
     width: 10px;
+    pointer-events: none;
+}
+
+.value_block .quantity-block {
+    user-select: none;
+    /* Отключает выделение текста */
+    -webkit-user-select: none;
+    /* Для Safari */
+    -ms-user-select: none;
+    /* Для старых IE */
 }
 
 .value_block .quantity-button {
@@ -153,6 +163,48 @@
     font-weight: 500;
     text-align: center;
     width: 30px;
+}
+
+.quantity-button,
+.quantity-button.dis_increment {
+    transition: background-color 0.3s;
+}
+
+.quantity-button.dis_increment {
+    cursor: auto;
+    background-color: #f1f2f4;
+    position: relative;
+}
+
+@media only screen and (min-width: 768px) {
+    .cart_flex_block .quantity-button.dis_increment:after {
+        content: 'Достигнуто максимальное кол-во';
+        display: inline-block;
+        font-size: 12px;
+        line-height: 12px;
+        position: absolute;
+        top: -35px;
+        left: unset;
+        width: fit-content;
+        white-space: nowrap;
+        color: #e00303;
+        padding: 5px;
+        border-radius: 5px;
+        background-color: #ff00002b;
+        opacity: 0;
+        animation: fadeIn 0.5s forwards;
+    }
+
+    /* Анимация для изменения opacity */
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
 }
 
 
@@ -258,6 +310,7 @@ h3.cart_brand_name {
 }
 
 .cart_product_name {
+    display: inline-block;
     font-size: 15px;
     font-weight: 400;
     line-height: 16.5px;
@@ -308,6 +361,15 @@ h3.cart_brand_name {
     margin-bottom: 15px;
 }
 
+.cart_fill_info .summary_item.minimum_order {
+    display: block;
+    padding: 10px;
+    border-radius: 10px;
+    background: #ffd4d4;
+    color: #e00303;
+    margin: 30px 0;
+}
+
 .cart_checkout-button {
     background: linear-gradient(90deg, #64B704 0%, #1FB4FF 100%);
     border: none;
@@ -316,6 +378,13 @@ h3.cart_brand_name {
     width: 100%;
     border-radius: 10px;
     margin-bottom: 20px;
+    transition: all 0.4s;
+}
+
+.cart_checkout-button.disabled_go_to_checkout {
+    cursor: disabled;
+    filter: grayscale(1);
+    transition: all 0.4s;
 }
 
 .cart_wrapper .terms {
