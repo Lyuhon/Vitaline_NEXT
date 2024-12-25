@@ -39,14 +39,34 @@ export const CartProvider = ({ children, initialCartItems }) => {
     };
 
     // Функция для обновления куки (по желанию можете убрать, если мешает)
+    // const updateCookies = (updatedItems) => {
+    //     document.cookie = `vitaline_cart=${encodeURIComponent(JSON.stringify({
+    //         items: updatedItems.map(item => ({
+    //             productId: item.id,
+    //             qty: item.qty,
+    //         }))
+    //     }))}; Path=/; Max-Age=31536000;`;
+    // };
+
+
+    //SLCT
     const updateCookies = (updatedItems) => {
         document.cookie = `vitaline_cart=${encodeURIComponent(JSON.stringify({
             items: updatedItems.map(item => ({
                 productId: item.id,
                 qty: item.qty,
+                selected: item.selected
+                // selected: item.selected ?? true, // оставим true по умолчанию, если вдруг нет
             }))
         }))}; Path=/; Max-Age=31536000;`;
     };
+
+    //SLCT
+    // Обёртка над setItems
+    function setCartItems(newItems) {
+        setItems(newItems);
+        updateCookies(newItems); // <-- сразу записываем в куки
+    }
 
     // Инициализация корзины при монтировании
     useEffect(() => {
@@ -60,11 +80,15 @@ export const CartProvider = ({ children, initialCartItems }) => {
                             qty: item.maxQty,
                             total: item.maxQty * parsePrice(item.price),
                             selected: true,
+                            //SLCT fix
+                            selected: item.selected
                         };
                     } else {
                         return null; // Удаляем, если maxQty=0
                     }
                 }
+                //SLCT fix
+                // return { ...item };
                 return { ...item, selected: true };
             })
             .filter(item => item !== null);
@@ -116,6 +140,9 @@ export const CartProvider = ({ children, initialCartItems }) => {
             item.id === itemId ? { ...item, selected: !item.selected } : item
         );
         setItems(updatedItems);
+        //SLCT
+        updateCookies(updatedItems);
+        // setCartItems(updated);
     };
 
     // Изменение количества товара
@@ -137,6 +164,8 @@ export const CartProvider = ({ children, initialCartItems }) => {
     // Собираем всё, что хотим пробросить через контекст
     const value = {
         items,
+        //SLCT
+        setCartItems,
         selectAll,
         toggleSelectAll,
         toggleItemSelection,

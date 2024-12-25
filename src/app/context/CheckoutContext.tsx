@@ -100,9 +100,11 @@ export const CheckoutProvider = ({ children }: { children: ReactNode }) => {
             if (response.ok) {
                 // router.push('/checkout/success');
                 // Очистка корзины после успешного заказа
-                await fetch('/api/cart/remove', {
-                    method: 'POST',
-                });
+                // await fetch('/api/cart/remove', {
+                //     method: 'POST',
+                // });
+                //SLCT
+                await fetch('/api/cart/remove-selected', { method: 'POST' });
 
                 router.push('/checkout/success');
             } else {

@@ -28,14 +28,25 @@ export async function POST(request) {
         existingItem.image = productImage;
         existingItem.price = productPrice;
         existingItem.maxQuantity = maxQuantity;
+        // existingItem.selected = selected;
     } else {
+        // cart.items.push({
+        //     productId,
+        //     qty: quantity,
+        //     name: productName,
+        //     image: productImage,
+        //     price: productPrice,
+        //     maxQuantity
+        // });
         cart.items.push({
             productId,
             qty: quantity,
             name: productName,
             image: productImage,
             price: productPrice,
-            maxQuantity
+            maxQuantity,
+            //SLCT
+            selected: true,
         });
     }
 

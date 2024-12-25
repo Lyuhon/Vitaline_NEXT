@@ -272,3 +272,7 @@ span#phone-error {
         right: 10px;
     }
 }
+
+.checkout_section.cart_wrapper .info_block_main {
+    align-items: flex-start;
+}

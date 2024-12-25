@@ -446,6 +446,9 @@ import CartSummary from './CartSummaryUpdate';
 import { CartProvider } from '../context/CartContext';
 import AnimatedWrapper from '@/components/animation/AnimatedWrapper'; // Импортируем AnimatedWrapper
 
+import ForceSelectAllOnLoad from './ForceSelectAllOnLoad';
+
+
 async function fetchSingleProductByID(id) {
     const query = `
       query GetSimpleProduct($id: ID!) {
@@ -547,7 +550,8 @@ export default async function CartPage() {
         const qty = item?.qty || 1;
         const maxQty = p.stockQuantity || 0;
         const priceNum = parsePrice(p.price || '0');
-        return { ...p, qty, maxQty, total: qty * priceNum };
+        //SLCT
+        return { ...p, qty, maxQty, total: qty * priceNum, selected: true, };
     });
 
     return (
@@ -558,6 +562,7 @@ export default async function CartPage() {
 
                     <CartProvider initialCartItems={cartItemsDetailed}>
 
+                        <ForceSelectAllOnLoad />
                         <div className="cart_flex_block">
                             <div className="items">
 

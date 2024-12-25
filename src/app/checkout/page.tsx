@@ -179,8 +179,6 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { CartProvider } from '@/app/context/CartContext';
 import { CheckoutProvider } from '@/app/context/CheckoutContext';
-// import CheckoutForm from './CheckoutForm';
-// import CheckoutCartItemsClient from '../checkout/CheckoutCartItemsClient.jsx';
 import MainComponent from './MainComponent';
 import '@/app/cart/cart.css';
 import './checkout.css';
@@ -208,6 +206,8 @@ interface Product {
 interface CartItem {
     productId: string;
     qty: number;
+    // SLCT
+    selected: boolean;
 }
 
 interface Cart {
@@ -221,6 +221,7 @@ async function fetchSingleProductByID(id: string): Promise<Product | null> {
           id
           name
           slug
+          sku
           ... on SimpleProduct {
             price
             stockStatus
@@ -266,12 +267,6 @@ async function fetchProductsByIds(ids: string[]): Promise<Product[]> {
     return products;
 }
 
-// interface CartItemDetailed extends Product {
-//     qty: number;
-//     maxQty: number;
-//     total: number;
-// }
-
 interface CartItemDetailed {
     productId: string;
     name: string;
@@ -290,20 +285,15 @@ export default async function CheckoutPage() {
     const cartCookieValue = cartCookie?.value;
 
     const cart: Cart = cartCookieValue ? JSON.parse(cartCookieValue) : { items: [] };
-    const productIds = cart.items?.map(i => i.productId) || [];
+    // const productIds = cart.items?.map(i => i.productId) || [];
+    //SLCT
+    const selectedItems = cart.items?.filter(i => i.selected) || [];
+    const productIds = selectedItems.map(i => i.productId);
     const products = await fetchProductsByIds(productIds);
 
     if (products.length === 0) {
         redirect('/cart');
     }
-
-    // const cartItemsDetailed: CartItemDetailed[] = products.map(p => {
-    //     const item = cart.items.find(i => i.productId === p.id);
-    //     const qty = item?.qty || 1;
-    //     const maxQty = p.stockQuantity || 0;
-    //     const priceNum = parseInt(p.price.replace(/[^\d]/g, ''), 10);
-    //     return { ...p, qty, maxQty, total: qty * priceNum };
-    // });
 
     const cartItemsDetailed: CartItemDetailed[] = products.map(p => {
         const item = cart.items.find(i => i.productId === p.id);
@@ -326,34 +316,8 @@ export default async function CheckoutPage() {
         <AnimatedWrapper>
             <CartProvider initialCartItems={cartItemsDetailed}>
                 <CheckoutProvider>
-                    {/* <div className="checkout_section cart_wrapper full">
-                        <div className="form-container">
-                            <h1>Оформление заказа</h1>
-                            <CheckoutForm />
-                        </div>
 
-                        <div className="cart_part cart_fill_info">
-                            <div className="items">
-                                <CheckoutCartItemsClient />
-                            </div>
-                            <CheckoutCartSummaryUpdate />
-                        </div>
-                    </div> */}
-
-                    {/* <div className="checkout_section cart_wrapper full"> */}
-                    {/* <div className="form-container">
-                            <h1>Оформление заказа</h1>
-                            <CheckoutForm />
-                        </div>
-
-                        <div className="cart_part cart_fill_info">
-                            <div className="items">
-                                <CheckoutCartItemsClient />
-                            </div>
-                            <CheckoutCartSummaryUpdate />
-                        </div> */}
                     <MainComponent />
-                    {/* </div> */}
 
                 </CheckoutProvider>
             </CartProvider>
