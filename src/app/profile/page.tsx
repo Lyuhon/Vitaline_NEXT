@@ -288,6 +288,8 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import './profile.css';
+import AnimatedWrapper from '@/components/animation/AnimatedWrapper'; // Импортируем AnimatedWrapper
+
 
 export default function ProfilePage() {
     const [activeSection, setActiveSection] = useState<'profile' | 'orders' | 'favorites' | 'points' | 'support'>('profile');
@@ -622,43 +624,51 @@ export default function ProfilePage() {
     );
 
     return (
-        <div className="profile-container">
-            <aside className="sidebar_profile">
-                {/* На мобильной версии отображаем активный пункт и стрелочку. 
+        <>
+
+            <AnimatedWrapper>
+
+                <div className="profile-container">
+                    <aside className="sidebar_profile">
+                        {/* На мобильной версии отображаем активный пункт и стрелочку. 
                     При клике по активному пункту — раскрываем/скрываем меню */}
 
-                <div className="mobile-dropdown-header" onClick={() => {
-                    if (window.innerWidth <= 768) {
-                        setIsMenuOpen(!isMenuOpen);
-                    }
-                }}>
-                    <span>
-                        {
-                            // Показываем название активного пункта на мобильном
-                            activeSection === 'profile' ? 'Мой профиль' :
-                                activeSection === 'orders' ? 'Мои заказы' :
-                                    activeSection === 'favorites' ? 'Избранное' :
-                                        activeSection === 'points' ? 'Мои баллы' :
-                                            activeSection === 'support' ? 'Служба поддержки' : ''
-                        }
-                    </span>
-                    {/* Стрелочка вниз/вверх */}
-                    <span
-                        className={`dropdown-arrow ${isMenuOpen ? 'open' : ''}`}
-                    >▼
-                    </span>
-                </div>
+                        <div className="mobile-dropdown-header" onClick={() => {
+                            if (window.innerWidth <= 768) {
+                                setIsMenuOpen(!isMenuOpen);
+                            }
+                        }}>
+                            <span>
+                                {
+                                    // Показываем название активного пункта на мобильном
+                                    activeSection === 'profile' ? 'Мой профиль' :
+                                        activeSection === 'orders' ? 'Мои заказы' :
+                                            activeSection === 'favorites' ? 'Избранное' :
+                                                activeSection === 'points' ? 'Мои баллы' :
+                                                    activeSection === 'support' ? 'Служба поддержки' : ''
+                                }
+                            </span>
+                            {/* Стрелочка вниз/вверх */}
+                            <span
+                                className={`dropdown-arrow ${isMenuOpen ? 'open' : ''}`}
+                            >▼
+                            </span>
+                        </div>
 
-                {/* Десктопная версия: меню всегда показано. 
+                        {/* Десктопная версия: меню всегда показано. 
                     Мобильная версия: при isMenuOpen=true показываем все пункты */}
-                <div className={`menu-items ${isMenuOpen ? 'open' : ''}`}>
-                    {menuItems}
-                </div>
-            </aside >
+                        <div className={`menu-items ${isMenuOpen ? 'open' : ''}`}>
+                            {menuItems}
+                        </div>
+                    </aside >
 
-            <main className="content-container">
-                {renderContent()}
-            </main>
-        </div >
+                    <main className="content-container">
+                        {renderContent()}
+                    </main>
+                </div >
+
+            </AnimatedWrapper>
+
+        </>
     );
 }

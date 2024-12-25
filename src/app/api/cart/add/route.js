@@ -21,7 +21,8 @@ export async function POST(request) {
 
     const existingItem = cart.items.find((item) => item.productId === productId);
     if (existingItem) {
-        existingItem.qty += quantity;
+        // existingItem.qty += quantity;
+        existingItem.qty = quantity;
         // Обновляем информацию, если она изменилась
         existingItem.name = productName;
         existingItem.image = productImage;

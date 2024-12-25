@@ -1,132 +1,3 @@
-// // src/context/CartContext.jsx
-// 'use client';
-
-// import React, { createContext, useState, useEffect } from 'react';
-
-// // Создаём контекст
-// export const CartContext = createContext();
-
-// // Провайдер контекста
-// export const CartProvider = ({ children, initialCartItems }) => {
-//     const [items, setItems] = useState([]);
-//     const [selectAll, setSelectAll] = useState(true);
-//     const [totalPrice, setTotalPrice] = useState(0);
-//     const [totalItems, setTotalItems] = useState(0);
-//     const [deliveryPrice] = useState(25000); // Доставка фиксированная
-//     const [finalPrice, setFinalPrice] = useState(0);
-
-//     // Функция для парсинга цены
-//     const parsePrice = (price) => {
-//         const num = parseInt(price.toString().replace(/\D/g, ''), 10);
-//         return isNaN(num) ? 0 : num;
-//     };
-
-//     // Функция для обновления куки
-//     const updateCookies = (updatedItems) => {
-//         document.cookie = `vitaline_cart=${encodeURIComponent(JSON.stringify({
-//             items: updatedItems.map(item => ({
-//                 productId: item.id,
-//                 qty: item.qty
-//             }))
-//         }))}; Path=/; Max-Age=31536000;`;
-//     };
-
-//     // Инициализация корзины при монтировании
-//     useEffect(() => {
-//         // Корректируем количество товаров в корзине согласно актуальным данным о наличии
-//         const adjustedItems = initialCartItems.map(item => {
-//             if (item.qty > item.maxQty) {
-//                 return {
-//                     ...item,
-//                     qty: item.maxQty > 0 ? item.maxQty : 1, // Минимум 1, если maxQty 0
-//                     total: (item.maxQty > 0 ? item.maxQty : 1) * parsePrice(item.price)
-//                 };
-//             }
-//             return item;
-//         });
-
-//         setItems(adjustedItems);
-
-//         // Проверяем, были ли произведены корректировки
-//         const wasAdjusted = initialCartItems.some((item, index) => item.qty !== adjustedItems[index].qty);
-
-//         if (wasAdjusted) {
-//             updateCookies(adjustedItems);
-//         }
-//     }, [initialCartItems]);
-
-//     // Обновление общей суммы, количества и финальной цены при изменении элементов
-//     useEffect(() => {
-//         const total = items.reduce((acc, item) => item.selected ? acc + item.total : acc, 0);
-//         const selectedItemsCount = items.filter(item => item.selected).length;
-
-//         setTotalPrice(total);
-//         setTotalItems(selectedItemsCount);
-//         setFinalPrice(total + deliveryPrice);
-//     }, [items, deliveryPrice]);
-
-//     // Обновление состояния "Выделить все" при изменении выбранных товаров
-//     useEffect(() => {
-//         const allSelected = items.length > 0 && items.every(item => item.selected);
-//         setSelectAll(allSelected);
-//     }, [items]);
-
-//     // Функция для переключения состояния "Выделить все"
-//     const toggleSelectAll = () => {
-//         const newSelectAll = !selectAll;
-//         setSelectAll(newSelectAll);
-//         const updatedItems = items.map(item => ({ ...item, selected: newSelectAll }));
-//         setItems(updatedItems);
-//     };
-
-//     // Функция для переключения выбора отдельного товара
-//     const toggleItemSelection = (itemId) => {
-//         const updatedItems = items.map(item =>
-//             item.id === itemId ? { ...item, selected: !item.selected } : item
-//         );
-//         setItems(updatedItems);
-//     };
-
-//     // Функция для изменения количества товара
-//     const handleItemQuantityChange = (itemId, newQty) => {
-//         const updatedItems = items.map(item =>
-//             item.id === itemId
-//                 ? {
-//                     ...item,
-//                     qty: newQty > item.maxQty ? item.maxQty : newQty, // Ограничение максимального количества
-//                     total: (newQty > item.maxQty ? item.maxQty : newQty) * parsePrice(item.price)
-//                 }
-//                 : item
-//         );
-//         setItems(updatedItems);
-//         updateCookies(updatedItems);
-//     };
-
-//     const value = {
-//         items,
-//         selectAll,
-//         toggleSelectAll,
-//         toggleItemSelection,
-//         handleItemQuantityChange,
-//         parsePrice,
-//         totalPrice,
-//         totalItems,
-//         deliveryPrice,
-//         finalPrice,
-//     };
-
-//     return (
-//         <CartContext.Provider value={value}>
-//             {children}
-//         </CartContext.Provider>
-//     );
-// };
-
-
-
-
-
-
 // src/context/CartContext.jsx
 'use client';
 
@@ -141,8 +12,25 @@ export const CartProvider = ({ children, initialCartItems }) => {
     const [selectAll, setSelectAll] = useState(true);
     const [totalPrice, setTotalPrice] = useState(0);
     const [totalItems, setTotalItems] = useState(0);
-    const [deliveryPrice] = useState(25000); // Доставка фиксированная
+
+    // <-- Исходно у вас была доставка фиксированная: 25 000 сум,
+    //     теперь будем динамически менять между 25 000 и 60 000
+    const [deliveryPrice, setDeliveryPrice] = useState(25000);
     const [finalPrice, setFinalPrice] = useState(0);
+
+    // <-- Дополнительный стейт: какой город выбран?
+    const [userCity, setUserCity] = useState('');
+
+    // <-- Функция, которая будет вызвана при изменении города
+    //     Если НЕ "Город Ташкент", ставим deliveryPrice = 60 000, иначе 25 000.
+    const handleCityChange = (city) => {
+        setUserCity(city);
+        if (city && city !== 'Город Ташкент') {
+            setDeliveryPrice(60000);
+        } else {
+            setDeliveryPrice(25000);
+        }
+    };
 
     // Функция для парсинга цены
     const parsePrice = (price) => {
@@ -150,19 +38,19 @@ export const CartProvider = ({ children, initialCartItems }) => {
         return isNaN(num) ? 0 : num;
     };
 
-    // Функция для обновления куки
+    // Функция для обновления куки (по желанию можете убрать, если мешает)
     const updateCookies = (updatedItems) => {
         document.cookie = `vitaline_cart=${encodeURIComponent(JSON.stringify({
             items: updatedItems.map(item => ({
                 productId: item.id,
-                qty: item.qty
+                qty: item.qty,
             }))
         }))}; Path=/; Max-Age=31536000;`;
     };
 
     // Инициализация корзины при монтировании
     useEffect(() => {
-        // Корректируем количество товаров в корзине согласно актуальным данным о наличии
+        // Корректируем товары, если qty > maxQty и т.д.
         const adjustedItems = initialCartItems
             .map(item => {
                 if (item.qty > item.maxQty) {
@@ -171,22 +59,19 @@ export const CartProvider = ({ children, initialCartItems }) => {
                             ...item,
                             qty: item.maxQty,
                             total: item.maxQty * parsePrice(item.price),
-                            selected: true, // Убедитесь, что selected всегда булево
+                            selected: true,
                         };
                     } else {
-                        return null; // Удаляем товар из корзины, если maxQty = 0
+                        return null; // Удаляем, если maxQty=0
                     }
                 }
-                return {
-                    ...item,
-                    selected: true, // Устанавливаем selected как true по умолчанию
-                };
+                return { ...item, selected: true };
             })
             .filter(item => item !== null);
 
         setItems(adjustedItems);
 
-        // Проверяем, были ли произведены корректировки
+        // Проверяем, были ли изменения
         const wasAdjusted = initialCartItems.some((item, index) => {
             const adjustedItem = adjustedItems[index];
             return adjustedItem && item.qty !== adjustedItem.qty;
@@ -198,23 +83,26 @@ export const CartProvider = ({ children, initialCartItems }) => {
         }
     }, [initialCartItems]);
 
-    // Обновление общей суммы, количества и финальной цены при изменении элементов
+    // При изменении items или deliveryPrice пересчитываем totalPrice, totalItems, finalPrice
     useEffect(() => {
-        const total = items.reduce((acc, item) => item.selected ? acc + item.total : acc, 0);
+        const total = items.reduce(
+            (acc, item) => (item.selected ? acc + item.total : acc),
+            0
+        );
         const selectedItemsCount = items.filter(item => item.selected).length;
 
         setTotalPrice(total);
         setTotalItems(selectedItemsCount);
-        setFinalPrice(total + deliveryPrice);
+        setFinalPrice(total + deliveryPrice); // <-- Важно: используем текущую deliveryPrice
     }, [items, deliveryPrice]);
 
-    // Обновление состояния "Выделить все" при изменении выбранных товаров
+    // Обновление состояния "Выделить все"
     useEffect(() => {
         const allSelected = items.length > 0 && items.every(item => item.selected);
         setSelectAll(allSelected);
     }, [items]);
 
-    // Функция для переключения состояния "Выделить все"
+    // Переключение "Выделить все"
     const toggleSelectAll = () => {
         const newSelectAll = !selectAll;
         setSelectAll(newSelectAll);
@@ -222,7 +110,7 @@ export const CartProvider = ({ children, initialCartItems }) => {
         setItems(updatedItems);
     };
 
-    // Функция для переключения выбора отдельного товара
+    // Переключение выбора отдельного товара
     const toggleItemSelection = (itemId) => {
         const updatedItems = items.map(item =>
             item.id === itemId ? { ...item, selected: !item.selected } : item
@@ -230,15 +118,15 @@ export const CartProvider = ({ children, initialCartItems }) => {
         setItems(updatedItems);
     };
 
-    // Функция для изменения количества товара
+    // Изменение количества товара
     const handleItemQuantityChange = (itemId, newQty) => {
         const updatedItems = items.map(item =>
             item.id === itemId
                 ? {
                     ...item,
-                    qty: newQty > item.maxQty ? item.maxQty : newQty, // Ограничение максимального количества
+                    qty: newQty > item.maxQty ? item.maxQty : newQty,
                     total: (newQty > item.maxQty ? item.maxQty : newQty) * parsePrice(item.price),
-                    selected: true, // Убедитесь, что selected всегда булево
+                    selected: true,
                 }
                 : item
         );
@@ -246,6 +134,7 @@ export const CartProvider = ({ children, initialCartItems }) => {
         updateCookies(updatedItems);
     };
 
+    // Собираем всё, что хотим пробросить через контекст
     const value = {
         items,
         selectAll,
@@ -257,6 +146,9 @@ export const CartProvider = ({ children, initialCartItems }) => {
         totalItems,
         deliveryPrice,
         finalPrice,
+        // <-- Новые поля (город и сеттер)
+        userCity,
+        handleCityChange,
     };
 
     return (

@@ -23,7 +23,7 @@
 //     });
 // }
 
-
+// \app\api\cart\remove\route.js
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 

@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import he from 'he';
 import './log_reg.css';
+import AnimatedWrapper from '@/components/animation/AnimatedWrapper'; // Импортируем AnimatedWrapper
+
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
@@ -92,57 +94,59 @@ export default function LoginPage() {
     }
 
     return (
-        <section className={`login_page ${isLoaded ? 'fade-in' : 'hidden'}`}>
-            <div className="login-box">
-                <h2 className="login-header">Ваш личный кабинет Vitaline</h2>
+        <AnimatedWrapper>
+            <section className={`login_page ${isLoaded ? 'fade-in' : 'hidden'}`}>
+                <div className="login-box">
+                    <h2 className="login-header">Ваш личный кабинет Vitaline</h2>
 
-                <form className="login_form" onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <input
-                            type="email"
-                            id="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Введите вашу почту"
-                            required
-                            autoComplete="username"
-                        />
-                    </div>
-
-                    <div className="form-group">
-                        <input
-                            type="password"
-                            id="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Введите ваш пароль"
-                            required
-                            autoComplete="current-password"
-                        />
-                    </div>
-
-                    {error && <div className="alert">{error}</div>}
-
-                    <div className="form-group remb_forg">
-                        <div className="remeber_me">
-                            <input id="remeber" type="checkbox" />
-                            <label htmlFor="remeber">Запомнить меня</label>
+                    <form className="login_form" onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <input
+                                type="email"
+                                id="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Введите вашу почту"
+                                required
+                                autoComplete="username"
+                            />
                         </div>
-                        <div className="forget_block">
-                            <Link href="#">Я забыл свой пароль</Link>
+
+                        <div className="form-group">
+                            <input
+                                type="password"
+                                id="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="Введите ваш пароль"
+                                required
+                                autoComplete="current-password"
+                            />
                         </div>
+
+                        {error && <div className="alert">{error}</div>}
+
+                        <div className="form-group remb_forg">
+                            <div className="remeber_me">
+                                <input id="remeber" type="checkbox" />
+                                <label htmlFor="remeber">Запомнить меня</label>
+                            </div>
+                            <div className="forget_block">
+                                <Link href="#">Я забыл свой пароль</Link>
+                            </div>
+                        </div>
+
+                        <button type="submit" className="button_login">
+                            Войти
+                        </button>
+                    </form>
+
+                    <div className="register_acc_links">
+                        <span>Нет аккаунта?</span>
+                        <Link href="#">Зарегистрироваться</Link>
                     </div>
-
-                    <button type="submit" className="button_login">
-                        Войти
-                    </button>
-                </form>
-
-                <div className="register_acc_links">
-                    <span>Нет аккаунта?</span>
-                    <Link href="#">Зарегистрироваться</Link>
                 </div>
-            </div>
-        </section>
+            </section>
+        </AnimatedWrapper>
     );
 }

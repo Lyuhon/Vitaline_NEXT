@@ -702,6 +702,8 @@ button:hover {
 
     .woo_prod_single_template .popup_content {
         width: 90%;
+        max-height: 70vh;
+        overflow-y: scroll;
     }
 
     .woo_prod_single_template .popup_content .product_pop_info {
@@ -749,6 +751,14 @@ button:hover {
 
     .product_item .add_to_cart {
         padding: 6px;
+    }
+
+    .woo_prod_single_template .general_heading_block h2 {
+        margin-top: 30px;
+    }
+
+    .woo_prod_single_template {
+        margin-bottom: 0px;
     }
 }
 

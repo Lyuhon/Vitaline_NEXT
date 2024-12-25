@@ -453,6 +453,7 @@ async function fetchSingleProductByID(id) {
           id 
           name
           slug
+          sku 
           ... on SimpleProduct {
             price
             stockStatus
@@ -516,21 +517,23 @@ export default async function CartPage() {
 
     if (products.length === 0) {
         return (
-            <div className="cart_wrapper">
-                <img
-                    className="empty_cart_image"
-                    src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/pngwing.com-1.png"
-                    alt="Пустая корзина"
-                />
-                <div className="cart-title">
-                    <h1>Корзина пока что пуста</h1>
+            <AnimatedWrapper>
+                <div className="cart_wrapper empty">
+                    <img
+                        className="empty_cart_image"
+                        src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/pngwing.com-1.png"
+                        alt="Пустая корзина"
+                    />
+                    <div className="cart-title">
+                        <h1>Корзина пока что пуста</h1>
+                    </div>
+                    <div className="cart_epmty_info">
+                        <p>
+                            Воспользуйтесь <Link href="/shop">каталогом продукции</Link> или поиском, чтобы найти всё что нужно.
+                        </p>
+                    </div>
                 </div>
-                <div className="cart_epmty_info">
-                    <p>
-                        Воспользуйтесь <Link href="/shop">каталогом продукции</Link> или поиском, чтобы найти всё что нужно.
-                    </p>
-                </div>
-            </div>
+            </AnimatedWrapper>
         );
     }
 
