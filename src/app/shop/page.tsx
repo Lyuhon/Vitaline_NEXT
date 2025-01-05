@@ -125,8 +125,8 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                                             className="product_item__image"
                                             src={p.image?.sourceUrl || '/images/products/default.jpg'}
                                             alt={p.image?.altText || p.name}
-                                            width={220}
-                                            height={220}
+                                            width={200}
+                                            height={200}
                                         />
                                     </Link>
 

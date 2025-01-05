@@ -331,6 +331,7 @@
 // app/product-brands/[slug]/page.tsx
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Metadata } from 'next';
 import { fetchBrandInfo, fetchBrandProducts } from '@/lib/brand/fetchBrandData';
 import '@/app/shop/shop.css';
@@ -395,10 +396,12 @@ export default async function BrandPage({
                 <div className="products_side">
                     {brandInfo.brandBanner && (
                         <div className="brand-banner" style={{ marginBottom: '20px' }}>
-                            <img
+                            <Image
                                 src={brandInfo.brandBanner}
                                 alt={brandInfo.name}
                                 style={{ width: '100%', maxHeight: '300px', objectFit: 'cover' }}
+                                width={1800}
+                                height={400}
                             />
                         </div>
                     )}
@@ -432,10 +435,12 @@ export default async function BrandPage({
                             return (
                                 <div className="product_item" key={p.id}>
                                     <Link href={`/product/${p.slug}`}>
-                                        <img
+                                        <Image
                                             className="product_item__image"
                                             src={p.image?.sourceUrl || '/images/products/default.jpg'}
                                             alt={p.image?.altText || p.name}
+                                            width={200}
+                                            height={200}
                                         />
                                     </Link>
 

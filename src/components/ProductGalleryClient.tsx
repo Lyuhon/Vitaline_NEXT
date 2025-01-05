@@ -127,8 +127,8 @@ export default function ProductGalleryClient({ productName, mainImage, mainImage
                         width: "100%",
                         height: "auto",
                     }}
-                    width={400} // Задайте подходящие размеры
-                    height={400}
+                    width={300} // Задайте подходящие размеры
+                    height={300}
                 />
             </div>
 
@@ -141,8 +141,8 @@ export default function ProductGalleryClient({ productName, mainImage, mainImage
                         className={idx === activeIndex ? "active_gallery_product_item" : ""}
                         onClick={() => handleThumbClick(idx)}
                         style={{ cursor: "pointer" }}
-                        width={120} // Задайте подходящие размеры
-                        height={120}
+                        width={300} // Задайте подходящие размеры
+                        height={300}
                     />
                 ))}
             </div>
