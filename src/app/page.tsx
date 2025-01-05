@@ -3,6 +3,7 @@ import { fetchProducts } from '../lib/fetchProducts';
 import ProductsSection from '../components/ProductsSection';
 import HomeCategories from '../components/HomeCategories';
 import HomeAdvantages from '../components/HomeAdvantages';
+import HomeBrands from '../components/HomeBrands';
 import UsefulBlog from '../components/UsefulBlog';
 // import CurrencyCahnger from '@/components/CurrencyCahnger';
 
@@ -19,6 +20,8 @@ export default async function Page() {
 
       <div className="home_page_content">
         <HomeSlider />
+
+        <HomeBrands />
 
         <ProductsSection products={products} />
 

@@ -3,14 +3,25 @@ import React from 'react';
 import ProductsSliderClient from './ProductsSliderClient';
 import Link from 'next/link';
 
+type Brand = {
+    id: string;
+    name: string;
+    slug: string;
+};
+
 type Product = {
     id: string;
     name: string;
     slug: string;
     price?: string;
+    convertedPrice?: string;
     image?: {
         sourceUrl?: string;
         altText?: string;
+    };
+
+    brands?: {
+        nodes: Brand[];
     };
 };
 
@@ -31,8 +42,8 @@ export default function ProductsSection({ products }: { products: Product[] }) {
             <div className="products_section_heading">
                 <div className="general_heading_block">
                     <div className="prods_sec_nav">
-                        <h2 className="active">Бестселлеры</h2>
-                        <h2>Новые поступления</h2>
+                        <h2 className="active__">Бестселлеры</h2>
+                        {/* <h2>Новые поступления</h2> */}
                     </div>
                     <Link className="section_read_more" href="/shop">Каталог товаров</Link>
                 </div>
@@ -52,10 +63,14 @@ export default function ProductsSection({ products }: { products: Product[] }) {
                                 />
                             </Link>
                             <div className="product_meta_box">
-                                {/* Предположим, что brand пока не подтягиваем - можно оставить как есть или убрать */}
-                                <Link href="#" className="product_item__brand">
-                                    {product.name.split(' ')[0]}
+
+                                <Link
+                                    href={`/product-brands/${product.brands?.nodes[0]?.slug ?? ''}`}
+                                    className="product_item__brand"
+                                >
+                                    {product.brands?.nodes[0]?.name ?? 'Без бренда'}
                                 </Link>
+
                                 <div className="line_highlight"></div>
 
                                 {/* Ссылка на страницу товара при клике на название товара */}
@@ -64,13 +79,16 @@ export default function ProductsSection({ products }: { products: Product[] }) {
                                 </Link>
 
                                 {/* Форматируем цену перед выводом */}
-                                <span className="product_item__price">
+                                {/* <span className="product_item__price">
                                     {formatPrice(product.price)}
+                                </span> */}
+                                <span className="product_item__price">
+                                    {product.convertedPrice}
                                 </span>
 
                             </div>
                             <button className="product_item__add_to_cart">
-                                Добавить в корзину
+                                В корзину
                             </button>
                         </div>
                     ))}

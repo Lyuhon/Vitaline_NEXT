@@ -5,7 +5,12 @@ const endpoint = 'https://nuxt.vitaline.uz/graphql';
 
 const query = gql`
   query GetProducts {
-    products(first: 5) {
+    products(
+      first: 8,
+      where: { 
+        stockStatus: IN_STOCK 
+      }) 
+      {
       nodes {
         id
         name
@@ -16,6 +21,14 @@ const query = gql`
         }
         ... on SimpleProduct {
           price
+          convertedPrice
+          brands {
+            nodes {
+              id
+              name
+              slug
+            }
+          }
         }
       }
     }

@@ -24,8 +24,19 @@ const query = gql`
       }
       ... on SimpleProduct {
         price
+        convertedPrice
         stockStatus
         stockQuantity
+        brands {
+          nodes {
+            id
+            name
+            slug
+            brandBanner
+            brandId
+            brandThumbnail
+          }
+        }
       }
       productCategories {
         nodes {

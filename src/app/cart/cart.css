@@ -339,6 +339,10 @@ h3.cart_brand_name {
     transition: all 0.4s;
 }
 
+.cart_checkout-button:hover {
+    transform: scale(1.03);
+}
+
 .cart_checkout-button.disabled_go_to_checkout {
     cursor: disabled;
     filter: grayscale(1);
@@ -423,12 +427,14 @@ h3.cart_brand_name {
     }
 
     .cart_fill_info .summary_price {
-        font-size: 25px;
-        line-height: 25px;
+        font-size: 22px;
+        line-height: 22px;
     }
 
     .cart_checkout-button {
         margin-top: 15px;
+        padding: 10px;
+        font-size: 14px;
     }
 }
 

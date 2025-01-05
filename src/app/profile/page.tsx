@@ -288,7 +288,16 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import './profile.css';
+import '../contacts/contacts.css';
 import AnimatedWrapper from '@/components/animation/AnimatedWrapper'; // Импортируем AnimatedWrapper
+// import Head from 'next/head';
+
+// export const generateMetadata = () => {
+//     return {
+//         title: 'Личный кабинет - Vitaline',
+//         description: 'Профиль | Служба поддержки',
+//     };
+// };
 
 
 export default function ProfilePage() {
@@ -299,6 +308,19 @@ export default function ProfilePage() {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
     const [checkedAuth, setCheckedAuth] = useState<boolean>(false); // Флаг, чтобы избежать повторной проверки
     const router = useRouter();
+
+    useEffect(() => {
+        document.title = 'Личный кабинет - Vitaline';
+        const metaDescription = document.querySelector('meta[name="description"]');
+        if (metaDescription) {
+            metaDescription.setAttribute('content', 'Профиль | Служба поддержки');
+        } else {
+            const meta = document.createElement('meta');
+            meta.name = 'description';
+            meta.content = 'Профиль | Служба поддержки';
+            document.head.appendChild(meta);
+        }
+    }, []);
 
     useEffect(() => {
         // Если уже проверили и установили состояние аутентификации, повторно не проверяем
@@ -513,8 +535,44 @@ export default function ProfilePage() {
                 return (
                     <motion.div {...fadeInUp} key="support">
                         <div className="profile-page-content">
-                            <h2>Служба поддержки</h2>
-                            <p>Свяжитесь с нами для помощи.</p>
+                            {/* <h2>Служба поддержки</h2> */}
+                            <div className="big_inf">
+                                Свяжитесь с нами и мы поможем с любым вопросом касаемо внутренних процессов Vitaline - ассортимент, заказы, доставка.
+                            </div>
+
+                            <div className="smal_inf">
+                                Рабочие дни с 9:00 до 19:00,
+                                <br />прием заказов online 24/7
+                            </div>
+
+                            <div className="supp_block">
+
+                                <div className="support_bottom_block">
+                                    <h2 className='supp_page_head'>Служба поддержки Vitaline</h2>
+                                    <div className="support_bottom_block_inner_wrap">
+                                        <a href="https://t.me/support_chat" className="tg_chat_btn" target="_blank" rel="noopener noreferrer">
+                                            <img alt="" src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Artboard.svg" />
+                                            <span>Открыть чат</span>
+                                        </a>
+                                        <div className="support-contacts">
+                                            <p style={{ whiteSpace: "nowrap" }}>+998 90 906 69 99</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="contacts-social-links">
+                                    <a href="#" className="contacts_insta">
+                                        <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Socials.svg" alt="" />
+                                        <span>Инстаграм @vitaline.uz</span>
+                                    </a>
+                                    <a href="#" className="contacts_telegram">
+                                        <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Artboard.svg" alt="" />
+                                        <span>Телеграм-канал Vitaline</span>
+                                    </a>
+                                </div>
+
+                            </div>
+
                         </div>
                     </motion.div>
                 );
@@ -624,6 +682,7 @@ export default function ProfilePage() {
     );
 
     return (
+
         <>
 
             <AnimatedWrapper>

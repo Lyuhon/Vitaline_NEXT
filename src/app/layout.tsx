@@ -9,7 +9,7 @@ import { Metadata } from 'next';
 // import Script from 'next/script';
 
 export const metadata: Metadata = {
-  title: 'Главная',
+  title: 'Интернет магазин витаминов - Vitaline',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -520,6 +520,32 @@ legend {
   margin-bottom: 60px;
 }
 
+.home_brand_list img {
+  border-radius: 6px;
+}
+
+.home_brand_list .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s;
+  border-radius: 5px !important;
+}
+
+@media only screen and (min-width: 768px) {
+  .home_brand_list .swiper-slide {
+    min-height: 134px;
+  }
+}
+
+.home_brand_list .swiper-slide:hover {
+  margin-top: -10px;
+}
+
+.home_brand_list .swiper.brands_list_slider {
+  padding: 11px;
+}
+
 .general_heading_block {
   display: flex;
   justify-content: space-between;
@@ -594,6 +620,8 @@ a.section_read_more {
   max-width: 100%;
   width: 100%;
   margin-bottom: 15px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
 }
 
 .product_item .product_meta_box {
@@ -609,14 +637,14 @@ a.section_read_more {
 
 .product_item .product_meta_box a.product_item__name {
   display: -webkit-box !important;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   /* Ограничение в 3 строки */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
 
   display: block;
-  min-height: 67.5px;
+  /* min-height: 67.5px; */
 
   font-size: 15px;
   font-weight: 400;
@@ -1227,6 +1255,38 @@ footer .links-column ul {
     color: #fff;
     font-weight: 900;
   }
+
+
+
+  /*Home - 2: Список брендов*/
+  .home_brand_list {
+    margin-bottom: 40px;
+  }
+
+  .home_brand_list .general_heading_block {
+    justify-content: space-between !important;
+  }
+
+  .home_brand_list .home_categories_section_heading .orange_heading_divider {
+    margin-left: 0px !important;
+  }
+
+  .home_brand_list h2 {
+    font-size: 22px !important;
+    font-weight: 400;
+  }
+
+  .home_brand_list img {
+    border-radius: 6px;
+  }
+
+  .home_brand_list .swiper-slide {
+    padding: 5px !important;
+    min-height: 85px;
+  }
+
+
+
 
   /*Home - 4: Список популярных категорий*/
   .home_categories .general_heading_block .section_read_more {

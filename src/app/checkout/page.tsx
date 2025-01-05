@@ -197,6 +197,7 @@ interface Product {
     id: string;
     name: string;
     slug: string;
+    sku: string;
     price: string;
     stockStatus: string;
     stockQuantity: number;
@@ -275,7 +276,8 @@ interface CartItemDetailed {
     maxQty: number;
     total: number;
     image: string;
-    // slug: string; // Добавьте, если используется в ссылках
+    slug: string;  // <-- ДОБАВЛЯЕМ
+    sku: string;   // <-- ДОБАВЛЯЕМ
 }
 
 export default async function CheckoutPage() {
@@ -307,7 +309,9 @@ export default async function CheckoutPage() {
             qty,
             maxQty,
             total: qty * priceNum,
-            image: p.image.sourceUrl
+            image: p.image.sourceUrl,
+            slug: p.slug,  // <-- ДОБАВЛЯЕМ
+            sku: p.sku
         };
     });
 

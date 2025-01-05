@@ -37,6 +37,19 @@ export default function LoginPage() {
         setTimeout(() => setIsLoaded(true), 100);
     }, [router]);
 
+    useEffect(() => {
+        document.title = 'Вход в личный кабинет - Vitaline';
+        const metaDescription = document.querySelector('meta[name="description"]');
+        if (metaDescription) {
+            metaDescription.setAttribute('content', 'Профиль Vitaline');
+        } else {
+            const meta = document.createElement('meta');
+            meta.name = 'description';
+            meta.content = 'Профиль Vitaline';
+            document.head.appendChild(meta);
+        }
+    }, []);
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');

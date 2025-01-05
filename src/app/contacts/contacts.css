@@ -139,7 +139,40 @@ h1.contact_title {
     line-height: 19.8px;
 }
 
+.support-contacts {
+    white-space: nowrap;
+}
 
+.big_inf {
+    font-size: 23px;
+    font-weight: 400;
+    line-height: 25px;
+    margin-bottom: 40px;
+}
+
+.smal_inf {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 20px;
+    margin-bottom: 50px;
+}
+
+.supp_block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h2.supp_page_head {
+    margin: 0 0 20px 0 !important;
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    line-height: 22px !important;
+}
+
+.support_bottom_block .tg_chat_btn {
+    width: 60%;
+}
 
 
 
@@ -222,6 +255,15 @@ h1.contact_title {
     }
 
     .support_bottom_block .tg_chat_btn {
+        width: 100%;
+    }
+
+    .supp_block {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .support_bottom_block {
         width: 100%;
     }
 }

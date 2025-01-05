@@ -1,0 +1,22 @@
+.brands-page h1 {
+    margin-bottom: 20px;
+}
+
+.brands-page .brandsCount {
+    margin-bottom: 20px;
+}
+
+.brand-banner img {
+    border-radius: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+    .brands-page h1 {
+        font-size: 25px;
+        line-height: 25px;
+    }
+
+    .shop_page.brands-page {
+        margin-top: 10px;
+    }
+}
