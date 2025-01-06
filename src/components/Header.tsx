@@ -39,21 +39,23 @@ const Header = () => {
                             className="delivery_image"
                             src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/front-view-male-courier-green-uniform-holding-food-delivery-box-pink-desk_140725-33524-removebg-preview-1-1.png"
                             alt="Доставщик"
-                            width={500}
-                            height={500}
+                            width={120}
+                            height={120}
                         />
                         <span className="header__delivery-info">
-                            <b>Бесплатная доставка</b> – при покупке свыше <b>600 000 сум</b>
+                            {/* <b>Бесплатная доставка</b> – при покупке свыше <b>600 000 сум</b> */}
+                            <b>Скидка в 3%</b> – при покупке свыше <b>1000$</b>
                         </span>
                     </div>
                     <a href="#" className="header__app-download">
-                        <span>Скачать приложение Vitaline</span>
-                        <Image
+                        {/* <span>Скачать приложение Vitaline</span> */}
+                        <span>Оригинальные витамины из <b>США</b></span>
+                        {/* <Image
                             src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/3643758-gadget-handphone-mobile-phone-smartphone_113400-1-1.svg"
                             alt="Скачать приложение"
-                            width={500}
-                            height={500}
-                        />
+                            width={120}
+                            height={120}
+                        /> */}
                     </a>
                 </div>
             </div>
@@ -107,22 +109,24 @@ const Header = () => {
             {/* Навигация */}
             <nav className="header__navigation pc_visible">
                 <div className="header__menu">
-                    <div className="product_nav_button">
-                        <Image
-                            src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/preferences_desktop_apps_icon_180940-1.svg"
-                            alt="Продукция"
-                            width={20}
-                            height={20}
-                        />
-                        <span>Продукция</span>
-                    </div>
+                    <Link href="/shop">
+                        <div className="product_nav_button">
+                            <Image
+                                src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/preferences_desktop_apps_icon_180940-1.svg"
+                                alt="Продукция"
+                                width={20}
+                                height={20}
+                            />
+                            <span>Продукция</span>
+                        </div>
+                    </Link>
                     <div className="menu_block_link_ist">
-                        <Link href="/cat-list">Категории</Link>
+                        {/* <Link href="/cat-list">Категории</Link> */}
                         <Link href="/about">О нас</Link>
                         <Link href="/warehouse">Склады</Link>
-                        <Link href="/promotions">Акции</Link>
+                        {/* <Link href="/promotions">Акции</Link> */}
                         <Link href="/blog">Блог</Link>
-                        <Link href="/loyalty-program">Программа лояльности</Link>
+                        {/* <Link href="/loyalty-program">Программа лояльности</Link> */}
                         <Link href="/contacts">Контакты</Link>
                     </div>
                 </div>
@@ -137,14 +141,14 @@ const Header = () => {
                         />
                         <span>Личный кабинет</span>
                     </Link>
-                    <Link href="/favorites" className="header__favorites">
+                    {/* <Link href="/favorites" className="header__favorites">
                         <Image
                             src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/3643770-favorite-heart-like-likes-love-loved_113432-1.svg"
                             alt="Избранное"
                             width={20}
                             height={20}
                         />
-                    </Link>
+                    </Link> */}
                     <Link href="/cart" className="header__cart">
                         <Image
                             src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/РЎРРѕР№_1-1.svg"

@@ -5,7 +5,8 @@ import HomeCategories from '../components/HomeCategories';
 import HomeAdvantages from '../components/HomeAdvantages';
 import HomeBrands from '../components/HomeBrands';
 import UsefulBlog from '../components/UsefulBlog';
-// import CurrencyCahnger from '@/components/CurrencyCahnger';
+
+// import { MiniCartProvider } from '@/app/context/MiniCartContext';
 
 
 import HomeSlider from "@/components/HomeSlider";
@@ -25,7 +26,7 @@ export default async function Page() {
 
         <ProductsSection products={products} />
 
-        <HomeCategories />
+        {/* <HomeCategories /> */}
 
         <HomeAdvantages />
 

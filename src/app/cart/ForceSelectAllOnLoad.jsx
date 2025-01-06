@@ -41,7 +41,8 @@ export default function ForceSelectAllOnLoad() {
         const updated = items.map(item => ({
             ...item,
             selected: true,
-            total: item.qty * parsePrice(item.price),
+            // total: item.qty * parsePrice(item.price), // тут UZS
+            total: item.qty * parsePrice(item.convertedPrice),
         }));
 
         // Устанавливаем

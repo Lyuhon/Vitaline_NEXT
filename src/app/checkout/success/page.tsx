@@ -1,6 +1,7 @@
 import React from 'react';
 import './thanks.css';
 import '@/app/contacts/contacts.css';
+import Image from 'next/image';
 
 export const generateMetadata = () => {
     return {
@@ -39,7 +40,14 @@ const SuccessPage = () => {
 
                                     <div >
                                         <a className='tg_button' href="https://t.me/vitalinebot" target="_blank" rel="noopener noreferrer">
-                                            <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Artboard.svg" alt="" />
+
+                                            <Image
+                                                src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Artboard.svg"
+                                                alt="Иконка ТГ"
+                                                width={22}
+                                                height={22}
+                                            />
+                                            {/* <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Artboard.svg" alt="" /> */}
                                             <span>Телеграм-чат Vitaline</span>
                                         </a>
                                     </div>
@@ -56,7 +64,12 @@ const SuccessPage = () => {
                             <h2>Служба поддержки Vitaline</h2>
                             <div className="support_bottom_block_inner_wrap">
                                 <a href="https://t.me/support_chat" className="tg_chat_btn" target="_blank" rel="noopener noreferrer">
-                                    <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Artboard.svg" alt="" />
+                                    <Image
+                                        src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Artboard.svg"
+                                        alt="Иконка ТГ"
+                                        width={22}
+                                        height={22}
+                                    />
                                     <span>Открыть чат</span>
                                 </a>
                                 <div className="support-contacts">

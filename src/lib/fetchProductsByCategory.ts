@@ -8,7 +8,7 @@ const PRODUCTS_BY_CATEGORY_QUERY = gql`
     products(
       first: $first
       after: $after
-      where: { category: $category }
+      where: { category: $category, stockStatus: IN_STOCK }
     ) {
       pageInfo {
         hasNextPage
@@ -24,21 +24,44 @@ const PRODUCTS_BY_CATEGORY_QUERY = gql`
         }
         ... on SimpleProduct {
           price
+          convertedPrice
+          stockStatus
+          brands {
+            nodes {
+              id
+              name
+              slug
+              brandId
+            }
+          }
         }
       }
     }
   }
 `;
+type Brand = {
+  id: string;
+  name: string;
+  slug: string;
+  brandId?: string;
+};
+
 
 export type ProductNode = {
   id: string;
   name: string;
   slug: string;
+  stockStatus?: string;
+  stockQuantity?: number;
   image?: {
     sourceUrl?: string;
     altText?: string;
   };
   price?: string;
+  convertedPrice?: string;
+  brands?: {
+    nodes: Brand[];
+  };
 };
 
 type ProductsData = {

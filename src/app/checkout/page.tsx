@@ -199,6 +199,7 @@ interface Product {
     slug: string;
     sku: string;
     price: string;
+    convertedPrice: string;
     stockStatus: string;
     stockQuantity: number;
     image: ProductImage;
@@ -225,6 +226,7 @@ async function fetchSingleProductByID(id: string): Promise<Product | null> {
           sku
           ... on SimpleProduct {
             price
+            convertedPrice
             stockStatus
             stockQuantity
             image {
@@ -272,6 +274,7 @@ interface CartItemDetailed {
     productId: string;
     name: string;
     price: string;
+    // convertedPrice: string;
     qty: number;
     maxQty: number;
     total: number;
@@ -302,13 +305,17 @@ export default async function CheckoutPage() {
         const qty = item?.qty || 1;
         const maxQty = p.stockQuantity || 0;
         const priceNum = parseInt(p.price.replace(/[^\d]/g, ''), 10);
+        const priceNumUSD = parseInt(p.convertedPrice.replace(/[^\d]/g, ''), 10);
+
         return {
             productId: p.id,
             name: p.name,
-            price: p.price,
+            // price: p.price,
+            price: p.convertedPrice,
             qty,
             maxQty,
-            total: qty * priceNum,
+            // total: qty * priceNum,
+            total: qty * priceNumUSD,
             image: p.image.sourceUrl,
             slug: p.slug,  // <-- ДОБАВЛЯЕМ
             sku: p.sku

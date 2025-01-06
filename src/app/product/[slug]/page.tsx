@@ -8,6 +8,8 @@ import ProductGalleryClient from '@/components/ProductGalleryClient';
 import SKUCopy from "@/components/SKUCopy";
 // import AddToCartButton from '@/components/AddToCartButton';
 import AddToCartSection from '../AddToCartSection'; // Импорт нового компонента
+import AddToCartButtonInList from '@/components/add_to_cart_popup/AddToCartButtonInList';
+
 
 import { MiniCartProvider } from '@/app/context/MiniCartContext';
 
@@ -329,6 +331,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                                 rpPrice = rpPrice.replace('&nbsp;', ' ').replace('UZS', 'сӯм');
                             }
 
+                            // Парсим цену с поддержкой десятичных знаков
+                            const numericPrice = rp.convertedPrice ? parseFloat(rp.convertedPrice.replace(/[^\d.]/g, '')) / 1 : 0;
+
                             return (
                                 <div className="product_item" key={rp.id}>
                                     <Link href={`/product/${rp.slug}`}>
@@ -357,10 +362,22 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                                             {rp.convertedPrice}
                                         </span>
                                     </div>
-                                    <div className="add_to_cart">
+                                    {/* <div className="add_to_cart">
                                         <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/shopping-cart_icon-icons.com_72552-1-1.svg" alt="Корзина" />
                                         <span>В корзину</span>
-                                    </div>
+                                    </div> */}
+
+                                    <MiniCartProvider>
+
+                                        <AddToCartButtonInList
+                                            productId={rp.id}
+                                            productName={rp.name}
+                                            productImage={rp.image?.sourceUrl ?? '/images/products/default.jpg'}
+                                            productPrice={numericPrice}
+                                            maxQuantity={rp.stockQuantity || 0}
+                                        />
+
+                                    </MiniCartProvider>
                                 </div>
                             );
                         })}

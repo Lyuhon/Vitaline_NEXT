@@ -459,6 +459,7 @@ async function fetchSingleProductByID(id) {
           sku 
           ... on SimpleProduct {
             price
+            convertedPrice 
             stockStatus
             stockQuantity
             image {
@@ -550,8 +551,13 @@ export default async function CartPage() {
         const qty = item?.qty || 1;
         const maxQty = p.stockQuantity || 0;
         const priceNum = parsePrice(p.price || '0');
+        // const priceNumUSD = parsePrice(p.convertedPrice || '0');
+        const priceNumUSD = parsePrice(p.convertedPrice || '0');
+
         //SLCT
-        return { ...p, qty, maxQty, total: qty * priceNum, selected: true, };
+        // return { ...p, qty, maxQty, total: qty * priceNum, selected: true, };
+        return { ...p, qty, maxQty, total: qty * priceNumUSD, selected: true, };
+
     });
 
     return (

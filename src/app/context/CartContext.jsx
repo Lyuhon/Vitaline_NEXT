@@ -15,7 +15,7 @@ export const CartProvider = ({ children, initialCartItems }) => {
 
     // <-- Исходно у вас была доставка фиксированная: 25 000 сум,
     //     теперь будем динамически менять между 25 000 и 60 000
-    const [deliveryPrice, setDeliveryPrice] = useState(25000);
+    const [deliveryPrice, setDeliveryPrice] = useState(200); //было 25000
     const [finalPrice, setFinalPrice] = useState(0);
 
     // <-- Дополнительный стейт: какой город выбран?
@@ -26,9 +26,9 @@ export const CartProvider = ({ children, initialCartItems }) => {
     const handleCityChange = (city) => {
         setUserCity(city);
         if (city && city !== 'Город Ташкент') {
-            setDeliveryPrice(60000);
+            setDeliveryPrice(500); //было 60000
         } else {
-            setDeliveryPrice(25000);
+            setDeliveryPrice(200); //было 25000
         }
     };
 
@@ -78,7 +78,8 @@ export const CartProvider = ({ children, initialCartItems }) => {
                         return {
                             ...item,
                             qty: item.maxQty,
-                            total: item.maxQty * parsePrice(item.price),
+                            // total: item.maxQty * parsePrice(item.price), //UZS
+                            total: item.maxQty * parsePrice(item.convertedPrice),
                             selected: true,
                             //SLCT fix
                             selected: item.selected
@@ -152,7 +153,8 @@ export const CartProvider = ({ children, initialCartItems }) => {
                 ? {
                     ...item,
                     qty: newQty > item.maxQty ? item.maxQty : newQty,
-                    total: (newQty > item.maxQty ? item.maxQty : newQty) * parsePrice(item.price),
+                    // total: (newQty > item.maxQty ? item.maxQty : newQty) * parsePrice(item.price), //UZS
+                    total: (newQty > item.maxQty ? item.maxQty : newQty) * parsePrice(item.convertedPrice),
                     selected: true,
                 }
                 : item

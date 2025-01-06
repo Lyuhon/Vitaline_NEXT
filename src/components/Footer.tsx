@@ -1,5 +1,5 @@
 // src/app/components/Footer.tsx
-import Consultation from "@/components/Consultation";
+import Consultation from "@/components/FooterConsultation";
 import Link from 'next/link'
 
 export default function Footer() {
@@ -45,11 +45,11 @@ export default function Footer() {
                                     <Link href="/about">О нас</Link>
                                 </li>
                                 <li>
-                                    <Link href="/shop">Магазин</Link>
+                                    <Link href="/shop">Каталог</Link>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <Link href="#">Доставка</Link>
-                                </li>
+                                </li> */}
                                 <li>
                                     <Link href="/contacts">Контакты</Link>
                                 </li>
@@ -62,15 +62,15 @@ export default function Footer() {
                                 <li>
                                     <Link href="#">Мой профиль</Link>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <Link href="#">Избранное</Link>
-                                </li>
+                                </li> */}
                                 <li>
                                     <Link href="/cart">Корзина</Link>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <Link href="/profile/points">Мои баллы</Link>
-                                </li>
+                                </li> */}
                             </ul>
                         </div>
 
@@ -80,12 +80,12 @@ export default function Footer() {
                                 <li>
                                     <Link href="/blog">Блог</Link>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <Link href="#">Готовые схемы</Link>
                                 </li>
                                 <li>
                                     <Link href="/loyalty-program">Программа лояльности</Link>
-                                </li>
+                                </li> */}
                             </ul>
                         </div>
                     </div>

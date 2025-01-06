@@ -13,10 +13,6 @@
     display: none;
 }
 
-.shop_page_wrapper {
-    /* display: flex;
-    gap: 60px; */
-}
 
 h1.shop_page_title {
     font-size: 30px;
@@ -88,5 +84,6 @@ h1.shop_page_title {
 
     .product_item .product_meta_box a.product_item__name {
         font-size: 13px;
+        min-height: 58.7px;
     }
 }

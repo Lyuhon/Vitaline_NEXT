@@ -3,6 +3,7 @@
 
 import React, { useContext } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import RemoveItemButton from '@/components/RemoveItemButton';
 import { CartContext } from '../context/CartContext';
 
@@ -55,13 +56,19 @@ export default function CartItemsClient() {
                         checked={item.selected}
                         onChange={() => toggleItemSelection(item.id)}
                     />
-                    <img
+                    {/* <img
                         src={item.image?.sourceUrl ?? '/images/default-product.png'}
                         alt={item.name}
+                    /> */}
+                    <Image
+                        src={item.image?.sourceUrl ?? '/images/default-product.png'}
+                        alt={item.name}
+                        width={120}
+                        height={120}
                     />
                     <div className="info_block_main">
                         <div className="item-info">
-                            <h3 className="cart_brand_name">Бренд</h3>
+                            {/* <h3 className="cart_brand_name">Бренд</h3> */}
                             <Link href={`/product/${item.slug}`} className="cart_product_name">
                                 {item.name}
                             </Link>
@@ -90,7 +97,9 @@ export default function CartItemsClient() {
                             </div>
                         </div>
                         <div className="cart_item_price">
-                            {item.total.toLocaleString('ru-RU')} сум
+                            {/* {item.total.toLocaleString('ru-RU')} сум */}
+                            {(item.total / 100).toFixed(2)}$
+
                         </div>
                     </div>
 

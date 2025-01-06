@@ -693,9 +693,9 @@ export default function CheckoutPage() {
     // Если город НЕ "Город Ташкент", ставим 60 000, иначе 25 000
     useEffect(() => {
         if (deliveryAddress.city && deliveryAddress.city !== 'Город Ташкент') {
-            setMyDeliveryPrice(60000);
+            setMyDeliveryPrice(500); // было 60000 UZS
         } else {
-            setMyDeliveryPrice(25000);
+            setMyDeliveryPrice(200); // было 25000 UZS
         }
     }, [deliveryAddress.city]);
 
@@ -705,7 +705,7 @@ export default function CheckoutPage() {
     }, [totalPrice, myDeliveryPrice]);
 
     // Проверяем минимальную сумму
-    const MIN_ORDER_SUM = 100000;
+    const MIN_ORDER_SUM = 10000;
     const isBelowMinimum = myFinalPrice < MIN_ORDER_SUM;
 
     // Обработчик кнопки "Перейти к оформлению заказа"
@@ -821,14 +821,14 @@ function CartItemsClient({
                     <Image
                         src={item.image || '/images/default-product.png'}
                         alt={item.name}
-                        width={200}
-                        height={200}
+                        width={120}
+                        height={120}
                         className="product-image"
                     />
 
                     <div className="info_block_main">
                         <div className="item-info">
-                            <h3 className="cart_brand_name">Бренд</h3>
+                            {/* <h3 className="cart_brand_name">Бренд</h3> */}
                             <Link href={`/product/${item.slug}`} className="cart_product_name">
                                 {item.name}
                             </Link>
@@ -871,7 +871,9 @@ function CartItemsClient({
                             </div>
                         </div>
                         <div className="cart_item_price">
-                            {item.total.toLocaleString('ru-RU')} сум
+                            {/* {item.total.toLocaleString('ru-RU')} сум */}
+                            {(item.total / 100).toFixed(2)}$
+
                         </div>
                     </div>
                 </div>
@@ -933,7 +935,8 @@ function CartSummaryUpdate({
                 <div className="summary_price">
                     <h4>Итого:</h4>
                     <span className="cart_sum_tot_price">
-                        {finalPrice.toLocaleString('ru-RU')} сум
+                        {/* {finalPrice.toLocaleString('ru-RU')} сум */}
+                        {(finalPrice / 100).toFixed(2)}$
                     </span>
                 </div>
 
@@ -942,25 +945,32 @@ function CartSummaryUpdate({
                         {totalItems} {totalItems === 1 ? 'позиция' : 'позиции'}
                     </span>
                     <span className="cart_summary_items_count_price">
-                        {totalPrice.toLocaleString('ru-RU')} сум
+                        {/* {totalPrice.toLocaleString('ru-RU')} сум */}
+                        <span className="cart_summary_items_count_price">{(totalPrice / 100).toFixed(2)}$</span>
                     </span>
                 </div>
 
                 <div className="summary_item">
                     <span>Скидка Vitaline</span>
-                    <span className="cart_summary_items_discount_value">0 сум</span>
+                    {/* <span className="cart_summary_items_discount_value">0 сум</span> */}
+                    <span className="cart_summary_items_discount_value">0 $</span>
+
                 </div>
 
                 <div className="summary_item">
                     <span>Доставка*</span>
                     <span className="cart_summary_items_delivery_price">
-                        {deliveryPrice.toLocaleString('ru-RU')} сум
+                        {/* {deliveryPrice.toLocaleString('ru-RU')} сум */}
+                        {(deliveryPrice / 100).toFixed(2)}$
+
                     </span>
                 </div>
 
                 {isBelowMinimum && (
                     <div className="summary_item minimum_order">
-                        <span>Минимальная сумма для заказа не должна быть менее 100 000 сум</span>
+                        {/* <span>Минимальная сумма для заказа не должна быть менее 100 000 сум</span> */}
+                        <span>Минимальная сумма для заказа не должна быть менее 100 $</span>
+
                     </div>
                 )}
 

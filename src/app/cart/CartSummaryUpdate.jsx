@@ -187,7 +187,8 @@ export default function CartSummaryUpdate() {
     const router = useRouter(); // Инициализируем router
 
     // Минимальная сумма заказа
-    const MIN_ORDER_SUM = 100000;
+    // const MIN_ORDER_SUM = 100000;
+    const MIN_ORDER_SUM = 10000;
 
     // Проверяем, меньше ли итоговая сумма минимальной
     const isBelowMinimum = finalPrice < MIN_ORDER_SUM;
@@ -221,30 +222,34 @@ export default function CartSummaryUpdate() {
                 <div className="summary_price">
                     <h4>Итого:</h4>
                     <span className={`cart_sum_tot_price ${animate ? 'animate' : ''}`}>
-                        {finalPrice.toLocaleString('ru-RU')} сум
+                        {/* {finalPrice.toLocaleString('ru-RU')} сум */}
+                        {(finalPrice / 100).toFixed(2)}$
                     </span>
                 </div>
 
                 <div className="summary_item">
                     <span className="cart_summary_items_count">{totalItems} позиции</span>
-                    <span className="cart_summary_items_count_price">{totalPrice.toLocaleString('ru-RU')} сум</span>
+                    {/* <span className="cart_summary_items_count_price">{totalPrice.toLocaleString('ru-RU')} сум</span> */}
+                    <span className="cart_summary_items_count_price">{(totalPrice / 100).toFixed(2)}$</span>
+
                 </div>
 
                 <div className="summary_item">
                     <span>Скидка Vitaline</span>
-                    <span className="cart_summary_items_discount_value">0 сум</span>
+                    <span className="cart_summary_items_discount_value">0 $</span>
                 </div>
 
                 <div className="summary_item">
                     <span>Доставка*</span>
-                    <span className="cart_summary_items_delivery_price">{deliveryPrice.toLocaleString('ru-RU')} сум</span>
+                    {/* <span className="cart_summary_items_delivery_price">{deliveryPrice.toLocaleString('ru-RU')} сум</span> */}
+                    <span className="cart_summary_items_delivery_price">{(deliveryPrice / 100).toFixed(2)}$</span>
                 </div>
 
                 {/* Условное отображение сообщения о минимальной сумме заказа */}
                 {isBelowMinimum && (
                     <div className="summary_item minimum_order">
                         <span>
-                            Минимальная сумма для заказа не должна быть менее 100 000 сум
+                            Минимальная сумма для заказа не должна быть менее 100 $
                         </span>
                     </div>
                 )}

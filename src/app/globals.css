@@ -205,6 +205,17 @@ legend {
 /* AddToCartButton.css */
 
 /* Стили для секции кнопок */
+.load_mmmore {
+  background-color: #ff7900;
+  padding: 8px 16px;
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  width: 180px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
 .actb_add_to_cart_section {
   display: flex;
   align-items: center;
@@ -259,24 +270,16 @@ legend {
   color: #fff;
 }
 
+.add_to_cart.product_item__add_to_cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
 
-/* .cart_flex_block .quantity-button.dis_increment:after {
-  content: 'Достигнуто максимальное кол-во';
-  display: inline-block;
-  font-size: 12px;
-  line-height: 12px;
-  position: absolute;
-  top: -35px;
-  left: unset;
-  width: fit-content;
-  white-space: nowrap;
-  color: #e00303;
-  padding: 5px;
-  border-radius: 5px;
-  background-color: #ff00002b;
-  opacity: 0;
-  animation: fadeIn 0.5s forwards;
-} */
+.add_to_cart.product_item__add_to_cart img {
+  width: 16px;
+}
 
 /* Анимация для изменения opacity */
 @keyframes fadeIn {
@@ -317,6 +320,10 @@ legend {
   width: 90%;
   text-align: center;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.actb_popup_content a.actb_popup_button {
+  color: #fff;
 }
 
 .added_to_cart_pop {

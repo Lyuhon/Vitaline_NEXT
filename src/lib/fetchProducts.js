@@ -20,6 +20,7 @@ const query = gql`
           altText
         }
         ... on SimpleProduct {
+          stockStatus
           price
           convertedPrice
           brands {
