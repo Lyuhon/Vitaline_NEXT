@@ -8,6 +8,9 @@ import PageTransition from '@/components/PageTransition';
 import { Metadata } from 'next';
 // import Script from 'next/script';
 
+import { Suspense } from "react";
+import { Metrika } from "@/components/Metrika";
+
 export const metadata: Metadata = {
   title: 'Интернет магазин витаминов - Vitaline',
 };
@@ -41,6 +44,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* </AnimatedWrapper> */}
         <Footer />
         <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <Suspense>
+          <Metrika />
+        </Suspense>
       </body>
     </html >
   );

@@ -56,7 +56,7 @@ export default function AddToCartButtonInList({
                 }),
             });
 
-            const delayPromise = delay(1000); // Задержка для имитации реальной загрузки (1000 мс)
+            const delayPromise = delay(300); // Задержка для имитации реальной загрузки (1000 мс)
 
             const [response] = await Promise.all([fetchPromise, delayPromise]);
 
