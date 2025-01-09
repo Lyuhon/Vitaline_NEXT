@@ -149,7 +149,7 @@ const Header = () => {
                         </div>
 
                         <div className="desc_conts">
-                            <span className="header__phone"><a href="tel:+998 91 166 00 90">91 166 00 90</a></span>
+                            <span className="header__phone"><Link href="tel:+998 91 166 00 90">91 166 00 90</Link></span>
                             <span className="header__availability">Оператор онлайн</span>
                         </div>
                     </div>
