@@ -136,7 +136,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
                 {categories.length > 0 && (
                     <>
-                        <Link href={`/category/${categories[0].slug}`}>{categories[0].name}</Link>
+                        {/* <Link href={`/category/${categories[0].slug}`}>{categories[0].name}</Link> */}
+                        <Link href={`#${categories[0].slug}`}>{categories[0].name}</Link>
                         <span className="bread_divider">&gt;</span>
                     </>
                 )}
@@ -204,7 +205,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                                     <h3>Метки:</h3>
                                     <div className="list">
                                         {tags.map(tag => (
-                                            <Link key={tag.slug} href={`/tag/${tag.slug}`}>
+                                            // <Link key={tag.slug} href={`/tag/${tag.slug}`}>
+                                            <Link key={tag.slug} href={`#${tag.slug}`}>
                                                 {tag.name}
                                             </Link>
                                         ))}
@@ -215,7 +217,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                                     <h3>Категории:</h3>
                                     <div className="list">
                                         {categories.map(cat => (
-                                            <Link key={cat.slug} href={`/category/${cat.slug}`}>
+                                            // <Link key={cat.slug} href={`/category/${cat.slug}`}>
+                                            <Link key={cat.slug} href={`#${cat.slug}`}>
                                                 {cat.name}
                                             </Link>
                                         ))}
