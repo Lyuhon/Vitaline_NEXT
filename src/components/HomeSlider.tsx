@@ -5,29 +5,29 @@ import HomeSliderSwiper from './HomeSliderSwiper';
 const slides = [
     {
         id: 1,
-        background: "https://www.vitaline.uz/wp-content/uploads/2024/05/child-min.jpg",
-        text: "Child Life",
+        background: "https://nuxt.vitaline.uz/wp-content/next_images/vitaline_trade_good_prices.webp",
+        text: "Цены от дистрибьютора",
     },
     {
         id: 2,
-        background: "https://www.vitaline.uz/wp-content/uploads/2021/03/carlson-min.jpg",
-        text: "Carlson labs",
+        background: "https://nuxt.vitaline.uz/wp-content/next_images/vitaline_trade_new_rpoducts.webp",
+        text: "Новинки",
     },
-    {
-        id: 3,
-        background: "https://www.vitaline.uz/wp-content/uploads/2024/05/oblozhka-dlya-sajta3-2-min.jpg",
-        text: "DR. Mercola",
-    },
-    {
-        id: 4,
-        background: "https://www.vitaline.uz/wp-content/uploads/2021/03/62e2dff2-4958-409a-b9b3-034fda03ddc1.jpeg",
-        text: "Solgar",
-    },
-    {
-        id: 5,
-        background: "https://www.vitaline.uz/wp-content/uploads/2022/12/2.jpg",
-        text: "ПЕРЕЙТИ",
-    },
+    // {
+    //     id: 3,
+    //     background: "https://www.vitaline.uz/wp-content/uploads/2024/05/oblozhka-dlya-sajta3-2-min.jpg",
+    //     text: "DR. Mercola",
+    // },
+    // {
+    //     id: 4,
+    //     background: "https://www.vitaline.uz/wp-content/uploads/2021/03/62e2dff2-4958-409a-b9b3-034fda03ddc1.jpeg",
+    //     text: "Solgar",
+    // },
+    // {
+    //     id: 5,
+    //     background: "https://www.vitaline.uz/wp-content/uploads/2022/12/2.jpg",
+    //     text: "ПЕРЕЙТИ",
+    // },
 ];
 
 export default function SimpleSlider() {
@@ -43,7 +43,7 @@ export default function SimpleSlider() {
                             style={{
                                 backgroundImage: `url(${slide.background})`,
                                 backgroundSize: "cover",
-                                backgroundPosition: "center",
+                                backgroundPosition: "left center",
                             }}
                         >
                             <div className="overlay_home_sldr">

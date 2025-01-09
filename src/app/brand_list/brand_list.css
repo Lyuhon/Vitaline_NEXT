@@ -1,0 +1,62 @@
+.page_brand_list {
+    max-width: 1220px;
+    padding: 0 20px;
+    margin: 0 auto;
+    margin-bottom: 60px;
+    margin-top: 60px;
+    border-radius: 30px;
+}
+
+.brand_banner img {
+    border-radius: 10px;
+}
+
+.page_brand_list_info h1 {
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 30px;
+    margin-bottom: 20px;
+}
+
+.page_brand_list_info ul {
+    padding: 10px 20px;
+}
+
+.page_brand_list_info li {
+    list-style: disc;
+}
+
+.grid_brands_page_comp {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+    margin-top: 40px;
+}
+
+@media only screen and (max-width: 768px) {
+    .page_brand_list {
+        margin-top: 20px;
+    }
+
+    .brand_banner {
+        height: 160px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .brand_banner img {
+        max-height: 300px;
+        object-fit: cover;
+        object-position: left;
+    }
+
+    .grid_brands_page_comp {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)) !important;
+    }
+
+    .brand-card {
+        padding: 10px !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

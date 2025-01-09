@@ -8,6 +8,7 @@
 
 .brand-banner img {
     border-radius: 10px;
+    background-color: #f2f2f2;
 }
 
 @media only screen and (max-width: 768px) {

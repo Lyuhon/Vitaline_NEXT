@@ -39,7 +39,7 @@ const SuccessPage = () => {
                                         <strong> вы могли получить ответ о заказе от менеджера:</strong></p>
 
                                     <div >
-                                        <a className='tg_button' href="https://t.me/vitalinebot" target="_blank" rel="noopener noreferrer">
+                                        <a className='tg_button' href="https://t.me/abdelmansur" target="_blank" rel="noopener noreferrer">
 
                                             <Image
                                                 src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Artboard.svg"
@@ -63,7 +63,7 @@ const SuccessPage = () => {
                         <div className="support_bottom_block">
                             <h2>Служба поддержки Vitaline</h2>
                             <div className="support_bottom_block_inner_wrap">
-                                <a href="https://t.me/support_chat" className="tg_chat_btn" target="_blank" rel="noopener noreferrer">
+                                <a href="https://t.me/abdelmansur" className="tg_chat_btn" target="_blank" rel="noopener noreferrer">
                                     <Image
                                         src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Artboard.svg"
                                         alt="Иконка ТГ"
@@ -73,7 +73,7 @@ const SuccessPage = () => {
                                     <span>Открыть чат</span>
                                 </a>
                                 <div className="support-contacts">
-                                    <p>+998 90 906 69 99</p>
+                                    <p><a href="tel:+998 91 166 00 90">+998 91 166 00 90</a></p>
                                 </div>
                             </div>
                         </div>

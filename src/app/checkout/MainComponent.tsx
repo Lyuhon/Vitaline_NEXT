@@ -1137,7 +1137,7 @@ const CheckoutForm = forwardRef<HTMLFormElement, CheckoutFormProps>(
                         </select>
                     </div>
 
-                    <div className="form-group">
+                    <div className="form-group" style={{ display: 'none' }}>
                         <label className="for_mob_db">Способ доставки</label>
                         <div className="radio-group">
                             <label>

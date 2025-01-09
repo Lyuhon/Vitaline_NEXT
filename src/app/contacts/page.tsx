@@ -34,7 +34,7 @@ const ContactsPage = () => {
 
                     <div className='phone_to_connect'>
                         <p><strong>Телефон для связи:</strong></p>
-                        <p>+998 90 906 69 99</p>
+                        <p><a href="tel:+998 91 166 00 90">+998 91 166 00 90</a></p>
                     </div>
 
                     <p className="info_italic">
@@ -44,14 +44,14 @@ const ContactsPage = () => {
                     </p>
 
                     <div className="contacts-social-links">
-                        <a href="#" className="contacts_insta">
+                        <a href="https://www.instagram.com/vitaline.optom/" className="contacts_insta">
                             <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Socials.svg" alt="" />
-                            <span>Инстаграм @vitaline.uz</span>
+                            <span>Инстаграм vitaline.optom</span>
                         </a>
 
-                        <a href="#" className="contacts_telegram">
+                        <a href="https://t.me/abdelmansur" className="contacts_telegram">
                             <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Artboard.svg" alt="" />
-                            <span>Телеграм-канал Vitaline</span>
+                            <span>Телеграм чат Vitaline</span>
                         </a>
                     </div>
                 </div>
@@ -65,13 +65,13 @@ const ContactsPage = () => {
                         <h2>Служба поддержки Vitaline</h2>
 
                         <div className="support_bottom_block_inner_wrap">
-                            <a href="https://t.me/support_chat" className="tg_chat_btn" target="_blank" rel="noopener noreferrer">
+                            <a href="https://t.me/abdelmansur" className="tg_chat_btn" target="_blank" rel="noopener noreferrer">
                                 <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Artboard.svg" alt="" />
                                 <span>Открыть чат</span>
                             </a>
 
                             <div className="support-contacts">
-                                <p>+998 90 906 69 99</p>
+                                <p><a href="tel:+998 91 166 00 90">+998 91 166 00 90</a></p>
                             </div>
                         </div>
 

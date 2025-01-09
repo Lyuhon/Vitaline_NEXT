@@ -1,5 +1,7 @@
 .shop_page {
-    max-width: 1180px;
+    max-width: 1220px;
+    padding-left: 20px;
+    padding-right: 20px;
     margin: 0 auto;
     margin-bottom: 60px;
     margin-top: 60px;

@@ -34,7 +34,7 @@ const Header = () => {
             {/* Верхняя полоса */}
             <div className="header__top-bar pc_visible">
                 <div className="header__top-bar-content">
-                    <div className="delivery_block">
+                    <div className="delivery_block" style={{ display: 'none' }}>
                         <Image
                             className="delivery_image"
                             src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/front-view-male-courier-green-uniform-holding-food-delivery-box-pink-desk_140725-33524-removebg-preview-1-1.png"
@@ -47,7 +47,7 @@ const Header = () => {
                             <b>Скидка в 3%</b> – при покупке свыше <b>1000$</b>
                         </span>
                     </div>
-                    <a href="#" className="header__app-download">
+                    <a href="#" className="header__app-download" style={{ display: 'none' }}>
                         {/* <span>Скачать приложение Vitaline</span> */}
                         <span>Оригинальные витамины из <b>США</b></span>
                         {/* <Image
@@ -57,6 +57,56 @@ const Header = () => {
                             height={120}
                         /> */}
                     </a>
+
+                    <div className="images_block">
+                        <Image
+                            className="vitamins_head_icons"
+                            src="https://nuxt.vitaline.uz/wp-content/next_images/header_tablets%20(1).webp"
+                            alt="Витаминка"
+                            width={50}
+                            height={50}
+                        />
+
+                        <Image
+                            className="vitamins_head_icons"
+                            src="https://nuxt.vitaline.uz/wp-content/next_images/header_tablets%20(4).webp"
+                            alt="Витаминка"
+                            width={50}
+                            height={50}
+                        />
+
+                        <Image
+                            className="vitamins_head_icons"
+                            src="https://nuxt.vitaline.uz/wp-content/next_images/header_tablets%20(2).webp"
+                            alt="Витаминка"
+                            width={50}
+                            height={50}
+                        />
+
+                        <Image
+                            className="vitamins_head_icons"
+                            src="https://nuxt.vitaline.uz/wp-content/next_images/header_tablets%20(5).webp"
+                            alt="Витаминка"
+                            width={50}
+                            height={50}
+                        />
+
+                        <Image
+                            className="vitamins_head_icons"
+                            src="https://nuxt.vitaline.uz/wp-content/next_images/header_tablets%20(3).webp"
+                            alt="Витаминка"
+                            width={50}
+                            height={50}
+                        />
+
+                        <Image
+                            className="vitamins_head_icons"
+                            src="https://nuxt.vitaline.uz/wp-content/next_images/header_tablets%20(6).webp"
+                            alt="Витаминка"
+                            width={50}
+                            height={50}
+                        />
+                    </div>
                 </div>
             </div>
 
@@ -72,7 +122,7 @@ const Header = () => {
                             height={500}
                         />
                     </Link>
-                    <span>Интернет-магазин витаминов и БАДов от лучших мировых брендов</span>
+                    <span>Оптовый интернет магазин витаминов и БАДов от лучших мировых брендов</span>
                 </div>
 
                 <div className="header__search_and_contacts">
@@ -99,7 +149,7 @@ const Header = () => {
                         </div>
 
                         <div className="desc_conts">
-                            <span className="header__phone">90 906 9099</span>
+                            <span className="header__phone"><a href="tel:+998 91 166 00 90">91 166 00 90</a></span>
                             <span className="header__availability">Оператор онлайн</span>
                         </div>
                     </div>

@@ -1429,3 +1429,84 @@ footer .links-column ul {
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* тестовый CSS */
+header .images_block {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+header .images_block img {
+  width: 35px;
+  height: 35px;
+}
+
+
+
+.bottom_nav.mobile_visible {
+  height: 75px;
+  position: fixed;
+  justify-content: space-between;
+  bottom: 0;
+  left: 0px;
+  z-index: 9999999;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  padding: 22px;
+  width: 100%;
+  box-shadow: 0px -5px 15px 0px #0000000D;
+}
+
+.bottom_nav.mobile_visible svg {
+  width: 32px;
+}
+
+@media only screen and (max-width: 768px) {
+  body {
+    padding-bottom: 70px;
+  }
+
+  .product_item .product_meta_box .product_item__price {
+    margin: 10px 0 10px 0 !important;
+  }
+
+  .product_item__image {
+    max-width: 90%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+  }
+
+  /* .bottom_nav.mobile_visible svg path,
+  .bottom_nav.mobile_visible svg circle {
+    stroke: #555555;
+    transition: all 0.3s;
+  }
+
+  .bottom_nav.mobile_visible svg:hover path,
+  .bottom_nav.mobile_visible svg:hover circle {
+    stroke: #FF7900;
+    transition: all 0.3s;
+  } */
+}
