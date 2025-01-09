@@ -131,7 +131,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 <Link href="/">Главная</Link>
                 <span className="bread_divider">&gt;</span>
 
-                <Link href="/products">Продукция</Link>
+                <Link href="/shop">Продукция</Link>
                 <span className="bread_divider">&gt;</span>
 
                 {categories.length > 0 && (
