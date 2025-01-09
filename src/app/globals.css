@@ -1428,8 +1428,12 @@ footer .links-column ul {
     display: none;
   }
 
-}
+  .actb_popup_overlay {
+    bottom: 85px;
+  }
 
+
+}
 
 
 
@@ -1496,6 +1500,10 @@ header .images_block img {
     max-width: 90%;
     margin: 0 auto;
     margin-bottom: 10px;
+  }
+
+  .home_product_section .product_item {
+    padding: 10px;
   }
 
   /* .bottom_nav.mobile_visible svg path,

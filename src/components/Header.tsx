@@ -34,7 +34,7 @@ const Header = () => {
             {/* Верхняя полоса */}
             <div className="header__top-bar pc_visible">
                 <div className="header__top-bar-content">
-                    <div className="delivery_block" style={{ display: 'none' }}>
+                    <div className="delivery_block">
                         <Image
                             className="delivery_image"
                             src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/front-view-male-courier-green-uniform-holding-food-delivery-box-pink-desk_140725-33524-removebg-preview-1-1.png"
@@ -47,7 +47,7 @@ const Header = () => {
                             <b>Скидка в 3%</b> – при покупке свыше <b>1000$</b>
                         </span>
                     </div>
-                    <a href="#" className="header__app-download" style={{ display: 'none' }}>
+                    <a href="#" className="header__app-download">
                         {/* <span>Скачать приложение Vitaline</span> */}
                         <span>Оригинальные витамины из <b>США</b></span>
                         {/* <Image
@@ -58,7 +58,7 @@ const Header = () => {
                         /> */}
                     </a>
 
-                    <div className="images_block">
+                    {/* <div className="images_block">
                         <Image
                             className="vitamins_head_icons"
                             src="https://nuxt.vitaline.uz/wp-content/next_images/header_tablets%20(1).webp"
@@ -106,7 +106,7 @@ const Header = () => {
                             width={50}
                             height={50}
                         />
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
