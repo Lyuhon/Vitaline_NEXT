@@ -86,6 +86,7 @@
     max-width: 100%;
     margin-bottom: 40px;
     border-radius: 5px;
+    background-color: #f2f2f2;
 }
 
 .prod_layout .gallery_product_block .gallery_list {
@@ -788,6 +789,11 @@ button:hover {
     .product_short_info_block .product_price {
         text-align: center;
         margin-bottom: 20px;
+    }
+
+    .product_price.mobile_visible {
+        text-align: left;
+        margin-top: -10px;
     }
 
     .prod_layout .value_block {

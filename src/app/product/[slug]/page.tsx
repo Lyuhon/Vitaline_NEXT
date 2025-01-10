@@ -222,6 +222,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                             <span className={inStock ? '' : 'out_of_stock'}>{inStock ? 'В наличии' : 'Нет в наличии'}</span>
                         </div>
 
+                        <div className="product_price mobile_visible">
+                            {/* {formattedPrice} */}
+                            {product.convertedPrice}
+                        </div>
+
                         <div className="prod_meta_list">
                             {product.sku && <SKUCopy sku={product.sku} />}
                             <div className="cat_and_tag">
@@ -250,7 +255,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                                 </div>
                             </div>
 
-                            <div className="product_price">
+                            <div className="product_price pc_visible">
                                 {/* {formattedPrice} */}
                                 {product.convertedPrice}
                             </div>
