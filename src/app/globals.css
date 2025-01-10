@@ -1469,7 +1469,7 @@ header .images_block img {
 
 
 .bottom_nav.mobile_visible {
-  height: 75px;
+  height: 62px;
   position: fixed;
   justify-content: space-between;
   bottom: 0;
@@ -1484,12 +1484,12 @@ header .images_block img {
 }
 
 .bottom_nav.mobile_visible svg {
-  width: 32px;
+  width: 25px;
 }
 
 @media only screen and (max-width: 768px) {
   body {
-    padding-bottom: 70px;
+    padding-bottom: 50px;
   }
 
   .product_item .product_meta_box .product_item__price {
@@ -1517,4 +1517,44 @@ header .images_block img {
     stroke: #FF7900;
     transition: all 0.3s;
   } */
+}
+
+
+
+
+/* Добавьте эти стили в ваш globals.css */
+.loading-container {
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+}
+
+.loading-image {
+  margin: 30px auto;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+    transform: scale(0.98);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0.6;
+    transform: scale(0.98);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .loading-container {
+    height: 200px;
+  }
 }

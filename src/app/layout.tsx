@@ -11,6 +11,7 @@ import { Metadata } from 'next';
 import { Suspense } from "react";
 import { Metrika } from "@/components/Metrika";
 
+
 export const metadata: Metadata = {
   title: 'Интернет магазин витаминов - Vitaline',
 };
@@ -35,12 +36,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <Header />
         {/* <AnimatedWrapper> */}
-        <PageTransition>
-          {/* <div id="page-transition-wrapper" className="content-wrapper page-transition"> */}
-          <div className="content-wrapper">
-            {children}
-          </div>
-        </PageTransition>
+        {/* Был рабочий */}
+        {/* <PageTransition> */}
+        {/* <div id="page-transition-wrapper" className="content-wrapper page-transition"> */}
+
+        <div className="content-wrapper">
+          {children}
+        </div>
+
+        {/* </PageTransition> */}
         {/* </AnimatedWrapper> */}
         <Footer />
         <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>

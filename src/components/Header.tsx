@@ -118,8 +118,8 @@ const Header = () => {
                             src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/8e3bc2dcd6d2b7628adf6e926f325187.png"
                             alt="Vitaline Logo"
                             className="header__logo-image"
-                            width={500}
-                            height={500}
+                            width={240}
+                            height={100}
                         />
                     </Link>
                     <span>Оптовый интернет магазин витаминов и БАДов от лучших мировых брендов</span>

@@ -77,12 +77,24 @@ export async function fetchSingleProduct(slug) {
     },
   });
 
-  const data = await client.request(query, { slug });
+  // const data = await client.request(query, { slug });
 
-  // Проверяем, если цена существует, то форматируем
-  if (data.product && data.product.price) {
-    data.product.price = formatPrice(data.product.price);
+  // // Проверяем, если цена существует, то форматируем
+  // if (data.product && data.product.price) {
+  //   data.product.price = formatPrice(data.product.price);
+  // }
+
+  // return data.product;
+  try {
+    const data = await client.request(query, { slug });
+
+    if (data.product && data.product.price) {
+      data.product.price = formatPrice(data.product.price);
+    }
+
+    return data.product;
+  } catch (error) {
+    console.error('Error fetching product:', error);
+    return null; // Возвращаем null при ошибке
   }
-
-  return data.product;
 }

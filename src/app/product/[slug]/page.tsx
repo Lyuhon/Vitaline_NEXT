@@ -10,8 +10,11 @@ import SKUCopy from "@/components/SKUCopy";
 import AddToCartSection from '../AddToCartSection'; // Импорт нового компонента
 import AddToCartButtonInList from '@/components/add_to_cart_popup/AddToCartButtonInList';
 
-
 import { MiniCartProvider } from '@/app/context/MiniCartContext';
+
+
+import HomeBrands from '@/components/HomeBrands';
+
 
 import Link from 'next/link';
 import Image from 'next/image';
@@ -88,7 +91,28 @@ interface PageProps {
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
     const resolvedParams = await params; // Ждем разрешения промиса
     const { slug } = resolvedParams; // Извлекаем slug после
-    const product: Product = await fetchSingleProduct(slug);
+    // const product: Product = await fetchSingleProduct(slug);
+
+    const product: Product | null = await fetchSingleProduct(slug); // Предполагаем, что может вернуть null
+
+    // Проверяем, найден ли продукт
+    if (!product) {
+        return (
+            <section className="product-not-found">
+                <h1>Товар не найден</h1>
+                <p>
+                    К сожалению, товара по этой ссылке.
+                    <br></br>Ознакомьтесь с ассортиментом витаминов в нашем каталоге!
+                </p>
+                <Link href="/shop" className="catalog-link">
+                    Перейти в каталог
+                </Link>
+
+                <HomeBrands />
+
+            </section>
+        );
+    }
 
     const mainImage = product.image?.sourceUrl || '/images/default-product.png';
     const mainImageAlt = product.image?.altText || product.name;
