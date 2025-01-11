@@ -44,7 +44,7 @@ const Header = () => {
                         />
                         <span className="header__delivery-info">
                             {/* <b>Бесплатная доставка</b> – при покупке свыше <b>600 000 сум</b> */}
-                            <b>Скидка в 2%</b> – при покупке свыше <b>1000$</b>
+                            <b>Оптовые поставки</b> оригинальных витамином
                         </span>
                     </div>
                     <a href="#" className="header__app-download">
