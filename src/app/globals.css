@@ -1533,7 +1533,7 @@ header .images_block img {
 
 .loading-image {
   margin: 30px auto;
-  animation: pulse 1.5s ease-in-out infinite;
+  animation: pulse 1s ease-in-out infinite;
 }
 
 @keyframes pulse {
@@ -1555,6 +1555,6 @@ header .images_block img {
 
 @media only screen and (max-width: 768px) {
   .loading-container {
-    height: 200px;
+    height: calc(100vh - 100px);
   }
 }
