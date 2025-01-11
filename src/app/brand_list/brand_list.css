@@ -33,6 +33,12 @@
     margin-top: 40px;
 }
 
+.brand-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 @media only screen and (max-width: 768px) {
     .page_brand_list {
         margin-top: 20px;

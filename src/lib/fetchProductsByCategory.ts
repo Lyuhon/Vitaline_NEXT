@@ -86,3 +86,6 @@ export async function fetchProductsByCategory(category: string, after?: string):
     hasNextPage: data.products.pageInfo.hasNextPage
   };
 }
+
+
+

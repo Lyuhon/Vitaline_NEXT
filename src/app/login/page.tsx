@@ -145,7 +145,7 @@ export default function LoginPage() {
                                 <label htmlFor="remeber">Запомнить меня</label>
                             </div>
                             <div className="forget_block">
-                                <Link href="#">Я забыл свой пароль</Link>
+                                <Link target='_blank' href="https://t.me/abdelmansur">Я забыл свой пароль</Link>
                             </div>
                         </div>
 
@@ -156,7 +156,7 @@ export default function LoginPage() {
 
                     <div className="register_acc_links">
                         <span>Нет аккаунта?</span>
-                        <Link href="#">Зарегистрироваться</Link>
+                        <Link target='_blank' href="https://t.me/abdelmansur">Зарегистрироваться</Link>
                     </div>
                 </div>
             </section>

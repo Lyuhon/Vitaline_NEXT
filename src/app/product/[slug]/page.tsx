@@ -160,8 +160,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
                 {categories.length > 0 && (
                     <>
-                        {/* <Link href={`/category/${categories[0].slug}`}>{categories[0].name}</Link> */}
-                        <Link href={`#${categories[0].slug}`}>{categories[0].name}</Link>
+                        <Link href={`/category/${categories[0].slug}`}>{categories[0].name}</Link>
+                        {/* <Link href={`#${categories[0].slug}`}>{categories[0].name}</Link> */}
                         <span className="bread_divider">&gt;</span>
                     </>
                 )}
@@ -230,7 +230,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                         <div className="prod_meta_list">
                             {product.sku && <SKUCopy sku={product.sku} />}
                             <div className="cat_and_tag">
-                                <div className="categories_list">
+                                {/* <div className="categories_list">
                                     <h3>Метки:</h3>
                                     <div className="list">
                                         {tags.map(tag => (
@@ -240,14 +240,13 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                                             </Link>
                                         ))}
                                     </div>
-                                </div>
+                                </div> */}
 
                                 <div className="categories_list">
                                     <h3>Категории:</h3>
                                     <div className="list">
                                         {categories.map(cat => (
-                                            // <Link key={cat.slug} href={`/category/${cat.slug}`}>
-                                            <Link key={cat.slug} href={`#${cat.slug}`}>
+                                            <Link key={cat.slug} href={`/category/${cat.slug}`}>
                                                 {cat.name}
                                             </Link>
                                         ))}
