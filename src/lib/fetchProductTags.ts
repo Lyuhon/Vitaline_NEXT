@@ -15,18 +15,18 @@ const TAGS_QUERY = gql`
 `;
 
 type ProductTagNode = {
-    name: string;
-    slug: string;
+  name: string;
+  slug: string;
 };
 
 type ProductTagsData = {
-    productTags: {
-        nodes: ProductTagNode[];
-    };
+  productTags: {
+    nodes: ProductTagNode[];
+  };
 };
 
 export async function fetchProductTags() {
-    const client = new GraphQLClient(endpoint);
-    const data = await client.request<ProductTagsData>(TAGS_QUERY);
-    return data.productTags.nodes;
+  const client = new GraphQLClient(endpoint);
+  const data = await client.request<ProductTagsData>(TAGS_QUERY);
+  return data.productTags.nodes;
 }
