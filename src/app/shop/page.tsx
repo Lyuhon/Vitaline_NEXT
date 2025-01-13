@@ -84,7 +84,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                                             </Link>
 
                                             <span className="product_item__price">
-                                                {p.convertedPrice ? p.convertedPrice : 'Цена не указана'}
+                                                {/* {p.convertedPrice ? p.convertedPrice : 'Цена не указана'} */}
                                             </span>
                                         </div>
 
