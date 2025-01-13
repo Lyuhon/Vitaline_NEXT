@@ -203,6 +203,10 @@ span.stock_count {
         font-size: 13px;
     }
 
+    .pagination_button {
+        padding: 10px;
+    }
+
     a.pagination_button svg {
         min-width: 20px;
     }
