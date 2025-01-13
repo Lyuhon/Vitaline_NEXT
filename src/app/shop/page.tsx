@@ -2,13 +2,16 @@
 import { fetchWooProducts, convertWooProduct } from '@/lib/woocommerceCatalog';
 import Link from 'next/link';
 import Image from 'next/image';
+import { redirect } from 'next/navigation';
 import './shop.css';
 import AddToCartButtonInList from '@/components/add_to_cart_popup/AddToCartButtonInList';
 import { MiniCartProvider } from '@/app/context/MiniCartContext';
+import { Pagination } from './Pagination';
 
 interface ShopPageProps {
     searchParams: Promise<{
         page?: string;
+        debug?: string;
     }>;
 }
 
@@ -30,9 +33,16 @@ const parsePrice = (price: string): number => {
 export default async function ShopPage({ searchParams }: ShopPageProps) {
     const params = await searchParams;
     const currentPage = params.page ? parseInt(params.page) : 1;
+    const showStock = params.debug === 'stock'; // Будет true если в URL есть ?debug=stock
     const perPage = 20;
 
     const { products, total, totalPages } = await fetchWooProducts(currentPage, perPage);
+
+    // Проверка на некорректную страницу
+    if (currentPage > totalPages || currentPage < 1) {
+        redirect('/shop?page=1');
+    }
+
     const convertedProducts = products.map(convertWooProduct);
 
     return (
@@ -41,17 +51,12 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                 <div className="shop_page_wrapper">
                     <div className="products_side">
                         <h1 className="shop_page_title">Каталог товаров</h1>
-                        <h2>
-                            Отображение {(currentPage - 1) * perPage + 1}–{Math.min(currentPage * perPage, total)} из {total}
+                        <h2 style={{ marginBottom: '15px' }}>
+                            Отображено {(currentPage - 1) * perPage + 1}–{Math.min(currentPage * perPage, total)} из {total}
                         </h2>
 
                         <div className="shop_page_prod_grid">
                             {convertedProducts.map((p) => {
-                                let formattedPrice = p.price ? p.price : 'Цена не указана';
-                                if (formattedPrice !== 'Цена не указана') {
-                                    formattedPrice = formattedPrice.replace(/\u00A0/g, ' ').replace('UZS', 'сӯм');
-                                }
-
                                 const numericPrice = p.convertedPrice ? parsePrice(p.convertedPrice) : 0;
                                 const inStock = p.stockStatus === 'IN_STOCK';
 
@@ -86,6 +91,12 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                                             <span className="product_item__price">
                                                 {p.convertedPrice ? p.convertedPrice : 'Цена не указана'}
                                             </span>
+
+                                            {showStock && (
+                                                <div className="product_item__stock">
+                                                    <span className="stock_count">В наличии: {p.stockQuantity} шт.</span>
+                                                </div>
+                                            )}
                                         </div>
 
                                         <AddToCartButtonInList
@@ -103,29 +114,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
 
                         <div className="pagination_controls">
                             {totalPages > 1 && (
-                                <div className="pagination">
-                                    {currentPage > 1 && (
-                                        <Link
-                                            href={`/shop?page=${currentPage - 1}`}
-                                            className="pagination_button"
-                                        >
-                                            Предыдущая
-                                        </Link>
-                                    )}
-
-                                    <span className="pagination_info">
-                                        Страница {currentPage} из {totalPages}
-                                    </span>
-
-                                    {currentPage < totalPages && (
-                                        <Link
-                                            href={`/shop?page=${currentPage + 1}`}
-                                            className="pagination_button"
-                                        >
-                                            Следующая
-                                        </Link>
-                                    )}
-                                </div>
+                                <Pagination currentPage={currentPage} totalPages={totalPages} />
                             )}
                         </div>
                     </div>
