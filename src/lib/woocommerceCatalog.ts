@@ -307,10 +307,20 @@ export async function fetchWooProducts(page: number = 1, perPage: number = 20): 
         throw error;
     }
 }
+
+// Добавляем функцию кодирования ID в начало файла
+const encodeProductId = (id: string | number): string => {
+    return Buffer.from(`post:${id}`).toString('base64');
+};
+
 // Convert WooCommerce product to match your existing format
 export function convertWooProduct(product: WooProduct) {
+
+    const encodedId = encodeProductId(product.id);
+
     return {
-        id: product.id.toString(),
+        // id: product.id.toString(),
+        id: encodeProductId(product.id), // Здесь кодируем ID
         name: product.name,
         slug: product.slug,
         image: {

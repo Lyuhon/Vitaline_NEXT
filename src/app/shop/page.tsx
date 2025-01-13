@@ -8,6 +8,10 @@ import AddToCartButtonInList from '@/components/add_to_cart_popup/AddToCartButto
 import { MiniCartProvider } from '@/app/context/MiniCartContext';
 import { Pagination } from './Pagination';
 
+// Обновленная функция, которая принимает строку или число
+// const encodeProductId = (id: string | number): string => {
+//     return Buffer.from(`post:${id}`).toString('base64');
+// };
 interface ShopPageProps {
     searchParams: Promise<{
         page?: string;
@@ -94,13 +98,14 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
 
                                             {showStock && (
                                                 <div className="product_item__stock">
-                                                    <span className="stock_count">В наличии: {p.stockQuantity} шт.</span>
+                                                    <span className="stock_count">В наличии: <b>{p.stockQuantity}</b></span>
                                                 </div>
                                             )}
                                         </div>
 
                                         <AddToCartButtonInList
                                             productId={p.id}
+                                            // productId={encodeProductId(p.id)}
                                             productName={p.name}
                                             productImage={p.image?.sourceUrl ?? '/images/products/default.jpg'}
                                             productPrice={numericPrice}
