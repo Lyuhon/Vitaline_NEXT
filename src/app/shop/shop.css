@@ -75,23 +75,6 @@ h1.shop_page_title {
 
 
 
-@media only screen and (max-width: 768px) {
-    .shop_page_prod_grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .shop_page {
-        padding: 22px;
-    }
-
-    .product_item {
-        padding: 15px 10px;
-    }
-
-    .product_item .product_meta_box a.product_item__name {
-        font-size: 13px;
-    }
-}
 
 
 
@@ -166,4 +149,24 @@ h1.shop_page_title {
 .pagination_info {
     font-size: 0.9rem;
     color: #666;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+    .shop_page_prod_grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .shop_page {
+        padding: 22px;
+    }
+
+    .product_item {
+        padding: 15px 10px;
+    }
+
+    .product_item .product_meta_box a.product_item__name {
+        font-size: 13px;
+    }
 }
