@@ -1455,6 +1455,8 @@ footer .links-column ul {
 
   .absolute_count_c {
     left: 21px;
+    font-size: 10px;
+    line-height: 8px;
     background: #ffa351;
   }
 
