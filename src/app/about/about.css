@@ -25,6 +25,7 @@
 
 .about_page .abot_vitaline .about_descript {
     width: 60%;
+    font-size: 20px;
 }
 
 .about_descript h1 {
@@ -32,6 +33,11 @@
     font-weight: 600;
     line-height: 30px;
     margin-bottom: 35px;
+}
+
+.about_descript li {
+    list-style: disc;
+    margin-left: 40px;
 }
 
 .about_page p {
@@ -75,6 +81,12 @@
     text-align: center;
 }
 
+.additional_key_adv b,
+b {
+    color: #FF7900;
+    font-weight: 500;
+}
+
 
 
 .abot_vitaline_bottom {
@@ -99,8 +111,12 @@
         padding: 0 22px;
     }
 
+    .about_page .abot_vitaline .about_descript {
+        font-size: 16px;
+    }
+
     .about_page p {
-        font-size: 15px;
+        font-size: 16px;
         font-weight: 400;
         line-height: 17px;
 

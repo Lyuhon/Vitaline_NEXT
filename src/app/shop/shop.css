@@ -218,7 +218,22 @@ span.stock_count {
 }
 
 
+/*Стили списка брендов*/
+.home_brand_list .swiper.brands_list_slider {
+    padding-left: 0px;
+    padding-right: 0px;
+}
 
+.home_brand_list {
+    padding: 0px;
+}
+
+.home_categories_section_heading h2 {
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 26px;
+    margin-bottom: 20px;
+}
 
 @media only screen and (max-width: 768px) {
     .shop_page {
@@ -267,5 +282,13 @@ span.stock_count {
     .pagination_loading {
         height: 24px;
         margin-top: -24px;
+    }
+
+    /*Стили списка брендов*/
+    .shop_page .home_categories_section_heading h2 {
+        font-size: 30px !important;
+        font-weight: 500;
+        line-height: 30px;
+        margin-bottom: 20px;
     }
 }

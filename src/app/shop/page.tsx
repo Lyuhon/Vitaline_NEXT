@@ -141,6 +141,7 @@ import './shop.css';
 import AddToCartButtonInList from '@/components/add_to_cart_popup/AddToCartButtonInList';
 import { MiniCartProvider } from '@/app/context/MiniCartContext';
 import { Pagination } from './Pagination';
+import ShopBrandsSlider from '@/components/ShopBrandsSlider';
 
 // Обновленная функция, которая принимает строку или число
 // const encodeProductId = (id: string | number): string => {
@@ -188,6 +189,9 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
             <div className="shop_page">
                 <div className="shop_page_wrapper">
                     <div className="products_side">
+
+                        <ShopBrandsSlider />
+
                         <h1 className="shop_page_title">Каталог товаров</h1>
                         <h2 style={{ marginBottom: '15px' }}>
                             Отображено {(currentPage - 1) * perPage + 1}–{Math.min(currentPage * perPage, total)} из {total}

@@ -320,6 +320,7 @@ export async function fetchWooProducts(page: number = 1, perPage: number = 20): 
     }
 }
 
+
 const encodeProductId = (id: string | number): string => {
     return Buffer.from(`post:${id}`).toString('base64');
 };
