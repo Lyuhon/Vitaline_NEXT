@@ -6,8 +6,8 @@ import './about.css';
 
 export const generateMetadata = () => {
     return {
-        title: 'Контакты - Vitaline',
-        description: 'Контактная информация магазина Vitaline в Ташкенте. Адрес, телефон, график работы.',
+        title: 'О нас - Vitaline',
+        description: 'Информация о нашем интернет магзине Vitaline, а так же преимуществах.',
     };
 };
 

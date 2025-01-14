@@ -232,6 +232,24 @@ export function Pagination({ currentPage, totalPages }: PaginationProps) {
         setIsLoading(false);
     }, [searchParams.get('page')]);
 
+    // useEffect(() => {
+    //     try {
+    //         // Пробуем прокрутить и body, и documentElement для максимальной совместимости
+    //         document.documentElement.scrollTo({
+    //             top: 0,
+    //             behavior: 'smooth'
+    //         });
+    //         document.body.scrollTo({
+    //             top: 0,
+    //             behavior: 'smooth'
+    //         });
+    //     } catch (e) {
+    //         // Если что-то пошло не так, используем запасной вариант
+    //         window.scrollTo(0, 0);
+    //     }
+    //     setIsLoading(false);
+    // }, [searchParams.get('page')]);
+
     const createUrl = (pageNumber: number) => {
         const params = new URLSearchParams(searchParams.toString());
         params.set('page', pageNumber.toString());

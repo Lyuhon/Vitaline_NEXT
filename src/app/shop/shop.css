@@ -1,3 +1,8 @@
+html,
+body {
+    scroll-behavior: smooth !important;
+}
+
 .shop_page {
     max-width: 1220px;
     padding-left: 20px;
