@@ -125,7 +125,8 @@ h1.shop_page_title {
     gap: 1rem;
     justify-content: center;
     align-items: center;
-    margin: 2rem 0;
+    margin: 32px;
+    margin-bottom: 45px;
 }
 
 .pagination_button {
@@ -133,6 +134,7 @@ h1.shop_page_title {
     border-radius: 4px;
     text-decoration: none;
     transition: all 0.3s ease;
+    background: #fff;
 }
 
 .pagination_button:hover {
@@ -145,7 +147,7 @@ h1.shop_page_title {
     color: #666;
 }
 
-a.pagination_number {
+.pagination_number {
     display: flex;
     width: 32px;
     height: 32px;
@@ -154,13 +156,14 @@ a.pagination_number {
     align-items: center;
     justify-content: center;
     transition: all 0.3s;
+    color: #000;
 }
 
-a.pagination_number:hover {
+.pagination_number:hover {
     background-color: #f2f2f280;
 }
 
-a.pagination_number.active {
+.pagination_number.active {
     background-color: #EBFFA380;
     font-weight: 400;
     border: 1px solid gray;
@@ -182,17 +185,50 @@ span.stock_count {
     border-radius: 5px;
 }
 
+.pagination_loading {
+    height: 24px;
+    margin-top: -24px !important;
+}
+
+
+
+
+.pagination_loading {
+    text-align: center;
+    margin-top: 1rem;
+    color: #666;
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Стили для disabled состояния кнопок */
+.pagination_button:disabled,
+.pagination_number:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+
+
 @media only screen and (max-width: 768px) {
     .shop_page {
         margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 22px;
     }
 
     .shop_page_prod_grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .shop_page {
-        padding: 22px;
     }
 
     .product_item {
@@ -205,9 +241,11 @@ span.stock_count {
 
     .pagination {
         gap: 10px;
+        margin: 32px 0;
+        margin-bottom: 38px;
     }
 
-    a.pagination_number {
+    .pagination_number {
         font-size: 15px;
         line-height: 15px;
         width: 29px;
@@ -218,11 +256,16 @@ span.stock_count {
         padding: 10px;
     }
 
-    a.pagination_button svg {
+    .pagination_button svg {
         min-width: 20px;
     }
 
     span.stock_count {
         margin-top: -5px;
+    }
+
+    .pagination_loading {
+        height: 24px;
+        margin-top: -24px;
     }
 }

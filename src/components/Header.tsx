@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import '@/app/header.css'; // Файл для стилей хедера
 import Image from 'next/image';
+import CartCounter from '@/components/CartCounter';
 
 const Header = () => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -149,7 +150,7 @@ const Header = () => {
                         </div>
 
                         <div className="desc_conts">
-                            <span className="header__phone"><Link href="tel:+998 91 166 00 90">91 166 00 90</Link></span>
+                            <span className="header__phone"><Link href="tel:+998 95 099 00 90">95 099 00 90</Link></span>
                             <span className="header__availability">Оператор онлайн</span>
                         </div>
                     </div>
@@ -206,6 +207,7 @@ const Header = () => {
                             width={20}
                             height={20}
                         />
+                        <CartCounter />
                     </Link>
                 </div>
             </nav>

@@ -1147,6 +1147,27 @@ footer .links-column ul {
   gap: 20px;
 }
 
+/*Кол-во в корзине*/
+.header__cart {
+  position: relative;
+}
+
+.absolute_count_c {
+  position: absolute;
+  top: -10px;
+  left: 11px;
+  background: #ff7900;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 1px;
+  color: #fff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 /* Адаптивность */
 @media only screen and (min-width: 768px) {
@@ -1432,6 +1453,10 @@ footer .links-column ul {
     bottom: 85px;
   }
 
+  .absolute_count_c {
+    left: 21px;
+    background: #ffa351;
+  }
 
 }
 
