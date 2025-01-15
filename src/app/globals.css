@@ -824,7 +824,7 @@ a.section_read_more {
 }
 
 .consultation .overlay {
-  padding: 45px 15px;
+  padding: 75px 15px;
   background-color: #00000066;
 }
 
@@ -874,7 +874,7 @@ a.section_read_more {
   font-weight: 400;
 
   color: #fff;
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 
 .consultation .form_block {
@@ -1366,7 +1366,7 @@ footer .links-column ul {
   }
 
   .consultation .overlay {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(24, 23, 37, 0.4) 58%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(24, 23, 37, 0.4) 23%);
 
   }
 
@@ -1584,4 +1584,10 @@ header .images_block img {
   .loading-container {
     height: calc(100vh - 100px);
   }
+}
+
+
+h3.orange_title,
+h3.white_title {
+  display: none;
 }

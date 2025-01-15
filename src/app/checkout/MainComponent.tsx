@@ -376,6 +376,7 @@ function CartSummaryUpdate({
                     style={{
                         cursor: isBelowMinimum || loading ? 'not-allowed' : 'pointer',
                         opacity: isBelowMinimum || loading ? 0.6 : 1,
+                        pointerEvents: isBelowMinimum || loading ? 'none' : 'auto'
                     }}
                 >
                     {loading ? 'Оформление...' : 'Перейти к оформлению заказа'}
