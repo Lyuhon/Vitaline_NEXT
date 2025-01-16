@@ -188,8 +188,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link
           rel="icon"
           type="image/png"
-          sizes="32x32"
-          href="https://nuxt.vitaline.uz/wp-content/uploads/2025/01/vitaline-favicon.png"
+          href="https://nuxt.vitaline.uz/wp-content/uploads/2025/01/vitaline-icon.png"
         // href="https://www.vitaline.uz/wp-content/themes/vl/assets/img/favicons/favicon-32x32.png"
         />
 
