@@ -175,6 +175,8 @@ import { CheckoutProvider } from '@/app/context/CheckoutContext';
 import MainComponent from './MainComponent';
 import '@/app/cart/cart.css';
 import './checkout.css';
+// page.tsx
+import CheckoutStyles from './CheckoutStyles';
 import AnimatedWrapper from '@/components/animation/AnimatedWrapper';
 
 export const metadata: Metadata = {
@@ -359,6 +361,7 @@ export default async function CheckoutPage() {
 
     return (
         <AnimatedWrapper>
+            <CheckoutStyles />
             <CartProvider initialCartItems={cartItemsDetailed}>
                 <CheckoutProvider>
                     <MainComponent />

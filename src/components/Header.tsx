@@ -59,55 +59,6 @@ const Header = () => {
                         /> */}
                     </a>
 
-                    {/* <div className="images_block">
-                        <Image
-                            className="vitamins_head_icons"
-                            src="https://nuxt.vitaline.uz/wp-content/next_images/header_tablets%20(1).webp"
-                            alt="Витаминка"
-                            width={50}
-                            height={50}
-                        />
-
-                        <Image
-                            className="vitamins_head_icons"
-                            src="https://nuxt.vitaline.uz/wp-content/next_images/header_tablets%20(4).webp"
-                            alt="Витаминка"
-                            width={50}
-                            height={50}
-                        />
-
-                        <Image
-                            className="vitamins_head_icons"
-                            src="https://nuxt.vitaline.uz/wp-content/next_images/header_tablets%20(2).webp"
-                            alt="Витаминка"
-                            width={50}
-                            height={50}
-                        />
-
-                        <Image
-                            className="vitamins_head_icons"
-                            src="https://nuxt.vitaline.uz/wp-content/next_images/header_tablets%20(5).webp"
-                            alt="Витаминка"
-                            width={50}
-                            height={50}
-                        />
-
-                        <Image
-                            className="vitamins_head_icons"
-                            src="https://nuxt.vitaline.uz/wp-content/next_images/header_tablets%20(3).webp"
-                            alt="Витаминка"
-                            width={50}
-                            height={50}
-                        />
-
-                        <Image
-                            className="vitamins_head_icons"
-                            src="https://nuxt.vitaline.uz/wp-content/next_images/header_tablets%20(6).webp"
-                            alt="Витаминка"
-                            width={50}
-                            height={50}
-                        />
-                    </div> */}
                 </div>
             </div>
 
@@ -116,7 +67,7 @@ const Header = () => {
                 <div className="header__logo__info">
                     <Link href="/">
                         <Image
-                            src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/8e3bc2dcd6d2b7628adf6e926f325187.png"
+                            src="https://nuxt.vitaline.uz/wp-content/uploads/2025/01/vitaline-trade-logo.png"
                             alt="Vitaline Logo"
                             className="header__logo-image"
                             width={240}
@@ -260,7 +211,7 @@ const Header = () => {
                 <div className="header__logo__info">
                     <Link href="/">
                         <Image
-                            src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/8e3bc2dcd6d2b7628adf6e926f325187.png"
+                            src="https://nuxt.vitaline.uz/wp-content/uploads/2025/01/vitaline-trade-logo.png"
                             alt="Vitaline Logo"
                             className="header__logo-image"
                             width={240}
@@ -549,7 +500,7 @@ const Header = () => {
                 <div className="header__logo__info">
                     <Link href="/">
                         <Image
-                            src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/8e3bc2dcd6d2b7628adf6e926f325187.png"
+                            src="https://nuxt.vitaline.uz/wp-content/uploads/2025/01/vitaline-trade-logo.png"
                             alt="Vitaline Logo"
                             className="header__logo-image"
                             width={240}

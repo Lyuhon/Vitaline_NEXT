@@ -379,7 +379,7 @@ function CartSummaryUpdate({
                         pointerEvents: isBelowMinimum || loading ? 'none' : 'auto'
                     }}
                 >
-                    {loading ? 'Оформление...' : 'Перейти к оформлению заказа'}
+                    {loading ? 'Оформление...' : 'Оформить заказ'}
                 </button>
 
                 <p className="terms">
