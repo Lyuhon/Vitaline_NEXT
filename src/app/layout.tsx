@@ -192,7 +192,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         // href="https://www.vitaline.uz/wp-content/themes/vl/assets/img/favicons/favicon-32x32.png"
         />
 
-        <meta property="og:title" content="Интернет магазин витаминов - Vitaline" />
+        <meta property="og:title" content="Оптовый интернет магазин витаминов - Vitaline Trade" />
         <meta property="og:description" content="Купить оптом витамины в Ташкенте с доставкой. Широкий выбор витаминов, БАДов и товаров для здоровья." />
         <meta property="og:url" content="https://www.vitaline-trade.com/" />
         <meta property="og:site_name" content="Vitaline Trade" />
