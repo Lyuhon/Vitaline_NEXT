@@ -2,7 +2,18 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['nuxt.vitaline.uz', 'dev.vitaline.uz'], // Добавьте домен вашего изображения
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "nuxt.vitaline.uz",
+        pathname: "**", // Разрешить любой путь
+      },
+      {
+        protocol: "https",
+        hostname: "dev.vitaline.uz",
+        pathname: "**", // Разрешить любой путь
+      },
+    ],
   },
 };
 

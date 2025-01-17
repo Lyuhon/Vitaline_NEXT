@@ -100,8 +100,9 @@ header .delivery_block b {
     height: 27px;
     padding: 5px 10px;
     border: 1.5px solid #FF7900;
-    border-radius: 10px;
-    margin-right: 15px;
+    /* border-radius: 10px; */
+    border-radius: 10px 0 0 10px;
+    /* margin-right: 15px; */
     outline: #EDEDED;
     width: 360px;
 }
@@ -111,11 +112,15 @@ header .delivery_block b {
     width: 70px;
     background: #FF7900;
     border: none;
-    border-radius: 10px;
-
+    /* border-radius: 10px; */
+    border-radius: 0 10px 10px 0;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.header__search_and_contacts button:hover {
+    background: #FF7900;
 }
 
 .header__contacts {
@@ -304,7 +309,17 @@ header .delivery_block b {
 
     .header__search_and_contacts button {
         width: 37px;
-        height: 37px;
+        height: 30px;
+        margin-left: -2px;
+        /* height: unset; */
+    }
+
+    .header__user-section {
+        display: none;
+    }
+
+    .pop_search_tags a:nth-child(n+10) {
+        display: none;
     }
 
 }
@@ -376,6 +391,11 @@ header .delivery_block b {
     }
 }
 
+/* .search-popup.hidden {
+    animation: fadeOut 0.3s ease-in forwards;
+    opacity: 0;
+    visibility: hidden;
+} */
 
 /* Стиль для попапа */
 .search-popup {
@@ -393,7 +413,7 @@ header .delivery_block b {
     animation: fadeIn 0.3s ease-out forwards;
 }
 
-.search-popup.hidden {
+.search-popup.hidden_pop {
     animation: fadeOut 0.3s ease-in forwards;
     opacity: 0;
     visibility: hidden;
@@ -413,16 +433,19 @@ header .delivery_block b {
 .search-popup-content-shdow-block {
     box-shadow: 0px 5px 15px 0px #00000017;
     background: #fff;
-    padding: 22px;
+    padding: 15px 22px;
+
 
     position: fixed;
     width: 100%;
     top: 0;
 }
 
+
+
 .search-pop_content {
     padding: 22px;
-    margin-top: 80px;
+    margin-top: 60px;
 }
 
 .search-pop_content h3 {
@@ -462,6 +485,14 @@ header .delivery_block b {
     color: #FF7900;
     font-size: 16px;
     cursor: pointer;
+    transition: 0.3s;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.close-popup:hover {
+    background: #FF7900;
+    color: #fff
 }
 
 .cat_like_items {
@@ -491,4 +522,156 @@ header .delivery_block b {
 .cat_like_single .icon_s {
     font-size: 30px;
     line-height: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (min-width: 768px) {
+    .search-popup {
+        top: 5%;
+        left: 10%;
+        width: 80%;
+        height: 90%;
+        border-radius: 10px;
+    }
+
+    .search-popup-content-shdow-block {
+        position: unset;
+        padding: 22px;
+    }
+
+    .search-popup-overlay {
+        position: fixed;
+        top: 0;
+        z-index: 99;
+        background: #0000003b;
+        height: 100vh;
+        width: 100vw;
+    }
+
+    .search-popup-header input {
+        width: 100%;
+    }
+
+    .search-pop_content {
+        margin-top: 0px !important;
+    }
+
+    .pop_search_tags {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .inner_search_cats_list {
+        max-height: 500px;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* SEARCH */
+a.search-result-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 5px;
+    padding-left: 10px;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+a.search-result-item:hover {
+    background: #f7f7f7;
+}
+
+a.search-result-item img {
+    min-width: 50px;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+
+p.sku {
+    width: fit-content;
+    background: #f4f4f4;
+    padding: 1px 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.nothing-found {
+    display: inline-block;
+    font-size: 15px;
+    line-height: 15px;
+    width: fit-content;
+    color: #e00303;
+    padding: 5px 8px;
+    border-radius: 5px;
+    background-color: #ff00002b;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+    margin-top: 20px;
+}
+
+
+
+
+/* Плавный переход для высоты и прозрачности */
+.inner_search_cats_list {
+    /* max-height: 500px; */
+    /* Установите максимальную высоту, достаточную для содержимого */
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    overflow: hidden;
+    opacity: 1;
+}
+
+.inner_search_cats_list.hidden_cats {
+    max-height: 0;
+    opacity: 0;
+}
+
+/* Индикатор загрузки */
+.loading-indicator {
+    text-align: center;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #555;
+    animation: blink 1s infinite;
+}
+
+/* Анимация мигания для индикатора загрузки */
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }

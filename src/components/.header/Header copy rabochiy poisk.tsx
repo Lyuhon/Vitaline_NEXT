@@ -1,8 +1,7 @@
 // src/app/components/Header.tsx
 'use client';
 
-// import React, { useEffect, useState } from 'react';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import '@/app/header.css'; // Файл для стилей хедера
 import Image from 'next/image';
@@ -16,39 +15,12 @@ const Header = () => {
     // Состояния поиска
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [searchResults, setSearchResults] = useState<any[]>([]);
-    // Для лоадера поискового запроса
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    // Для несразу поиска
-    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const token = localStorage.getItem('authToken');
             setIsAuthenticated(!!token);
         }
-    }, []);
-
-    // Отключаем прокрутку body при открытом попапе
-    useEffect(() => {
-        if (isPopupVisible) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = '';
-        }
-
-        // Чистим стиль при размонтировании компонента
-        return () => {
-            document.body.style.overflow = '';
-        };
-    }, [isPopupVisible]);
-
-    // Очистка Таймаута при Размонтировании Компонента
-    useEffect(() => {
-        return () => {
-            if (timeoutRef.current) {
-                clearTimeout(timeoutRef.current);
-            }
-        };
     }, []);
 
     // Закрываем попап с анимацией
@@ -112,7 +84,6 @@ const Header = () => {
     // ==============================
     // ФУНКЦИЯ: общий поиск по всей строке
     // ==============================
-
     async function fetchProducts(fullSearch: string) {
         // Если строка пустая — обнуляем
         if (!fullSearch.trim()) {
@@ -120,83 +91,71 @@ const Header = () => {
             return;
         }
 
-        // Устанавливаем состояние загрузки
-        setIsLoading(true);
+        // Разбиваем строку на слова. Например, "now шелуха" -> ["now", "шелуха"]
+        const splitted = fullSearch.trim().split(/\s+/);
 
-        try {
-            // Разбиваем строку на слова. Например, "now шелуха" -> ["now", "шелуха"]
-            const splitted = fullSearch.trim().split(/\s+/);
+        // Если получилось несколько слов, делаем для каждого — отдельный запрос
+        // и собираем все результаты в одну структуру.
+        // Для каждой product.id (или databaseId) считаем, сколько раз она повторилась.
+        const countsById: Record<number, number> = {};
+        const productMap: Record<number, any> = {};
 
-            // Если получилось несколько слов, делаем для каждого — отдельный запрос
-            // и собираем все результаты в одну структуру.
-            // Для каждой product.id (или databaseId) считаем, сколько раз она повторилась.
-            const countsById: Record<number, number> = {};
-            const productMap: Record<number, any> = {};
-
-            for (const word of splitted) {
-                if (!word) continue;
-                const products = await fetchProductsForTerm(word);
-                // Увеличиваем счётчик для каждого найденного товара
-                for (const p of products) {
-                    const pid = p.databaseId;
-                    if (!countsById[pid]) {
-                        countsById[pid] = 0;
-                    }
-                    countsById[pid] += 1;
-                    // Сохраним сам товар в словарь, чтобы потом оттуда брать
-                    productMap[pid] = p;
+        for (const word of splitted) {
+            if (!word) continue;
+            const products = await fetchProductsForTerm(word);
+            // Увеличиваем счётчик для каждого найденного товара
+            for (const p of products) {
+                const pid = p.databaseId;
+                if (!countsById[pid]) {
+                    countsById[pid] = 0;
                 }
+                countsById[pid] += 1;
+                // Сохраним сам товар в словарь, чтобы потом оттуда брать
+                productMap[pid] = p;
             }
-
-            // Превратим productMap в массив {product, count}.
-            // Потом отсортируем по count (чем больше, тем выше).
-            let combined: Array<{ product: any; count: number }> = [];
-
-            for (const pidStr of Object.keys(productMap)) {
-                const pidNum = Number(pidStr);
-                combined.push({
-                    product: productMap[pidNum],
-                    count: countsById[pidNum] || 0,
-                });
-            }
-
-            // Сортируем так, чтобы товары, у которых count == splitted.length, шли первыми.
-            combined.sort((a, b) => b.count - a.count);
-
-            // Забираем самих продуктов (уже отсортированных)
-            const sortedProducts = combined.map((entry) => entry.product);
-
-            // Покажем только первые 6
-            const top6 = sortedProducts.slice(0, 6);
-
-            setSearchResults(top6);
-        } catch (error) {
-            console.error('Ошибка при поиске:', error);
-        } finally {
-            // Сбрасываем состояние загрузки
-            setIsLoading(false);
         }
+
+        // Теперь у нас есть countsById, где, например, countsById[123] = 2,
+        // если товар встретился и в поиске по "now", и в поиске по "шелуха".
+        // А productMap[123] = {...} - это сам товар.
+
+        // Превратим productMap в массив {product, count}.
+        // Потом отсортируем по count (чем больше, тем выше).
+        let combined: Array<{ product: any; count: number }> = [];
+
+        for (const pidStr of Object.keys(productMap)) {
+            const pidNum = Number(pidStr);
+            combined.push({
+                product: productMap[pidNum],
+                count: countsById[pidNum] || 0,
+            });
+        }
+
+        // Сортируем так, чтобы товары, у которых count == splitted.length, шли первыми.
+        // То есть, если товар найден по всем словам, он в самом топе.
+        // Если несколько товаров имеют одинаковый count — порядок между ними не важен.
+        combined.sort((a, b) => b.count - a.count);
+
+        // Дополнительно можете (если хотите) сначала показывать товары,
+        // которые встретились по всем словам (a.count == splitted.length),
+        // потом по (a.count == splitted.length - 1) и т.д.
+
+        // Забираем самих продуктов (уже отсортированных)
+        const sortedProducts = combined.map((entry) => entry.product);
+
+        // Покажем только первые 6
+        const top6 = sortedProducts.slice(0, 6);
+
+        setSearchResults(top6);
     }
 
-
+    // Обработчик: при вводе вызываем fetchProducts
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         const value = e.target.value;
         setSearchTerm(value);
 
-        // Очистка предыдущего таймаута
-        if (timeoutRef.current) {
-            clearTimeout(timeoutRef.current);
-        }
-
-        if (value.length >= 3) {
-            // Устанавливаем новый таймаут
-            timeoutRef.current = setTimeout(() => {
-                fetchProducts(value);
-            }, 400); // Задержка 300 мс
-        } else {
-            // Очищаем результаты поиска, если введено меньше 3 символов
-            setSearchResults([]);
-        }
+        // Запускаем поиск
+        fetchProducts(value);
     }
 
     return (
@@ -248,13 +207,8 @@ const Header = () => {
                                 type="text"
                                 placeholder="Поиск товаров"
                                 className="header__search-input"
-                                onClick={() => setIsPopupVisible(true)}
-                                value={searchTerm}
-                                onChange={handleChange}
                             />
-                            <button className="header__search-button"
-                                onClick={() => setIsPopupVisible(true)}
-                                value={searchTerm}>
+                            <button className="header__search-button">
                                 <Image
                                     src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/searcher_magnifyng_glass_search_locate_find_icon_123813-1.svg"
                                     alt="Лупа"
@@ -391,18 +345,6 @@ const Header = () => {
                                 value={searchTerm}
                                 onChange={handleChange}
                             />
-                            <button
-                                className="header__search-button"
-                                onClick={() => setIsPopupVisible(true)}
-                                value={searchTerm}
-                            >
-                                <Image
-                                    src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/searcher_magnifyng_glass_search_locate_find_icon_123813-1.svg"
-                                    alt="Лупа"
-                                    width={20}
-                                    height={20}
-                                />
-                            </button>
                         </div>
                     </div>
 
@@ -421,11 +363,9 @@ const Header = () => {
                 {/* Попап поиска (mobile) */}
                 {isPopupVisible && (
                     <div className="search-popup-overlay">
-                        <div className={`search-popup ${isClosing ? 'hidden_pop' : ''}`}>
-
+                        <div className={`search-popup ${isClosing ? 'hidden' : ''}`}>
                             <div className="search-popup-content">
                                 <div className="search-popup-content-shdow-block">
-
                                     <div className="search-popup-header">
                                         <input
                                             type="text"
@@ -441,74 +381,11 @@ const Header = () => {
                                     </div>
                                 </div>
 
-
-
                                 {/* Результаты поиска */}
                                 <div className="search-pop_content">
-
-                                    {/* <div className="inner_search_cats_list"> */}
-                                    <div className={`inner_search_cats_list ${searchTerm && searchResults.length > 0 ? 'hidden_cats' : ''}`}>
-                                        <h3>Популярные категории</h3>
-
-                                        <div className="pop_search_tags">
-                                            <Link onClick={closePopup} href="/category/sportivnoe-pitanie">
-                                                <div>🏋️‍♂️ Спорт питание</div>
-                                            </Link>
-                                            <Link onClick={closePopup} href="/category/rybij-zhiromega3">
-                                                <div>🐟 Рыбий жир, омега</div>
-                                            </Link>
-                                            <Link onClick={closePopup} href="/category/vitamin-d-d3">
-                                                <div>☀️ Витамин Д3</div>
-                                            </Link>
-                                            <Link onClick={closePopup} href="/category/dlya-beremennyh">
-                                                <div>🤰 Для беременных</div>
-                                            </Link>
-                                            <Link onClick={closePopup} href="/category/detskoe-zdorove">
-                                                <div>🍼 Детское здоровье</div>
-                                            </Link>
-                                            <Link onClick={closePopup} href="/category/pishhevye-dobavki">
-                                                <div>🍵 Пищевые добавки</div>
-                                            </Link>
-                                            <Link onClick={closePopup} href="/category/multivitaminy">
-                                                <div>💊 Мультивитамины</div>
-                                            </Link>
-                                            <Link onClick={closePopup} href="/category/zhenskoe-zdorove">
-                                                <div>🙋‍♀️ Женское здоровье</div>
-                                            </Link>
-                                            <Link onClick={closePopup} href="/category/kozha-nogti-i-volosy">
-                                                <div>💅 Кожа, ногти, волосы</div>
-                                            </Link>
-                                            <Link onClick={closePopup} href="/category/produkty-pitanie">
-                                                <div>🧃 Продукты питания</div>
-                                            </Link>
-                                            <Link onClick={closePopup} href="/category/dlya-pohudeniya">
-                                                <div>🍽️ Для похудения</div>
-                                            </Link>
-                                            <Link onClick={closePopup} href="/category/zelen-i-superfudy">
-                                                <div>🥬 Зелень и суперфуды</div>
-                                            </Link>
-                                            <Link onClick={closePopup} href="/category/sistema-pishhevarenie">
-                                                <div>🥣 Для пищеварения</div>
-                                            </Link>
-                                            <Link onClick={closePopup} href="/category/preparaty-dlya-glaz">
-                                                <div>👁️ Препараты для глаз</div>
-                                            </Link>
-                                            <Link onClick={closePopup} href="/category/kosmetika">
-                                                <div>💄 Косметика</div>
-                                            </Link>
-
-                                        </div>
-                                    </div>
-
-                                    {isLoading && (
-                                        <div className='loading-indicator'>Загрузка...</div>
-                                    )}
-
-
-                                    {searchTerm.length >= 3 && searchResults.length === 0 ? (
-                                        <div className='nothing-found'>По вашему запросу <u>{searchTerm}</u> ничего не найдено</div>
+                                    {searchTerm && searchResults.length === 0 ? (
+                                        <p>Ничего не найдено</p>
                                     ) : (
-
 
                                         searchResults.map((product) => (
                                             <Link
@@ -540,6 +417,41 @@ const Header = () => {
                         </div>
                     </div>
                 )}
+
+                {/* Навигация (mobile) */}
+                <nav className="header__navigation mobile_visible temp-dn">
+                    <Link href="/shop" className="header__menu">
+                        <div className="product_nav_button">
+                            <Image
+                                src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/preferences_desktop_apps_icon_180940-1.svg"
+                                alt="Продукция"
+                                width={20}
+                                height={20}
+                            />
+                            <span>Продукция</span>
+                        </div>
+                    </Link>
+                    <div className="header__search_and_contacts">
+                        <div className="search_block">
+                            <input
+                                type="text"
+                                placeholder="Поиск товаров"
+                                className="header__search-input"
+                                value={searchTerm}
+                                onChange={handleChange}
+                                onFocus={() => setIsPopupVisible(true)}
+                            />
+                            <button className="header__search-button">
+                                <Image
+                                    src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/searcher_magnifyng_glass_search_locate_find_icon_123813-1.svg"
+                                    alt="Лупа"
+                                    width={14}
+                                    height={14}
+                                />
+                            </button>
+                        </div>
+                    </div>
+                </nav>
 
                 <Link href="/cart">
                     <div className="floating_cart">
