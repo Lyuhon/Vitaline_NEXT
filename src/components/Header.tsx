@@ -493,7 +493,7 @@ const Header = () => {
                                             <Link onClick={closePopup} href="/category/preparaty-dlya-glaz">
                                                 <div>👁️ Препараты для глаз</div>
                                             </Link>
-                                            <Link onClick={closePopup} href="/category/kosmetika">
+                                            <Link onClick={closePopup} href="/category/1kosmetika">
                                                 <div>💄 Косметика</div>
                                             </Link>
 
