@@ -46,7 +46,7 @@ const CartCounter = () => {
                 e.target.closest('.quantity-button') ||
                 e.target.closest('.item-remove')
             ) {
-                setTimeout(handleCartUpdate, 1000); // небольшая задержка, чтобы дождаться обновления cookie
+                setTimeout(handleCartUpdate, 1200); // небольшая задержка, чтобы дождаться обновления cookie
             }
         };
 
