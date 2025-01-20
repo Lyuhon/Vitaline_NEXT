@@ -174,7 +174,7 @@ export default function ProductsSection({ products }: { products: Product[] }) {
 
     return (
 
-        <section className="home_product_section">
+        <section className="home_product_section" id='slider_bestsellers'>
             <div className="products_section_heading">
                 <div className="general_heading_block">
                     <div className="prods_sec_nav">
@@ -251,10 +251,11 @@ export default function ProductsSection({ products }: { products: Product[] }) {
                         );
                     })}
                 </div>
-                <div className="swiper-button-next"></div>
-                <div className="swiper-button-prev"></div>
+                {/* <div className="swiper-button-next"></div>
+                <div className="swiper-button-prev"></div> */}
             </div>
-
+            <div className="swiper-button-next"></div>
+            <div className="swiper-button-prev"></div>
             <ProductsSliderClient />
         </section>
 

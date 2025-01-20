@@ -172,7 +172,16 @@ import { Metrika } from "@/components/Metrika";
 
 export const metadata: Metadata = {
   title: 'Оптовый интернет магазин витаминов - Vitaline Trade',
-  description: 'Купить оптом витамины в Ташкенте с доставкой. Широкий выбор витаминов, БАДов и товаров для здоровья.'
+  description: 'Купить оптом витамины в Ташкенте с доставкой. Широкий выбор витаминов, БАДов и товаров для здоровья.',
+  icons: {
+    icon: [
+      { url: '/vitaline-icon-32.png', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/vitaline-apple-icon-180.png' },
+    ],
+    shortcut: [{ url: '/vitaline-icon-32.png' }],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -185,12 +194,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
           href="https://unpkg.com/swiper/swiper-bundle.min.css"
         />
-        <link
+        {/* <link
           rel="icon"
           type="image/png"
           href="https://nuxt.vitaline.uz/wp-content/uploads/2025/01/vitaline-icon.png"
         // href="https://www.vitaline.uz/wp-content/themes/vl/assets/img/favicons/favicon-32x32.png"
-        />
+        /> */}
 
         <meta property="og:title" content="Оптовый интернет магазин витаминов - Vitaline Trade" />
         <meta property="og:description" content="Купить оптом витамины в Ташкенте с доставкой. Широкий выбор витаминов, БАДов и товаров для здоровья." />

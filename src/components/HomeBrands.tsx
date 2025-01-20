@@ -25,7 +25,7 @@ export default async function AllBrandsPage() {
         <section className='home_brand_list'>
             <div className="home_categories_section_heading">
                 <div className="general_heading_block">
-                    <h2>Продукция по бренду</h2>
+                    <h2 className='active__'>Продукция по бренду</h2>
                     <Link className="section_read_more" href="/brand_list">
                         Все бренды
                     </Link>
