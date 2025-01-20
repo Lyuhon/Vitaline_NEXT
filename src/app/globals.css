@@ -996,7 +996,8 @@ section.home_product_section {
 .grid_adv_item span::before {
   content: '';
   display: inline-block;
-  background-image: url(https://nuxt.vitaline.uz/wp-content/uploads/2024/12/3643781-check-checklist-complete-done-mark_113406-1-1.png);
+  /* background-image: url(https://nuxt.vitaline.uz/wp-content/uploads/2024/12/3643781-check-checklist-complete-done-mark_113406-1-1.png); */
+  background-image: url(https://nuxt.vitaline.uz/wp-content/uploads/2025/01/consultation_bcg.webp);
   background-size: contain;
   width: 27px;
   height: 27px;
@@ -1636,7 +1637,7 @@ header .images_block img {
 
 @media only screen and (max-width: 768px) {
   .loading-container {
-    height: calc(100vh - 100px);
+    height: calc(100vh - 180px);
   }
 }
 
