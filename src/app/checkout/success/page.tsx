@@ -2,6 +2,7 @@ import React from 'react';
 import './thanks.css';
 import '@/app/contacts/contacts.css';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export const generateMetadata = () => {
     return {
@@ -34,12 +35,12 @@ const SuccessPage = () => {
 
                             <div>
                                 <div className="f_irst">
-                                    <p className='first_info'>Перейдите в наш Телеграм-бот, чтобы
+                                    <p className='first_info'>Перейдите в наш Телеграм-чат, чтобы
                                         {/* <br /> */}
                                         <strong> вы могли получить ответ о заказе от менеджера:</strong></p>
 
                                     <div >
-                                        <a className='tg_button' href="https://t.me/abdelmansur" target="_blank" rel="noopener noreferrer">
+                                        <Link className='tg_button' href="https://t.me/abdelmansur" target="_blank" rel="noopener noreferrer">
 
                                             <Image
                                                 src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Artboard.svg"
@@ -49,7 +50,7 @@ const SuccessPage = () => {
                                             />
                                             {/* <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Artboard.svg" alt="" /> */}
                                             <span>Телеграм-чат Vitaline</span>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
 
@@ -63,7 +64,7 @@ const SuccessPage = () => {
                         <div className="support_bottom_block">
                             <h2>Служба поддержки Vitaline</h2>
                             <div className="support_bottom_block_inner_wrap">
-                                <a href="https://t.me/abdelmansur" className="tg_chat_btn" target="_blank" rel="noopener noreferrer">
+                                <a style={{ display: 'none' }} href="https://t.me/abdelmansur" className="tg_chat_btn" target="_blank" rel="noopener noreferrer">
                                     <Image
                                         src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Artboard.svg"
                                         alt="Иконка ТГ"
@@ -77,6 +78,10 @@ const SuccessPage = () => {
                                 </div>
                             </div>
                         </div>
+
+                        <Link href="/" className="back-home-link">
+                            🠔 Вернуться на главную
+                        </Link>
 
                     </div>
 

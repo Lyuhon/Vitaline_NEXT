@@ -40,13 +40,29 @@ const CartCounter = () => {
         };
 
         // Слушаем клики по элементам с определенным классом
+        // const handleClick = (e) => {
+        //     if (
+        //         e.target.closest('.add_to_cart') || // для класса
+        //         e.target.closest('.quantity-button') ||
+        //         e.target.closest('.item-remove') ||
+        //         e.target.closest('button.cart_checkout-button')
+        //     ) {
+        //         setTimeout(handleCartUpdate, 1200); // небольшая задержка, чтобы дождаться обновления cookie
+        //     }
+        // };
+
         const handleClick = (e) => {
+            // Все кнопки корзины кроме оформления заказа
             if (
-                e.target.closest('.add_to_cart') || // для класса
+                e.target.closest('.add_to_cart') ||
                 e.target.closest('.quantity-button') ||
                 e.target.closest('.item-remove')
             ) {
-                setTimeout(handleCartUpdate, 1200); // небольшая задержка, чтобы дождаться обновления cookie
+                setTimeout(handleCartUpdate, 1200); // 1.2 секунды
+            }
+            // Кнопка оформления заказа
+            else if (e.target.closest('button.cart_checkout-button')) {
+                setTimeout(handleCartUpdate, 3000); // 3 секунды
             }
         };
 
