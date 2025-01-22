@@ -160,7 +160,7 @@ import { createOrder } from '@/lib/woocommerce';
 // Опционально можно также указать runtime
 export const runtime = 'nodejs';
 // Увеличиваем время ожидания до 120 секунд
-export const maxDuration = 150;
+export const maxDuration = 60;
 
 
 function decodeProductId(encodedId: string): number {
