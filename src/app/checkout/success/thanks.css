@@ -23,7 +23,7 @@
     min-width: 45%;
     min-height: 100%;
 
-    background-image: url(https://nuxt.vitaline.uz/wp-content/uploads/2024/12/image-1.png);
+    background-image: url(https://nuxt.vitaline.uz/wp-content/uploads/2025/01/success-page.webp);
     border-radius: 20px;
     background-size: cover;
     background-position: bottom;
@@ -192,6 +192,16 @@ p.first_info::before,
 
     .support_bottom_block {
         width: 100%;
+    }
+
+    .tg_button {
+        font-size: 17px;
+        white-space: nowrap;
+    }
+
+    .back-home-link {
+        width: 100%;
+        text-align: center;
     }
 }
 
