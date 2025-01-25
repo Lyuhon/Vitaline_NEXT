@@ -17,8 +17,8 @@ export default function ProductsSliderClient() {
                     },
                     // Количество одновременно видимых слайдов
                     // и количество пролистываемых за раз (slidesPerGroup)
-                    slidesPerView: 2,
-                    slidesPerGroup: 2,
+                    slidesPerView: 1,
+                    slidesPerGroup: 1,
                     spaceBetween: 12,
 
                     // Буллет-пагинация

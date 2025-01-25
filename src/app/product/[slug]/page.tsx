@@ -12,6 +12,8 @@ import AddToCartButtonInList from '@/components/add_to_cart_popup/AddToCartButto
 
 import { MiniCartProvider } from '@/app/context/MiniCartContext';
 
+import CleanFullDescInfo from './CleanFullDescInfo';
+
 
 import HomeBrands from '@/components/HomeBrands';
 
@@ -333,6 +335,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                         </div>
                     </div>
                 </div>
+
+                <CleanFullDescInfo />
 
                 <div className="full_desc_info">
                     <div className="heading_block">

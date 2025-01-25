@@ -11,7 +11,7 @@ export default function ProductsSliderClient() {
             const Swiper = (window as any).Swiper;
             new Swiper('#slider_sales .products_slider', {
                 loop: true,
-                slidesPerView: 1.8,
+                slidesPerView: 2,
                 spaceBetween: 20,
                 autoplay: {
                     delay: 3000,

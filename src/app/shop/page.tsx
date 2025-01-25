@@ -143,6 +143,7 @@ import { MiniCartProvider } from '@/app/context/MiniCartContext';
 import { Pagination } from './Pagination';
 import ShopBrandsSlider from '@/components/ShopBrandsSlider';
 
+
 // Обновленная функция, которая принимает строку или число
 // const encodeProductId = (id: string | number): string => {
 //     return Buffer.from(`post:${id}`).toString('base64');

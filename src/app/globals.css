@@ -40,7 +40,7 @@ body {
   font-family: var(--font-family);
   color: var(--font-color);
 
-  scroll-behavior: smooth;
+  scroll-behavior: smooth !important;
 }
 
 section {

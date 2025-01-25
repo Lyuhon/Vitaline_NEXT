@@ -116,6 +116,17 @@ p.first_info::before,
     display: block;
 }
 
+.back-home-link {
+    display: inline-block;
+    font-weight: 500;
+    color: #FFF;
+    background-color: #ff7900;
+    border-radius: 10px;
+    margin-top: 30px;
+    width: fit-content;
+    padding: 8px 15px;
+}
+
 @media only screen and (max-width: 768px) {
     .thanks_page {
         padding: 0 22px;
@@ -203,16 +214,4 @@ p.first_info::before,
         width: 100%;
         text-align: center;
     }
-}
-
-
-.back-home-link {
-    display: inline-block;
-    font-weight: 500;
-    color: #FFF;
-    background-color: #ff7900;
-    border-radius: 10px;
-    margin-top: 30px;
-    width: fit-content;
-    padding: 8px 15px;
 }

@@ -33,7 +33,7 @@ export default async function AllBrandsPage() {
                 <div className="orange_heading_divider"></div>
             </div>
 
-            <div className="swiper brands_list_slider">
+            {/* <div className="swiper brands_list_slider">
                 <div className="swiper-wrapper">
                     {brands.map((brand: any) => (
                         <div className="swiper-slide"
@@ -54,48 +54,37 @@ export default async function AllBrandsPage() {
                                     objectFit="cover" // Для сохранения пропорций
                                     style={{ width: '100%', maxHeight: '150px' }}
                                 />
-                                {/* <img
-                                    src={brand.brandThumbnail || 'http://localhost:3000/_next/image?url=https%3A%2F%2Fnuxt.vitaline.uz%2Fwp-content%2Fuploads%2F2024%2F12%2F8e3bc2dcd6d2b7628adf6e926f325187.png&w=640&q=75'}
-                                    alt={brand.name}
-                                    style={{ width: '100%', maxHeight: '150px', objectFit: 'cover' }}
-                                /> */}
-                                {/* <h3 style={{ marginTop: '10px' }}>{brand.name}</h3> */}
                             </Link>
                         </div>
                     ))}
                 </div>
+            </div> */}
+
+            <div className="swiper brands_list_slider">
+                <div className="swiper-wrapper">
+                    {brands.map((brand: any) => (
+                        <Link className="swiper-slide"
+                            key={brand.id}
+                            style={{
+                                border: '1px solid #ddd',
+                                padding: '10px',
+                                borderRadius: '4px',
+                                textAlign: 'center',
+                            }}
+                            href={`/product-brands/${brand.slug}`}>
+                            <Image
+                                src={brand.brandThumbnail || 'https://nuxt.vitaline.uz/wp-content/uploads/2024/12/8e3bc2dcd6d2b7628adf6e926f325187.png'}
+                                alt={brand.name}
+                                width={110} // Укажите ширину изображения
+                                height={110} // Укажите высоту изображения
+                                objectFit="cover" // Для сохранения пропорций
+                                style={{ width: '100%', maxHeight: '150px', objectFit: 'contain', height: 'auto' }}
+                            />
+                        </Link>
+                    ))}
+                </div>
             </div>
 
-            {/* Пример простой сетки */}
-            {/* <div
-                style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-                    gap: '20px',
-                    marginTop: '20px',
-                }}
-            >
-                {brands.map((brand: any) => (
-                    <div
-                        key={brand.id}
-                        style={{
-                            border: '1px solid #ddd',
-                            padding: '10px',
-                            borderRadius: '4px',
-                            textAlign: 'center',
-                        }}
-                    >
-                        <Link href={`/product-brands/${brand.slug}`}>
-                            <img
-                                src={brand.brandThumbnail || '/images/default-thumbnail.jpg'}
-                                alt={brand.name}
-                                style={{ width: '100%', maxHeight: '150px', objectFit: 'cover' }}
-                            />
-                            <h3 style={{ marginTop: '10px' }}>{brand.name}</h3>
-                        </Link>
-                    </div>
-                ))}
-            </div> */}
 
             <HomeBrandsSliderSwiper />
 
