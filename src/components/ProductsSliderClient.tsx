@@ -64,6 +64,34 @@ export default function ProductsSliderClient() {
                     },
                 },
             });
+
+            new Swiper('#slider_newarrivals .products_slider', {
+                loop: true,
+                slidesPerView: 1.8,
+                spaceBetween: 20,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                navigation: {
+                    nextEl: '#slider_newarrivals .swiper-button-next',
+                    prevEl: '#slider_newarrivals .swiper-button-prev',
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    768: {
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                    },
+                    1024: {
+                        slidesPerView: 4,
+                        spaceBetween: 30,
+                    },
+                },
+            });
         }
     }, []);
 

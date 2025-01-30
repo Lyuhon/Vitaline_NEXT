@@ -1,35 +1,25 @@
 // src/app/components/Header.tsx
-'use client'
+'use client';
 
+// import React, { useEffect, useState } from 'react';
 import React, { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
+import '@/app/header.css'; // Файл для стилей хедера
 import Image from 'next/image';
 import CartCounter from '@/components/CartCounter';
-import { liteClient as algoliasearch } from 'algoliasearch/lite';
-import instantsearch from 'instantsearch.js';
-import { configure } from 'instantsearch.js/es/widgets';
-// import 'instantsearch.css/themes/reset.css';
-
-import '@/app/header.css';
-
-interface AlgoliaHit {
-    objectID: string;
-    name: string;
-    sku?: string;
-    url?: string;
-    thumbnail_url?: string;
-    categories?: string[];
-}
-
 
 const Header = () => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-    const [isPopupVisible, setIsPopupVisible] = useState<boolean>(false);
-    const [isClosing, setIsClosing] = useState<boolean>(false);
+    const [isPopupVisible, setIsPopupVisible] = useState<boolean>(false); // Состояние для показа попапа
+    const [isClosing, setIsClosing] = useState<boolean>(false); // Состояние для анимации закрытия
+
+    // Состояния поиска
     const [searchTerm, setSearchTerm] = useState<string>('');
-    const [searchResults, setSearchResults] = useState<AlgoliaHit[]>([]);
+    const [searchResults, setSearchResults] = useState<any[]>([]);
+    // Для лоадера поискового запроса
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const searchInstanceRef = useRef<any>(null);
+    // Для несразу поиска
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -38,46 +28,7 @@ const Header = () => {
         }
     }, []);
 
-    useEffect(() => {
-        const searchClient = algoliasearch(
-            'TJRO96P4LZ',
-            'e9cd85a57dcba249ac8ca48023342b99'
-        );
-
-        const search = instantsearch({
-            indexName: 'vt_trade_',
-            searchClient,
-        });
-
-        const customWidget = {
-            $$type: 'custom.results' as const,
-            init(options: { helper: any }) { },
-            render(options: { results: { hits: any[] } | null; helper: any }) {
-                if (options.results?.hits) {
-                    setSearchResults(options.results.hits as AlgoliaHit[]);
-                    setIsLoading(false);
-                }
-            },
-            dispose() {
-                setSearchResults([]);
-            }
-        } as const;
-
-        search.addWidgets([
-            configure({
-                hitsPerPage: 6,
-            }),
-            customWidget
-        ]);
-
-        search.start();
-        searchInstanceRef.current = search;
-
-        return () => {
-            search.dispose();
-        };
-    }, []);
-
+    // Отключаем прокрутку body при открытом попапе
     useEffect(() => {
         if (isPopupVisible) {
             document.body.style.overflow = 'hidden';
@@ -85,37 +36,168 @@ const Header = () => {
             document.body.style.overflow = '';
         }
 
+        // Чистим стиль при размонтировании компонента
         return () => {
             document.body.style.overflow = '';
         };
     }, [isPopupVisible]);
 
+    // Очистка Таймаута при Размонтировании Компонента
+    useEffect(() => {
+        return () => {
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
+        };
+    }, []);
+
+    // Закрываем попап с анимацией
     const closePopup = () => {
         setIsClosing(true);
         setTimeout(() => {
             setIsPopupVisible(false);
             setIsClosing(false);
-            setSearchTerm('');
-            if (searchInstanceRef.current) {
-                searchInstanceRef.current.helper.setQuery('').search();
-            }
         }, 300);
     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // ==============================
+    // ФУНКЦИЯ: делаем запрос к GraphQL
+    // ==============================
+    async function fetchProductsForTerm(term: string) {
+        // Один «подзапрос» (например, для "now" или "шелуха")
+        // Вытащим сразу 12 товаров, чтобы был запас (а потом обрежем до 6).
+        const query = `
+      query SearchProducts($search: String) {
+        products(first: 12, where: { search: $search }) {
+          nodes {
+            id
+            databaseId
+            name
+            sku
+            slug
+            image {
+              sourceUrl
+            }
+            ... on SimpleProduct {
+              price
+            }
+            ... on VariableProduct {
+              price
+            }
+          }
+        }
+      }
+    `;
+
+        try {
+            const response = await fetch('https://nuxt.vitaline.uz/graphql', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    query,
+                    variables: { search: term },
+                }),
+            });
+
+            const json = await response.json();
+            const nodes = json?.data?.products?.nodes || [];
+
+            return nodes; // Возвращаем массив товаров
+        } catch (err) {
+            console.error(`Ошибка при поиске: ${term}`, err);
+            return [];
+        }
+    }
+
+    // ==============================
+    // ФУНКЦИЯ: общий поиск по всей строке
+    // ==============================
+
+    async function fetchProducts(fullSearch: string) {
+        // Если строка пустая — обнуляем
+        if (!fullSearch.trim()) {
+            setSearchResults([]);
+            return;
+        }
+
+        // Устанавливаем состояние загрузки
+        setIsLoading(true);
+
+        try {
+            // Разбиваем строку на слова. Например, "now шелуха" -> ["now", "шелуха"]
+            const splitted = fullSearch.trim().split(/\s+/);
+
+            // Если получилось несколько слов, делаем для каждого — отдельный запрос
+            // и собираем все результаты в одну структуру.
+            // Для каждой product.id (или databaseId) считаем, сколько раз она повторилась.
+            const countsById: Record<number, number> = {};
+            const productMap: Record<number, any> = {};
+
+            for (const word of splitted) {
+                if (!word) continue;
+                const products = await fetchProductsForTerm(word);
+                // Увеличиваем счётчик для каждого найденного товара
+                for (const p of products) {
+                    const pid = p.databaseId;
+                    if (!countsById[pid]) {
+                        countsById[pid] = 0;
+                    }
+                    countsById[pid] += 1;
+                    // Сохраним сам товар в словарь, чтобы потом оттуда брать
+                    productMap[pid] = p;
+                }
+            }
+
+            // Превратим productMap в массив {product, count}.
+            // Потом отсортируем по count (чем больше, тем выше).
+            let combined: Array<{ product: any; count: number }> = [];
+
+            for (const pidStr of Object.keys(productMap)) {
+                const pidNum = Number(pidStr);
+                combined.push({
+                    product: productMap[pidNum],
+                    count: countsById[pidNum] || 0,
+                });
+            }
+
+            // Сортируем так, чтобы товары, у которых count == splitted.length, шли первыми.
+            combined.sort((a, b) => b.count - a.count);
+
+            // Забираем самих продуктов (уже отсортированных)
+            const sortedProducts = combined.map((entry) => entry.product);
+
+            // Покажем только первые 6
+            const top6 = sortedProducts.slice(0, 6);
+
+            setSearchResults(top6);
+        } catch (error) {
+            console.error('Ошибка при поиске:', error);
+        } finally {
+            // Сбрасываем состояние загрузки
+            setIsLoading(false);
+        }
+    }
+
+
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         const value = e.target.value;
         setSearchTerm(value);
 
-        if (value.length >= 2) {
-            setIsLoading(true);
-            if (searchInstanceRef.current) {
-                searchInstanceRef.current.helper.setQuery(value).search();
-            }
-        } else {
-            setSearchResults([]);
-            setIsLoading(false);
+        // Очистка предыдущего таймаута
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
         }
-    };
+
+        if (value.length >= 3) {
+            // Устанавливаем новый таймаут
+            timeoutRef.current = setTimeout(() => {
+                fetchProducts(value);
+            }, 400); // Задержка 300 мс
+        } else {
+            // Очищаем результаты поиска, если введено меньше 3 символов
+            setSearchResults([]);
+        }
+    }
 
     return (
         <>
@@ -340,8 +422,10 @@ const Header = () => {
                 {isPopupVisible && (
                     <div className="search-popup-overlay">
                         <div className={`search-popup ${isClosing ? 'hidden_pop' : ''}`}>
+
                             <div className="search-popup-content">
                                 <div className="search-popup-content-shdow-block">
+
                                     <div className="search-popup-header">
                                         <input
                                             type="text"
@@ -357,9 +441,15 @@ const Header = () => {
                                     </div>
                                 </div>
 
+
+
+                                {/* Результаты поиска */}
                                 <div className="search-pop_content">
+
+                                    {/* <div className="inner_search_cats_list"> */}
                                     <div className={`inner_search_cats_list ${searchTerm && searchResults.length > 0 ? 'hidden_cats' : ''}`}>
                                         <h3>Популярные категории</h3>
+
                                         <div className="pop_search_tags">
                                             <Link onClick={closePopup} href="/category/sportivnoe-pitanie">
                                                 <div>🏋️‍♂️ Спорт питание</div>
@@ -414,35 +504,37 @@ const Header = () => {
                                         <div className='loading-indicator'>Загрузка...</div>
                                     )}
 
-                                    {searchTerm.length >= 2 ? (
-                                        searchResults.length === 0 ? (
-                                            <div className='nothing-found'>По вашему запросу <u>{searchTerm}</u> ничего не найдено</div>
-                                        ) : (
-                                            searchResults.map((hit: AlgoliaHit) => (
-                                                <Link
-                                                    key={hit.objectID}
-                                                    href={`/product/${hit.url?.split('/').pop()}`}
-                                                    className="search-result-item"
-                                                    onClick={closePopup}
-                                                >
-                                                    <div>
-                                                        {hit.thumbnail_url && (
-                                                            <Image
-                                                                src={hit.thumbnail_url}
-                                                                alt={hit.name}
-                                                                width={50}
-                                                                height={50}
-                                                                style={{ objectFit: 'contain' }}
-                                                            />
-                                                        )}
-                                                    </div>
-                                                    <div style={{ marginLeft: '10px' }}>
-                                                        <p>{hit.name}</p>
-                                                        {hit.sku && <p className="sku">{hit.sku}</p>}
-                                                    </div>
-                                                </Link>
-                                            ))
-                                        )) : null}
+
+                                    {searchTerm.length >= 3 && searchResults.length === 0 ? (
+                                        <div className='nothing-found'>По вашему запросу <u>{searchTerm}</u> ничего не найдено</div>
+                                    ) : (
+
+
+                                        searchResults.map((product) => (
+                                            <Link
+                                                key={product.id}
+                                                href={`/product/${product.slug}`}
+                                                className="search-result-item"
+                                                onClick={closePopup}
+                                            >
+                                                <div>
+                                                    {product?.image?.sourceUrl && (
+                                                        <Image
+                                                            src={product.image.sourceUrl}
+                                                            alt={product.name}
+                                                            width={50}
+                                                            height={50}
+                                                            style={{ objectFit: 'contain' }}
+                                                        />
+                                                    )}
+                                                </div>
+                                                <div style={{ marginLeft: '10px' }}>
+                                                    <p>{product.name}</p>
+                                                    {product.sku && <p className="sku">{product.sku}</p>}
+                                                </div>
+                                            </Link>
+                                        ))
+                                    )}
                                 </div>
                             </div>
                         </div>

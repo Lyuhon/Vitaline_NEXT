@@ -1,8 +1,10 @@
 // src/app/page.tsx
-import { fetchProducts } from '../lib/fetchProducts';
+// import { fetchProducts } from '../lib/fetchProducts';
 import { fetchFeaturedProducts } from '../lib/fetchFeaturedProducts';
-import ProductsSection from '../components/ProductsSection';
+import { fetchBackInStockProducts } from '../lib/fetchBackInStockProducts';
+// import ProductsSection from '../components/ProductsSection';
 import ProductsSection_SalesOfMonth from '../components/ProductsSection_SalesOfMonth';
+import ProductsSection_BackInStock from '../components/ProductsSection_BackInStock';
 
 // import HomeCategories from '../components/HomeCategories';
 import HomeAdvantages from '../components/HomeAdvantages';
@@ -17,8 +19,9 @@ import HomeSlider from "@/components/HomeSlider";
 
 
 export default async function Page() {
-  const products = await fetchProducts();
+  // const products = await fetchProducts();
   const featuredProducts = await fetchFeaturedProducts();
+  const fetchBackInStock = await fetchBackInStockProducts();
 
 
   return (
@@ -31,7 +34,9 @@ export default async function Page() {
 
         <ProductsSection_SalesOfMonth products={featuredProducts} />
 
-        <ProductsSection products={products} />
+        <ProductsSection_BackInStock products={fetchBackInStock} />
+
+        {/* <ProductsSection products={products} /> */}
 
         {/* <HomeCategories /> */}
 

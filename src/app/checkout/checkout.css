@@ -108,6 +108,7 @@
 
 .delivery_inputs .form-group select {
     outline: none;
+    width: 100%;
 }
 
 .delivery_inputs .form-group select {
