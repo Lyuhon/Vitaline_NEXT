@@ -96,25 +96,53 @@ const Header = () => {
             setIsPopupVisible(false);
             setIsClosing(false);
             setSearchTerm('');
+            setSearchComplete(false); // Добавляем сброс флага
             if (searchInstanceRef.current) {
                 searchInstanceRef.current.helper.setQuery('').search();
             }
         }, 300);
     };
 
+    // Для дебаунса поиска 500 мс
+    const [searchComplete, setSearchComplete] = useState<boolean>(false);
+    const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setSearchTerm(value);
+        setSearchComplete(false); // Сбрасываем флаг завершения поиска
+
+        // Очищаем предыдущий таймер, если он есть
+        if (searchTimeoutRef.current) {
+            clearTimeout(searchTimeoutRef.current);
+        }
 
         if (value.length >= 2) {
             setIsLoading(true);
-            if (searchInstanceRef.current) {
-                searchInstanceRef.current.helper.setQuery(value).search();
-            }
+
+            searchTimeoutRef.current = setTimeout(() => {
+                if (searchInstanceRef.current) {
+                    searchInstanceRef.current.helper.setQuery(value).search();
+                    // Устанавливаем флаг завершения поиска после задержки
+                    setTimeout(() => {
+                        setSearchComplete(true);
+                    }, 50); // Небольшая дополнительная задержка для уверенности
+                }
+            }, 500);
         } else {
             setSearchResults([]);
             setIsLoading(false);
+            setSearchComplete(true);
         }
+        // if (value.length >= 2) {
+        //     setIsLoading(true);
+        //     if (searchInstanceRef.current) {
+        //         searchInstanceRef.current.helper.setQuery(value).search();
+        //     }
+        // } else {
+        //     setSearchResults([]);
+        //     setIsLoading(false);
+        // }
     };
 
     return (
@@ -415,13 +443,13 @@ const Header = () => {
                                     )}
 
                                     {searchTerm.length >= 2 ? (
-                                        searchResults.length === 0 ? (
+                                        searchComplete && searchResults.length === 0 ? (
                                             <div className='nothing-found'>По вашему запросу <u>{searchTerm}</u> ничего не найдено</div>
                                         ) : (
                                             searchResults.map((hit: AlgoliaHit) => (
                                                 <Link
                                                     key={hit.objectID}
-                                                    href={`/product/${hit.url?.split('/').pop()}`}
+                                                    href={hit.url ? `/product/${hit.url.replace('https://nuxt.vitaline.uz/product/', '')}` : '#'}
                                                     className="search-result-item"
                                                     onClick={closePopup}
                                                 >
