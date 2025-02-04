@@ -379,6 +379,7 @@ const Header = () => {
                                             value={searchTerm}
                                             onChange={handleChange}
                                         />
+
                                         <button className="close-popup" onClick={closePopup}>
                                             Закрыть
                                         </button>
@@ -387,6 +388,7 @@ const Header = () => {
 
                                 <div className="search-pop_content">
                                     <div className={`inner_search_cats_list ${searchTerm && searchResults.length > 0 ? 'hidden_cats' : ''}`}>
+
                                         <h3>Популярные категории</h3>
                                         <div className="pop_search_tags">
                                             <Link onClick={closePopup} href="/category/sportivnoe-pitanie">
@@ -442,7 +444,7 @@ const Header = () => {
                                         <div className='loading-indicator'>Загрузка...</div>
                                     )}
 
-                                    {searchTerm.length >= 2 ? (
+                                    {/* {searchTerm.length >= 2 ? (
                                         searchComplete && searchResults.length === 0 ? (
                                             <div className='nothing-found'>По вашему запросу <u>{searchTerm}</u> ничего не найдено</div>
                                         ) : (
@@ -470,7 +472,47 @@ const Header = () => {
                                                     </div>
                                                 </Link>
                                             ))
-                                        )) : null}
+                                        )) : null} */}
+
+                                    {searchTerm.length >= 2 ? (
+                                        searchComplete && searchResults.length === 0 ? (
+                                            <div className='nothing-found'>По вашему запросу <u>{searchTerm}</u> ничего не найдено</div>
+                                        ) : (
+                                            <>
+                                                <Link
+                                                    href={`/search-results?query=${searchTerm}`}
+                                                    className="search-results-btn"
+                                                    onClick={closePopup}
+                                                >
+                                                    Все результаты поиска ⭢
+                                                </Link>
+                                                {searchResults.map((hit: AlgoliaHit) => (
+                                                    <Link
+                                                        key={hit.objectID}
+                                                        href={hit.url ? `/product/${hit.url.replace('https://nuxt.vitaline.uz/product/', '')}` : '#'}
+                                                        className="search-result-item"
+                                                        onClick={closePopup}
+                                                    >
+                                                        <div>
+                                                            {hit.thumbnail_url && (
+                                                                <Image
+                                                                    src={hit.thumbnail_url}
+                                                                    alt={hit.name}
+                                                                    width={50}
+                                                                    height={50}
+                                                                    style={{ objectFit: 'contain' }}
+                                                                />
+                                                            )}
+                                                        </div>
+                                                        <div style={{ marginLeft: '10px' }}>
+                                                            <p>{hit.name}</p>
+                                                            {hit.sku && <p className="sku">{hit.sku}</p>}
+                                                        </div>
+                                                    </Link>
+                                                ))}
+                                            </>
+                                        )
+                                    ) : null}
                                 </div>
                             </div>
                         </div>

@@ -13,6 +13,22 @@
     align-items: center;
 }
 
+.search-results-btn {
+    display: block;
+    width: fit-content;
+    margin-bottom: 15px;
+    background: none;
+    border: none;
+    color: #fff;
+    background-color: #FF7900;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 5px 10px;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
 header .delivery_block {
     display: flex;
     width: fit-content;
@@ -258,6 +274,13 @@ header .delivery_block b {
 }
 
 @media only screen and (max-width: 768px) {
+
+    .search-results-btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
     header.header {
         position: fixed;
         top: 0;
