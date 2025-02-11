@@ -372,3 +372,10 @@ span#phone-error {
         opacity: 1;
     }
 }
+
+@media only screen and (min-width: 769px) {
+    .checkout_section .form-container {
+        position: sticky;
+        top: 20px;
+    }
+}

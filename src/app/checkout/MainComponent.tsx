@@ -863,7 +863,7 @@ function CartItemsClient({
     return (
         <>
             <div className="select-all">
-                <div className="total_cart_qy">{items.length} товара(ов)</div>
+                <div className="total_cart_qy">{items.length} позиций</div>
             </div>
 
             {items.map((item) => (

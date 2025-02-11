@@ -43,7 +43,7 @@ export default function CartItemsClient() {
                     <label htmlFor="select-all">Выделить все товары</label>
                 </div>
                 <div className="total_cart_qy">
-                    {items.length} товара(ов)
+                    {items.length} позиций
                 </div>
             </div>
 
@@ -109,3 +109,7 @@ export default function CartItemsClient() {
         </>
     );
 }
+
+
+// LOCAL Storage qty buttons
+// components/CartItemsClient.jsx

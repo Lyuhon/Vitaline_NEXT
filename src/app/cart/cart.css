@@ -228,7 +228,7 @@
 .cart_flex_block {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 40px;
 }
 
@@ -292,6 +292,9 @@ h3.cart_brand_name {
     padding: 25px 30px;
     background-color: #F3FFCA80;
     border-radius: 20px;
+
+    position: sticky;
+    top: 20px;
 }
 
 .cart_fill_info .summary_price {

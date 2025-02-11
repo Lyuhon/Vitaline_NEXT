@@ -1,8 +1,7 @@
-// // Рабочий 02 01 2024 но с варном
 // // src/components/AddToCartButton.tsx
 // 'use client';
 
-// import { useState, useEffect } from 'react';
+// import { useState, useEffect, useCallback } from 'react';
 // import { useMiniCart } from '@/app/context/MiniCartContext';
 // import MiniCartPopup from '@/app/product/MiniCartPopup';
 
@@ -32,6 +31,12 @@
 //     const [isPopupOpen, setIsPopupOpen] = useState(false);
 //     const [addedQuantity, setAddedQuantity] = useState(initialQty);
 
+//     // Мемоизируем функцию closePopup
+//     const closePopup = useCallback(() => {
+//         setIsPopupOpen(false);
+//         clearLastAddedItem();
+//     }, [clearLastAddedItem]);
+
 //     const addToCart = async () => {
 //         if (!stock) return;
 
@@ -51,7 +56,7 @@
 //                 }),
 //             });
 
-//             const delayPromise = delay(1000); // Задержка в 500 мс
+//             const delayPromise = delay(1000); // Задержка в 1000 мс
 
 //             const [response] = await Promise.all([fetchPromise, delayPromise]);
 
@@ -79,11 +84,6 @@
 //         }
 //     };
 
-//     const closePopup = () => {
-//         setIsPopupOpen(false);
-//         clearLastAddedItem();
-//     };
-
 //     // Закрытие popup при нажатии клавиши Esc
 //     useEffect(() => {
 //         const handleKeyDown = (e: KeyboardEvent) => {
@@ -97,7 +97,7 @@
 //         return () => {
 //             window.removeEventListener('keydown', handleKeyDown);
 //         };
-//     }, [isPopupOpen]);
+//     }, [isPopupOpen, closePopup]); // Добавили closePopup в зависимости
 
 //     return (
 //         <>
@@ -115,10 +115,10 @@
 //                     <span>{loading ? 'Добавляю...' : 'Добавить в корзину'}</span>
 //                 </div>
 
-//                 <div className="one_click_order">
+//                 {/* <div className="one_click_order">
 //                     <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/РЎРРѕР№_1-2.svg" alt="Корзина" />
 //                     <span>Купить в 1 клик</span>
-//                 </div>
+//                 </div> */}
 //             </div>
 
 //             {/* Popup */}
@@ -135,12 +135,18 @@
 // }
 
 
+
+
 // src/components/AddToCartButton.tsx
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
 import { useMiniCart } from '@/app/context/MiniCartContext';
 import MiniCartPopup from '@/app/product/MiniCartPopup';
+import { addToCart as addToLocalStorage } from '@/app/utils/cartStorage';
+
+// Константа для переключения между двойным хранением и только localStorage
+const USE_COOKIES = false; // true - двойное хранение (cookies + localStorage), false - только localStorage
 
 interface AddToCartProps {
     productId: string;
@@ -168,11 +174,52 @@ export default function AddToCartButton({
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [addedQuantity, setAddedQuantity] = useState(initialQty);
 
-    // Мемоизируем функцию closePopup
     const closePopup = useCallback(() => {
         setIsPopupOpen(false);
         clearLastAddedItem();
     }, [clearLastAddedItem]);
+
+    // Функция для добавления в localStorage
+    const addToLocalCart = async () => {
+        const product = {
+            productId,
+            name: productName,
+            image: productImage,
+            price: productPrice,
+            maxQuantity,
+            quantity: initialQty,
+        };
+
+        // Добавляем в localStorage
+        addToLocalStorage(product);
+
+        // Делаем запрос к API для логирования
+        await fetch('/api/cart/add-local', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(product),
+        });
+    };
+
+    // Функция для добавления через cookies
+    const addToCookieCart = async () => {
+        const response = await fetch('/api/cart/add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                productId,
+                productName,
+                productImage,
+                productPrice,
+                maxQuantity,
+                quantity: initialQty,
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Ошибка при добавлении в корзину');
+        }
+    };
 
     const addToCart = async () => {
         if (!stock) return;
@@ -180,25 +227,23 @@ export default function AddToCartButton({
         setLoading(true);
 
         try {
-            const fetchPromise = fetch('/api/cart/add', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    productId,
-                    productName,
-                    productImage,
-                    productPrice,
-                    maxQuantity,
-                    quantity: initialQty,
-                }),
-            });
+            const delayPromise = delay(1000);
 
-            const delayPromise = delay(1000); // Задержка в 1000 мс
-
-            const [response] = await Promise.all([fetchPromise, delayPromise]);
-
-            if (!response.ok) {
-                throw new Error('Ошибка при добавлении в корзину');
+            if (USE_COOKIES) {
+                // Используем оба хранилища одновременно
+                await Promise.all([
+                    addToCookieCart(),  // Сохраняем в cookies
+                    addToLocalCart(),   // Сохраняем в localStorage
+                    delayPromise
+                ]);
+                console.log(`${productName} добавлен в корзину (cookies + localStorage)`);
+            } else {
+                // Используем только localStorage
+                await Promise.all([
+                    addToLocalCart(),
+                    delayPromise
+                ]);
+                console.log(`${productName} добавлен в корзину (localStorage)`);
             }
 
             // Обновляем контекст с информацией о добавленном товаре
@@ -212,10 +257,8 @@ export default function AddToCartButton({
 
             setAddedQuantity(initialQty);
             setIsPopupOpen(true);
-            console.log(`${productName} добавлен в корзину`);
         } catch (error) {
-            console.error(error);
-            // Можно добавить уведомление об ошибке здесь
+            console.error('Ошибка при добавлении в корзину:', error);
         } finally {
             setLoading(false);
         }
@@ -234,7 +277,7 @@ export default function AddToCartButton({
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, [isPopupOpen, closePopup]); // Добавили closePopup в зависимости
+    }, [isPopupOpen, closePopup]);
 
     return (
         <>
@@ -258,7 +301,6 @@ export default function AddToCartButton({
                 </div> */}
             </div>
 
-            {/* Popup */}
             {isPopupOpen && (
                 <MiniCartPopup
                     productImage={productImage}

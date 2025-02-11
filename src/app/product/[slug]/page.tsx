@@ -6,6 +6,7 @@ import { fetchRelatedProducts } from '@/lib/fetchRelatedProducts';
 import ProductInteractionsClient from '@/components/ProductInteractionsClient';
 import ProductGalleryClient from '@/components/ProductGalleryClient';
 import SKUCopy from "@/components/SKUCopy";
+
 // import AddToCartButton from '@/components/AddToCartButton';
 import AddToCartSection from '../AddToCartSection'; // Импорт нового компонента
 import AddToCartButtonInList from '@/components/add_to_cart_popup/AddToCartButtonInList';
