@@ -655,7 +655,7 @@ p.sku {
     background-color: #ff00002b;
     opacity: 0;
     animation: fadeIn 0.5s forwards;
-    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 

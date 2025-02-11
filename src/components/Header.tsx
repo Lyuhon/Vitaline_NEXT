@@ -386,7 +386,7 @@ const Header = () => {
                                     </div>
                                 </div>
 
-                                <div className="search-pop_content">
+                                {/* <div className="search-pop_content">
                                     <div className={`inner_search_cats_list ${searchTerm && searchResults.length > 0 ? 'hidden_cats' : ''}`}>
 
                                         <h3>Популярные категории</h3>
@@ -444,35 +444,6 @@ const Header = () => {
                                         <div className='loading-indicator'>Загрузка...</div>
                                     )}
 
-                                    {/* {searchTerm.length >= 2 ? (
-                                        searchComplete && searchResults.length === 0 ? (
-                                            <div className='nothing-found'>По вашему запросу <u>{searchTerm}</u> ничего не найдено</div>
-                                        ) : (
-                                            searchResults.map((hit: AlgoliaHit) => (
-                                                <Link
-                                                    key={hit.objectID}
-                                                    href={hit.url ? `/product/${hit.url.replace('https://nuxt.vitaline.uz/product/', '')}` : '#'}
-                                                    className="search-result-item"
-                                                    onClick={closePopup}
-                                                >
-                                                    <div>
-                                                        {hit.thumbnail_url && (
-                                                            <Image
-                                                                src={hit.thumbnail_url}
-                                                                alt={hit.name}
-                                                                width={50}
-                                                                height={50}
-                                                                style={{ objectFit: 'contain' }}
-                                                            />
-                                                        )}
-                                                    </div>
-                                                    <div style={{ marginLeft: '10px' }}>
-                                                        <p>{hit.name}</p>
-                                                        {hit.sku && <p className="sku">{hit.sku}</p>}
-                                                    </div>
-                                                </Link>
-                                            ))
-                                        )) : null} */}
 
                                     {searchTerm.length >= 2 ? (
                                         searchComplete && searchResults.length === 0 ? (
@@ -513,6 +484,103 @@ const Header = () => {
                                             </>
                                         )
                                     ) : null}
+                                </div> */}
+
+                                <div className="search-pop_content">
+                                    {searchTerm.length >= 2 && searchComplete && searchResults.length === 0 && (
+                                        <div className='nothing-found'>По вашему запросу <u>{searchTerm}</u> ничего не найдено</div>
+                                    )}
+
+                                    <div className={`inner_search_cats_list ${searchTerm && searchResults.length > 0 ? 'hidden_cats' : ''}`}>
+                                        <h3>Популярные категории</h3>
+                                        <div className="pop_search_tags">
+                                            <Link onClick={closePopup} href="/category/sportivnoe-pitanie">
+                                                <div>🏋️‍♂️ Спорт питание</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/rybij-zhiromega3">
+                                                <div>🐟 Рыбий жир, омега</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/vitamin-d-d3">
+                                                <div>☀️ Витамин Д3</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/dlya-beremennyh">
+                                                <div>🤰 Для беременных</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/detskoe-zdorove">
+                                                <div>🍼 Детское здоровье</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/pishhevye-dobavki">
+                                                <div>🍵 Пищевые добавки</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/multivitaminy">
+                                                <div>💊 Мультивитамины</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/zhenskoe-zdorove">
+                                                <div>🙋‍♀️ Женское здоровье</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/kozha-nogti-i-volosy">
+                                                <div>💅 Кожа, ногти, волосы</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/produkty-pitanie">
+                                                <div>🧃 Продукты питания</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/dlya-pohudeniya">
+                                                <div>🍽️ Для похудения</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/zelen-i-superfudy">
+                                                <div>🥬 Зелень и суперфуды</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/sistema-pishhevarenie">
+                                                <div>🥣 Для пищеварения</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/preparaty-dlya-glaz">
+                                                <div>👁️ Препараты для глаз</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/1kosmetika">
+                                                <div>💄 Косметика</div>
+                                            </Link>
+                                        </div>
+                                    </div>
+
+                                    {isLoading && (
+                                        <div className='loading-indicator'>Загрузка...</div>
+                                    )}
+
+                                    {searchTerm.length >= 2 && searchResults.length > 0 && (
+                                        <>
+                                            <Link
+                                                href={`/search-results?query=${searchTerm}`}
+                                                className="search-results-btn"
+                                                onClick={closePopup}
+                                            >
+                                                Все результаты поиска ⭢
+                                            </Link>
+                                            {searchResults.map((hit: AlgoliaHit) => (
+                                                <Link
+                                                    key={hit.objectID}
+                                                    href={hit.url ? `/product/${hit.url.replace('https://nuxt.vitaline.uz/product/', '')}` : '#'}
+                                                    className="search-result-item"
+                                                    onClick={closePopup}
+                                                >
+                                                    <div>
+                                                        {hit.thumbnail_url && (
+                                                            <Image
+                                                                src={hit.thumbnail_url}
+                                                                alt={hit.name}
+                                                                width={50}
+                                                                height={50}
+                                                                style={{ objectFit: 'contain' }}
+                                                            />
+                                                        )}
+                                                    </div>
+                                                    <div style={{ marginLeft: '10px' }}>
+                                                        <p>{hit.name}</p>
+                                                        {hit.sku && <p className="sku">{hit.sku}</p>}
+                                                    </div>
+                                                </Link>
+                                            ))}
+                                        </>
+                                    )}
                                 </div>
                             </div>
                         </div>
