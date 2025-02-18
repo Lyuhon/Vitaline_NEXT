@@ -246,6 +246,13 @@
     width: 30px;
 }
 
+input.quantity-value {
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    text-align: center;
+    width: 30px !important;
+}
+
 .full_desc_info {
     position: relative;
     /* Убедитесь, что блок имеет контекст позиционирования */
