@@ -8,6 +8,7 @@ import CartCounter from '@/components/CartCounter';
 import { liteClient as algoliasearch } from 'algoliasearch/lite';
 import instantsearch from 'instantsearch.js';
 import { configure } from 'instantsearch.js/es/widgets';
+// import 'instantsearch.css/themes/reset.css';
 
 import '@/app/header.css';
 
@@ -28,38 +29,7 @@ const Header = () => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [searchResults, setSearchResults] = useState<AlgoliaHit[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
     const searchInstanceRef = useRef<any>(null);
-    const [mobileMenuClosing, setMobileMenuClosing] = useState<boolean>(false);
-
-    // Мобильное меню
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const token = localStorage.getItem('authToken');
-            setIsAuthenticated(!!token);
-        }
-    }, []);
-
-    // Эффект для блокировки прокрутки при открытом меню
-    useEffect(() => {
-        if (isMobileMenuOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = '';
-        }
-
-        return () => {
-            document.body.style.overflow = '';
-        };
-    }, [isMobileMenuOpen]);
-
-    const handleMobileMenuClose = () => {
-        setMobileMenuClosing(true);
-        setTimeout(() => {
-            setIsMobileMenuOpen(false);
-            setMobileMenuClosing(false);
-        }, 300); // Время анимации в миллисекундах
-    };
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -164,7 +134,15 @@ const Header = () => {
             setIsLoading(false);
             setSearchComplete(true);
         }
-
+        // if (value.length >= 2) {
+        //     setIsLoading(true);
+        //     if (searchInstanceRef.current) {
+        //         searchInstanceRef.current.helper.setQuery(value).search();
+        //     }
+        // } else {
+        //     setSearchResults([]);
+        //     setIsLoading(false);
+        // }
     };
 
     return (
@@ -224,7 +202,7 @@ const Header = () => {
                                 onClick={() => setIsPopupVisible(true)}
                                 value={searchTerm}>
                                 <Image
-                                    src="/icons/search-icon.svg"
+                                    src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/searcher_magnifyng_glass_search_locate_find_icon_123813-1.svg"
                                     alt="Лупа"
                                     width={20}
                                     height={20}
@@ -286,7 +264,7 @@ const Header = () => {
                         </Link>
                         <Link href="/cart" className="header__cart">
                             <Image
-                                src="/icons/cart-icon.svg"
+                                src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/РЎРРѕР№_1-1.svg"
                                 alt="Корзина"
                                 width={20}
                                 height={20}
@@ -298,10 +276,7 @@ const Header = () => {
 
                 {/* Хедер (mobile) */}
                 <div className="like_herb header__main mobile_visible">
-                    <button
-                        className="mobile_links_button"
-                        onClick={() => setIsMobileMenuOpen(true)}
-                    >
+                    <a href="#footer_nav" className="mobile_links_button">
                         <svg
                             width="20"
                             height="17"
@@ -337,7 +312,7 @@ const Header = () => {
                                 strokeLinecap="round"
                             />
                         </svg>
-                    </button>
+                    </a>
 
                     <div className="header__logo__info">
                         <Link href="/">
@@ -368,7 +343,7 @@ const Header = () => {
                                 value={searchTerm}
                             >
                                 <Image
-                                    src="/icons/search-icon.svg"
+                                    src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/searcher_magnifyng_glass_search_locate_find_icon_123813-1.svg"
                                     alt="Лупа"
                                     width={20}
                                     height={20}
@@ -380,95 +355,12 @@ const Header = () => {
                     <div className="header__user-section">
                         <Link href="/cart" className="header__cart">
                             <Image
-                                src="/icons/cart-icon.svg"
+                                src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/РЎРРѕР№_1-1.svg"
                                 alt="Корзина"
                                 width={20}
                                 height={20}
                             />
                         </Link>
-                    </div>
-                </div>
-
-                {/* Мобильное меню */}
-                <div className={`mobile-menu ${isMobileMenuOpen ? 'mobile-menu-open' : ''} ${mobileMenuClosing ? 'mobile-menu-closing' : ''}`}>
-                    <div className="mobile-menu-overlay" onClick={handleMobileMenuClose}></div>
-                    <div className="mobile-menu-container">
-                        <div style={{ justifyContent: 'space-between' }} className="mobile-menu-header">
-                            <div className="header__logo__info">
-                                <Link href="/">
-                                    <Image
-                                        src="https://nuxt.vitaline.uz/wp-content/uploads/2025/01/vitaline-trade-logo.png"
-                                        alt="Vitaline Logo"
-                                        style={{ margin: '0px' }}
-                                        className="header__logo-image"
-                                        width={240}
-                                        height={100}
-                                    />
-                                </Link>
-                            </div>
-
-                            <button
-                                className="mobile-menu-close"
-                                onClick={handleMobileMenuClose}
-                            >
-                                ✕
-                            </button>
-                        </div>
-                        <div className="mobile-menu-content">
-
-                            <div className="mobile-menu-links">
-                                <Link href="/" onClick={handleMobileMenuClose}>
-                                    <div className="mobile-menu-item">Главная</div>
-                                </Link>
-                                <Link href="/brand_list" onClick={handleMobileMenuClose}>
-                                    <div className="mobile-menu-item">Бренды</div>
-                                </Link>
-                                <Link href="/sales-of-month" onClick={handleMobileMenuClose}>
-                                    <div className="mobile-menu-item">Спец. предложения</div>
-                                </Link>
-                                <Link href="/about" onClick={handleMobileMenuClose}>
-                                    <div className="mobile-menu-item">О нас</div>
-                                </Link>
-                                <Link href="/warehouse" onClick={handleMobileMenuClose}>
-                                    <div className="mobile-menu-item">Склады</div>
-                                </Link>
-                                <Link href="/contacts" onClick={handleMobileMenuClose}>
-                                    <div className="mobile-menu-item">Контакты</div>
-                                </Link>
-                                <Link style={{ display: 'none' }} href={isAuthenticated ? '/profile' : '/login'} onClick={handleMobileMenuClose}>
-                                    <div className="mobile-menu-item">
-                                        <Image
-                                            src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/avatar_male_man_people_person_profile_user_icon_123199-1.svg"
-                                            alt="Личный кабинет"
-                                            width={20}
-                                            height={20}
-                                        />
-                                        <span>Личный кабинет</span>
-                                    </div>
-                                </Link>
-                            </div>
-
-                            <div className="menu-info-section">
-                                <p className="work_shop_info">График работы: <br></br>с 9:00 до 19:00</p>
-                                <p className="work_shop_info">Телефон для связи: <br></br><Link href="tel:+998 95 099 00 90">+998 95 099 00 90</Link></p>
-                                <p className="work_shop_info">Адрес: г. Ташкент, Мирабадский район, ул. Фидокор, 10</p>
-
-                                <div className="social-media">
-                                    <Link href="https://www.instagram.com/vitaline.uz/">
-                                        <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Rectangle-85.svg" alt="Instagram" />
-                                    </Link>
-                                    <Link href="https://t.me/vitalineuz_admin">
-                                        <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Rectangle-86.svg" alt="Telegram" />
-                                    </Link>
-                                    <Link href="https://wa.me/message/4LJSJMNTMHQOC1">
-                                        <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Rectangle-87.svg" alt="WhatsApp" />
-                                    </Link>
-                                    <Link href="https://www.facebook.com/vitalineuz">
-                                        <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Rectangle-84.svg" alt="Facebook" />
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -494,6 +386,105 @@ const Header = () => {
                                     </div>
                                 </div>
 
+                                {/* <div className="search-pop_content">
+                                    <div className={`inner_search_cats_list ${searchTerm && searchResults.length > 0 ? 'hidden_cats' : ''}`}>
+
+                                        <h3>Популярные категории</h3>
+                                        <div className="pop_search_tags">
+                                            <Link onClick={closePopup} href="/category/sportivnoe-pitanie">
+                                                <div>🏋️‍♂️ Спорт питание</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/rybij-zhiromega3">
+                                                <div>🐟 Рыбий жир, омега</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/vitamin-d-d3">
+                                                <div>☀️ Витамин Д3</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/dlya-beremennyh">
+                                                <div>🤰 Для беременных</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/detskoe-zdorove">
+                                                <div>🍼 Детское здоровье</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/pishhevye-dobavki">
+                                                <div>🍵 Пищевые добавки</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/multivitaminy">
+                                                <div>💊 Мультивитамины</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/zhenskoe-zdorove">
+                                                <div>🙋‍♀️ Женское здоровье</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/kozha-nogti-i-volosy">
+                                                <div>💅 Кожа, ногти, волосы</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/produkty-pitanie">
+                                                <div>🧃 Продукты питания</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/dlya-pohudeniya">
+                                                <div>🍽️ Для похудения</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/zelen-i-superfudy">
+                                                <div>🥬 Зелень и суперфуды</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/sistema-pishhevarenie">
+                                                <div>🥣 Для пищеварения</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/preparaty-dlya-glaz">
+                                                <div>👁️ Препараты для глаз</div>
+                                            </Link>
+                                            <Link onClick={closePopup} href="/category/1kosmetika">
+                                                <div>💄 Косметика</div>
+                                            </Link>
+
+                                        </div>
+                                    </div>
+
+                                    {isLoading && (
+                                        <div className='loading-indicator'>Загрузка...</div>
+                                    )}
+
+
+                                    {searchTerm.length >= 2 ? (
+                                        searchComplete && searchResults.length === 0 ? (
+                                            <div className='nothing-found'>По вашему запросу <u>{searchTerm}</u> ничего не найдено</div>
+                                        ) : (
+                                            <>
+                                                <Link
+                                                    href={`/search-results?query=${searchTerm}`}
+                                                    className="search-results-btn"
+                                                    onClick={closePopup}
+                                                >
+                                                    Все результаты поиска ⭢
+                                                </Link>
+                                                {searchResults.map((hit: AlgoliaHit) => (
+                                                    <Link
+                                                        key={hit.objectID}
+                                                        href={hit.url ? `/product/${hit.url.replace('https://nuxt.vitaline.uz/product/', '')}` : '#'}
+                                                        className="search-result-item"
+                                                        onClick={closePopup}
+                                                    >
+                                                        <div>
+                                                            {hit.thumbnail_url && (
+                                                                <Image
+                                                                    src={hit.thumbnail_url}
+                                                                    alt={hit.name}
+                                                                    width={50}
+                                                                    height={50}
+                                                                    style={{ objectFit: 'contain' }}
+                                                                />
+                                                            )}
+                                                        </div>
+                                                        <div style={{ marginLeft: '10px' }}>
+                                                            <p>{hit.name}</p>
+                                                            {hit.sku && <p className="sku">{hit.sku}</p>}
+                                                        </div>
+                                                    </Link>
+                                                ))}
+                                            </>
+                                        )
+                                    ) : null}
+                                </div> */}
 
                                 <div className="search-pop_content">
                                     {searchTerm.length >= 2 && searchComplete && searchResults.length === 0 && (

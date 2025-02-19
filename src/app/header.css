@@ -632,8 +632,16 @@ a.search-result-item:hover {
 
 a.search-result-item img {
     min-width: 50px;
-    margin-top: 5px;
     border-radius: 5px;
+    font-size: 0px;
+}
+
+a.search-result-item .search-image-preview {
+    min-width: 50px;
+    min-height: 50px;
+    border-radius: 8px;
+    background: #f4f4f4;
+    margin-top: 5px;
 }
 
 p.sku {
@@ -697,4 +705,151 @@ p.sku {
     100% {
         opacity: 1;
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Mobile Menu Styles */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 1000;
+    visibility: hidden;
+}
+
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.mobile-menu-container {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100%;
+    background: white;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: left 0.3s ease;
+    overflow-y: auto;
+}
+
+.mobile-menu-open {
+    visibility: visible;
+}
+
+.mobile-menu-open .mobile-menu-overlay {
+    opacity: 1;
+}
+
+.mobile-menu-open .mobile-menu-container {
+    left: 0;
+}
+
+.mobile-menu-closing .mobile-menu-container {
+    left: -100%;
+}
+
+.mobile-menu-closing .mobile-menu-overlay {
+    opacity: 0;
+}
+
+.mobile-menu-header {
+    padding: 10px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+
+
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    left: 0;
+}
+
+.mobile-menu-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.mobile-menu-content {
+    padding: 20px;
+    padding-top: 80px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.mobile-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    color: #333;
+    font-size: 16px;
+}
+
+.mobile-menu-item:last-child {
+    border-bottom: none;
+}
+
+.mobile_links_button {
+    background: none;
+    border: none;
+    padding-right: 10px;
+    cursor: pointer;
+}
+
+
+
+.menu-info-section {
+    color: #333333;
+}
+
+.mobile-menu-container .social-media {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.mobile-menu-container .social-media img {
+    width: 25px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.mobile-menu-container .work_shop_info {
+    text-align: left;
+    margin-bottom: 20px;
 }

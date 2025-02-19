@@ -15,27 +15,12 @@ export function Pagination({ currentPage, totalPages }: PaginationProps) {
     const searchParams = useSearchParams();
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
-    const [wasClicked, setWasClicked] = useState(false);
 
     useEffect(() => {
-        if (wasClicked) {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-        setWasClicked(false);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Сбрасываем состояние загрузки при изменении страницы
         setIsLoading(false);
     }, [searchParams.get('page')]);
-
-    const createUrl = (pageNumber: number) => {
-        const params = new URLSearchParams(searchParams.toString());
-        params.set('page', pageNumber.toString());
-        return `${pathname}?${params.toString()}`;
-    };
-
-    const handlePageChange = (pageNumber: number) => {
-        setIsLoading(true);
-        setWasClicked(true); // Устанавливаем флаг, что был клик
-        router.push(createUrl(pageNumber));
-    };
 
     // useEffect(() => {
     //     try {
@@ -55,16 +40,16 @@ export function Pagination({ currentPage, totalPages }: PaginationProps) {
     //     setIsLoading(false);
     // }, [searchParams.get('page')]);
 
-    // const createUrl = (pageNumber: number) => {
-    //     const params = new URLSearchParams(searchParams.toString());
-    //     params.set('page', pageNumber.toString());
-    //     return `${pathname}?${params.toString()}`;
-    // };
+    const createUrl = (pageNumber: number) => {
+        const params = new URLSearchParams(searchParams.toString());
+        params.set('page', pageNumber.toString());
+        return `${pathname}?${params.toString()}`;
+    };
 
-    // const handlePageChange = (pageNumber: number) => {
-    //     setIsLoading(true);
-    //     router.push(createUrl(pageNumber));
-    // };
+    const handlePageChange = (pageNumber: number) => {
+        setIsLoading(true);
+        router.push(createUrl(pageNumber));
+    };
 
     const getPageNumbers = () => {
         const pages: (number | string)[] = [];
@@ -143,4 +128,3 @@ export function Pagination({ currentPage, totalPages }: PaginationProps) {
         </>
     );
 }
-

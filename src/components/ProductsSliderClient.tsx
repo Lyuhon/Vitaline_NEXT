@@ -39,7 +39,7 @@ export default function ProductsSliderClient() {
 
             new Swiper('#slider_bestsellers .products_slider', {
                 loop: true,
-                slidesPerView: 1.8,
+                slidesPerView: 2,
                 spaceBetween: 20,
                 autoplay: {
                     delay: 3000,
@@ -67,7 +67,7 @@ export default function ProductsSliderClient() {
 
             new Swiper('#slider_newarrivals .products_slider', {
                 loop: true,
-                slidesPerView: 1.8,
+                slidesPerView: 2,
                 spaceBetween: 20,
                 autoplay: {
                     delay: 3000,

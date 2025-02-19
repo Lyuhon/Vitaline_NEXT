@@ -240,7 +240,7 @@ export default function Footer() {
                             </p>
                             <p className="work_shop_info">График работы: с 9:00 до 19:00</p>
                             <p className="work_shop_info">Телефон для связи: <Link href="tel:+998 95 099 00 90">+998 95 099 00 90</Link></p>
-                            <p className="work_shop_info">Адрес: Удобенчат, г. Ташкент</p>
+                            <p className="work_shop_info">Адрес: г. Ташкент, Мирабадский район, ул. Фидокор, 10</p>
 
                             <div className="social-media">
                                 <Link href="https://www.instagram.com/vitaline.uz/">

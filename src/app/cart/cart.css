@@ -123,6 +123,13 @@
     width: 30px;
 }
 
+input.quantity-value {
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    text-align: center;
+    width: 30px !important;
+}
+
 .quantity-button,
 .quantity-button.dis_increment {
     transition: background-color 0.3s;

@@ -1,0 +1,60 @@
+Новые файлы:
+
+src/app/shop/ShopClientWrapper.tsx
+
+Клиентский компонент-обертка
+Управляет состоянием товаров
+Содержит логику пагинации и "Загрузить еще"
+
+
+src/app/api/products/route.ts
+
+API роут для загрузки товаров
+Обрабатывает запросы пагинации
+
+
+Измененные файлы:
+
+src/app/shop/page.tsx
+
+Обновлен для работы с ShopClientWrapper
+Передает все необходимые пропсы
+
+
+src/app/shop/Pagination.tsx
+
+Добавлена логика контроля скролла
+Добавлен флаг wasClicked
+Скролл теперь работает только при клике на страницу
+
+
+
+Основные функции:
+
+Пагинация:
+typescriptCopyhandlePageChange(pageNumber) 
+// Заменяет товары при переключении страниц
+// Скроллит страницу вверх
+
+Загрузить еще:
+typescriptCopyloadMore()
+// Добавляет новые товары к существующим
+// Обновляет URL без скролла
+
+
+Состояния (ShopClientWrapper):
+
+products - текущие товары
+isLoadingMore - состояние загрузки
+currentLoadedPage - текущая загруженная страница
+isLoadMore - флаг типа пагинации
+
+Использование:
+jsxCopy<ShopClientWrapper 
+    initialProducts={convertedProducts}
+    initialTotal={total}
+    initialTotalPages={totalPages}
+    currentPage={currentPage}
+    perPage={perPage}
+    showStock={showStock}
+/>

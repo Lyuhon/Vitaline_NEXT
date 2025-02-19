@@ -12,8 +12,9 @@ export default function ProductsSliderClient() {
                     loop: true,
                     // Автоскролл каждые 5 секунд
                     autoplay: {
-                        delay: 5000,
+                        delay: 4000,
                         disableOnInteraction: false,
+                        pauseOnMouseEnter: true // Добавляем эту опцию
                     },
                     // Количество одновременно видимых слайдов
                     // и количество пролистываемых за раз (slidesPerGroup)
