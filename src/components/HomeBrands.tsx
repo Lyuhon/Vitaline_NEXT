@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { fetchAllBrands } from '@/lib/brand/fetchBrandDataComponent';
-import HomeBrandsSliderSwiper from './HomeBrandsSliderSwiper';
+// import HomeBrandsSliderSwiper from './HomeBrandsSliderSwiper';
 
 
 export const dynamic = 'force-static';
@@ -33,33 +33,6 @@ export default async function AllBrandsPage() {
                 <div className="orange_heading_divider"></div>
             </div>
 
-            {/* <div className="swiper brands_list_slider">
-                <div className="swiper-wrapper">
-                    {brands.map((brand: any) => (
-                        <div className="swiper-slide"
-                            key={brand.id}
-                            style={{
-                                border: '1px solid #ddd',
-                                padding: '10px',
-                                borderRadius: '4px',
-                                textAlign: 'center',
-                            }}
-                        >
-                            <Link href={`/product-brands/${brand.slug}`}>
-                                <Image
-                                    src={brand.brandThumbnail || 'https://nuxt.vitaline.uz/wp-content/uploads/2024/12/8e3bc2dcd6d2b7628adf6e926f325187.png'}
-                                    alt={brand.name}
-                                    width={110} // Укажите ширину изображения
-                                    height={110} // Укажите высоту изображения
-                                    objectFit="cover" // Для сохранения пропорций
-                                    style={{ width: '100%', maxHeight: '150px' }}
-                                />
-                            </Link>
-                        </div>
-                    ))}
-                </div>
-            </div> */}
-
             <div className="swiper brands_list_slider">
                 <div className="swiper-wrapper">
                     {brands.map((brand: any) => (
@@ -86,7 +59,7 @@ export default async function AllBrandsPage() {
             </div>
 
 
-            <HomeBrandsSliderSwiper />
+            {/* <HomeBrandsSliderSwiper /> */}
 
         </section>
     );
