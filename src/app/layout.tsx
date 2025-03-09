@@ -170,6 +170,9 @@ import { Suspense } from "react";
 import { Metrika } from "@/components/Metrika";
 
 
+//ОГРАНИЧЕНИЕ ПОЛЬЗОВАТЕЛЯ
+import HeaderWrapper from '@/components/HeaderWrapper';
+
 export const metadata: Metadata = {
   title: 'Оптовый интернет магазин витаминов - Vitaline Trade',
   description: 'Купить оптом витамины в Ташкенте с доставкой. Широкий выбор витаминов, БАДов и товаров для здоровья.',
@@ -213,7 +216,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta property="og:image:alt" content="Vitaline Trade - Оптовый магазин витаминов в Ташкенте"></meta>
       </head>
       <body>
-        <Header />
+        {/* <Header /> */}<HeaderWrapper />
         {/* <AnimatedWrapper> */}
         {/* Был рабочий */}
         {/* <PageTransition> */}

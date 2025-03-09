@@ -107,6 +107,13 @@
 
 //     const products = await fetchFeaturedProducts();
 
+//     // Подсчет общей статистики
+//     const totalStock = products.reduce((sum, p) => sum + (p.stockQuantity || 0), 0);
+//     const totalPrice = products.reduce((sum, p) => {
+//         const price = p.convertedPrice ? parsePrice(p.convertedPrice) : 0;
+//         return sum + (price * (p.stockQuantity || 0));
+//     }, 0);
+
 //     return (
 //         <MiniCartProvider>
 //             <div className="shop_page">
@@ -175,6 +182,26 @@
 //                                 );
 //                             })}
 //                         </div>
+
+//                         {showStock && (
+//                             <div className="total_stock_info" style={{
+//                                 marginTop: '20px',
+//                                 padding: '15px',
+//                                 paddingLeft: '0px',
+//                                 borderRadius: '8px'
+//                             }}>
+//                                 <div className="product_item__stock">
+//                                     <span className="stock_count">
+//                                         Общее количество в наличии: <b>{totalStock}</b>
+//                                     </span>
+//                                 </div>
+//                                 {/* <div className="product_item__stock" style={{ marginTop: '10px' }}>
+//                                     <span className="stock_count">
+//                                         Общая стоимость: <b>{totalPrice.toLocaleString()} $</b>
+//                                     </span>
+//                                 </div> */}
+//                             </div>
+//                         )}
 //                     </div>
 //                 </div>
 //             </div>
@@ -190,6 +217,7 @@ import './shop.css';
 import AddToCartButtonInList from '@/components/add_to_cart_popup/AddToCartButtonInList';
 import { MiniCartProvider } from '@/app/context/MiniCartContext';
 import ShopBrandsSlider from '@/components/ShopBrandsSlider';
+import { headers } from 'next/headers'; // Импортируем headers для получения userType
 
 interface ShopPageProps {
     searchParams: Promise<{
@@ -290,11 +318,27 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
     const params = await searchParams;
     const showStock = params.debug === 'stock';
 
+    // Получаем userType из заголовков
+    const headersList = await headers();
+    const userType = headersList.get("x-user-type") || null;
+
     const products = await fetchFeaturedProducts();
 
-    // Подсчет общей статистики
-    const totalStock = products.reduce((sum, p) => sum + (p.stockQuantity || 0), 0);
-    const totalPrice = products.reduce((sum, p) => {
+    // Фильтрация продуктов на основе userType
+    const filteredProducts = userType === 'restricted'
+        ? products.filter(product => {
+            // Проверяем, есть ли бренды, и исключаем товары с запрещёнными брендами
+            if (!product.brands || !product.brands.nodes.length) return true;
+            const restrictedBrands = ['carlson-labs', 'childlife'];
+            return !product.brands.nodes.some(brand =>
+                restrictedBrands.includes(brand.slug.toLowerCase())
+            );
+        })
+        : products;
+
+    // Подсчет общей статистики для отфильтрованных продуктов
+    const totalStock = filteredProducts.reduce((sum, p) => sum + (p.stockQuantity || 0), 0);
+    const totalPrice = filteredProducts.reduce((sum, p) => {
         const price = p.convertedPrice ? parsePrice(p.convertedPrice) : 0;
         return sum + (price * (p.stockQuantity || 0));
     }, 0);
@@ -308,11 +352,11 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
 
                         <h1 className="shop_page_title">Каталог сец. предложений</h1>
                         <h2 style={{ marginBottom: '15px' }}>
-                            Акционные товары ({products.length})
+                            Акционные товары ({filteredProducts.length})
                         </h2>
 
                         <div className="shop_page_prod_grid">
-                            {products.map((p: Product) => {
+                            {filteredProducts.map((p: Product) => {
                                 const numericPrice = p.convertedPrice ? parsePrice(p.convertedPrice) : 0;
                                 const inStock = p.stockStatus === 'IN_STOCK';
 

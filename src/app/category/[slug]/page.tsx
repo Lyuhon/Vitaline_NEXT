@@ -1,5 +1,8 @@
+// // \app\category\[slug]\page.tsx
+
 // import { fetchProductsByCategory } from '@/lib/category_page/fetchProductsByCategory';
 // import { fetchProductTags } from '@/lib/fetchProductTags';
+// import { fetchAllBrands } from '@/lib/brand/fetchBrandDataComponent';
 // import { Metadata, ResolvingMetadata } from 'next';
 // import Link from 'next/link';
 // import Image from 'next/image';
@@ -8,6 +11,8 @@
 // import { GraphQLClient, gql } from 'graphql-request';
 
 // import '@/app/shop/shop.css'
+// import './cat.css'
+
 
 // async function getCategoryName(slug: string) {
 //     const client = new GraphQLClient('https://nuxt.vitaline.uz/graphql');
@@ -94,7 +99,6 @@
 // };
 
 // export default async function CategoryPage({ params, searchParams }: CategoryPageProps) {
-//     // Дожидаемся разрешения промисов params и searchParams
 //     const [resolvedParams, resolvedSearchParams] = await Promise.all([
 //         params,
 //         searchParams
@@ -103,9 +107,10 @@
 //     const { slug } = resolvedParams;
 //     const { after } = resolvedSearchParams;
 
-//     const [tags, productsData] = await Promise.all([
+//     const [tags, productsData, brands] = await Promise.all([
 //         fetchProductTags(),
 //         fetchProductsByCategory(slug, after),
+//         fetchAllBrands(),
 //     ]);
 
 //     const products = productsData.nodes;
@@ -114,33 +119,65 @@
 
 //     return (
 //         <MiniCartProvider>
-//             <div className="shop_page">
+//             <div className="shop_page categories_page">
+
+//                 <h1 className="shop_page_title">🌿 {categoryName}</h1>
+
 //                 <div className="shop_page_wrapper">
-//                     {/* Сайдбар с тегами */}
+//                     {/* Сайдбар с тегами и брендами */}
 //                     <div className="category_filter_side">
-//                         <div className="tag_filt_list">
-//                             <div className="tags-checkbox-list">
-//                                 {tags.map((t) => (
-//                                     <Link key={t.slug} href={`/category/${t.slug}`}>
-//                                         <label className="checkbox-label">
-//                                             <input
-//                                                 type="checkbox"
-//                                                 name="tags"
-//                                                 value={t.name}
-//                                                 readOnly
-//                                                 checked={slug === t.slug}
+//                         {/* Секция тегов */}
+//                         {/* <div className="filter_section">
+//                             <h3 className="filter_title">Категории</h3>
+//                             <div className="tag_filt_list">
+//                                 <div className="tags-checkbox-list">
+//                                     {tags.map((t) => (
+//                                         <Link key={t.slug} href={`/category/${t.slug}`}>
+//                                             <label className="checkbox-label">
+//                                                 <input
+//                                                     type="checkbox"
+//                                                     name="tags"
+//                                                     value={t.name}
+//                                                     readOnly
+//                                                     checked={slug === t.slug}
+//                                                 />
+//                                                 {t.name}
+//                                             </label>
+//                                         </Link>
+//                                     ))}
+//                                 </div>
+//                             </div>
+//                         </div> */}
+
+//                         {/* Секция брендов */}
+//                         <div className="filter_section">
+//                             <h3 className="filter_title mobile_visible">Бренды</h3>
+//                             <div className="brands_filter_list">
+//                                 {brands.map((brand: any) => (
+//                                     <Link
+//                                         key={brand.id}
+//                                         href={`/product-brands/${brand.slug}`}
+//                                         className="brand_filter_item"
+//                                     >
+//                                         <div className="brand_filter_image">
+//                                             <Image
+//                                                 src={brand.brandThumbnail || '/images/default-thumbnail.jpg'}
+//                                                 alt={brand.name}
+//                                                 width={120}
+//                                                 height={120}
+//                                                 objectFit="cover"
 //                                             />
-//                                             {t.name}
-//                                         </label>
+//                                         </div>
+//                                         {/* <span className="brand_filter_name">{brand.name}</span> */}
 //                                     </Link>
 //                                 ))}
 //                             </div>
 //                         </div>
 //                     </div>
 
-//                     {/* Список товаров */}
+//                     {/* Остальная часть страницы остается без изменений */}
 //                     <div className="products_side">
-//                         <h1 className="shop_page_title">🌿 {categoryName}</h1>
+//                         {/* <h1 className="shop_page_title">🌿 {categoryName}</h1> */}
 
 //                         <div className="shop_page_prod_grid">
 //                             {products.map((p: ProductNode) => {
@@ -212,16 +249,6 @@
 // }
 
 
-
-
-
-
-
-
-
-
-
-
 import { fetchProductsByCategory } from '@/lib/category_page/fetchProductsByCategory';
 import { fetchProductTags } from '@/lib/fetchProductTags';
 import { fetchAllBrands } from '@/lib/brand/fetchBrandDataComponent';
@@ -232,9 +259,8 @@ import AddToCartButtonInList from '@/components/add_to_cart_popup/AddToCartButto
 import { MiniCartProvider } from '@/app/context/MiniCartContext';
 import { GraphQLClient, gql } from 'graphql-request';
 
-import '@/app/shop/shop.css'
-import './cat.css'
-
+import '@/app/shop/shop.css';
+import './cat.css';
 
 async function getCategoryName(slug: string) {
     const client = new GraphQLClient('https://nuxt.vitaline.uz/graphql');
@@ -342,35 +368,11 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
     return (
         <MiniCartProvider>
             <div className="shop_page categories_page">
-
                 <h1 className="shop_page_title">🌿 {categoryName}</h1>
 
                 <div className="shop_page_wrapper">
                     {/* Сайдбар с тегами и брендами */}
                     <div className="category_filter_side">
-                        {/* Секция тегов */}
-                        {/* <div className="filter_section">
-                            <h3 className="filter_title">Категории</h3>
-                            <div className="tag_filt_list">
-                                <div className="tags-checkbox-list">
-                                    {tags.map((t) => (
-                                        <Link key={t.slug} href={`/category/${t.slug}`}>
-                                            <label className="checkbox-label">
-                                                <input
-                                                    type="checkbox"
-                                                    name="tags"
-                                                    value={t.name}
-                                                    readOnly
-                                                    checked={slug === t.slug}
-                                                />
-                                                {t.name}
-                                            </label>
-                                        </Link>
-                                    ))}
-                                </div>
-                            </div>
-                        </div> */}
-
                         {/* Секция брендов */}
                         <div className="filter_section">
                             <h3 className="filter_title mobile_visible">Бренды</h3>
@@ -390,17 +392,14 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
                                                 objectFit="cover"
                                             />
                                         </div>
-                                        {/* <span className="brand_filter_name">{brand.name}</span> */}
                                     </Link>
                                 ))}
                             </div>
                         </div>
                     </div>
 
-                    {/* Остальная часть страницы остается без изменений */}
+                    {/* Остальная часть страницы */}
                     <div className="products_side">
-                        {/* <h1 className="shop_page_title">🌿 {categoryName}</h1> */}
-
                         <div className="shop_page_prod_grid">
                             {products.map((p: ProductNode) => {
                                 const numericPrice = p.convertedPrice ? parsePrice(p.convertedPrice) : 0;

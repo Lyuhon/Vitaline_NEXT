@@ -1,5 +1,5 @@
 // src/app/components/Header.tsx
-'use client';
+'use client'
 
 import React, { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
@@ -20,7 +20,8 @@ interface AlgoliaHit {
     categories?: string[];
 }
 
-const Header = ({ userType }: { userType: string | null }) => {
+
+const Header = () => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [isPopupVisible, setIsPopupVisible] = useState<boolean>(false);
     const [isClosing, setIsClosing] = useState<boolean>(false);
@@ -73,12 +74,8 @@ const Header = ({ userType }: { userType: string | null }) => {
             'e9cd85a57dcba249ac8ca48023342b99'
         );
 
-        // Выбор индекса на основе userType
-        const indexName = userType === 'restricted' ? 'vt_trade_cuted_' : 'vt_trade_';
-        console.log(`Header using Algolia index: ${indexName} for user type: ${userType || 'default'}`);
-
         const search = instantsearch({
-            indexName,
+            indexName: 'vt_trade_',
             searchClient,
         });
 
@@ -89,8 +86,6 @@ const Header = ({ userType }: { userType: string | null }) => {
                 if (options.results?.hits) {
                     setSearchResults(options.results.hits as AlgoliaHit[]);
                     setIsLoading(false);
-                } else {
-                    setSearchResults([]);
                 }
             },
             dispose() {
@@ -111,7 +106,7 @@ const Header = ({ userType }: { userType: string | null }) => {
         return () => {
             search.dispose();
         };
-    }, [userType]); // Пересоздаём поиск при изменении userType
+    }, []);
 
     useEffect(() => {
         if (isPopupVisible) {
@@ -131,7 +126,7 @@ const Header = ({ userType }: { userType: string | null }) => {
             setIsPopupVisible(false);
             setIsClosing(false);
             setSearchTerm('');
-            setSearchComplete(false);
+            setSearchComplete(false); // Добавляем сброс флага
             if (searchInstanceRef.current) {
                 searchInstanceRef.current.helper.setQuery('').search();
             }
@@ -145,8 +140,9 @@ const Header = ({ userType }: { userType: string | null }) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setSearchTerm(value);
-        setSearchComplete(false);
+        setSearchComplete(false); // Сбрасываем флаг завершения поиска
 
+        // Очищаем предыдущий таймер, если он есть
         if (searchTimeoutRef.current) {
             clearTimeout(searchTimeoutRef.current);
         }
@@ -157,9 +153,10 @@ const Header = ({ userType }: { userType: string | null }) => {
             searchTimeoutRef.current = setTimeout(() => {
                 if (searchInstanceRef.current) {
                     searchInstanceRef.current.helper.setQuery(value).search();
+                    // Устанавливаем флаг завершения поиска после задержки
                     setTimeout(() => {
                         setSearchComplete(true);
-                    }, 50);
+                    }, 50); // Небольшая дополнительная задержка для уверенности
                 }
             }, 500);
         } else {
@@ -167,6 +164,7 @@ const Header = ({ userType }: { userType: string | null }) => {
             setIsLoading(false);
             setSearchComplete(true);
         }
+
     };
 
     return (
@@ -222,7 +220,9 @@ const Header = ({ userType }: { userType: string | null }) => {
                                 value={searchTerm}
                                 onChange={handleChange}
                             />
-                            <button className="header__search-button" onClick={() => setIsPopupVisible(true)}>
+                            <button className="header__search-button"
+                                onClick={() => setIsPopupVisible(true)}
+                                value={searchTerm}>
                                 <Image
                                     src="/icons/search-icon.svg"
                                     alt="Лупа"
@@ -365,6 +365,7 @@ const Header = ({ userType }: { userType: string | null }) => {
                             <button
                                 className="header__search-button"
                                 onClick={() => setIsPopupVisible(true)}
+                                value={searchTerm}
                             >
                                 <Image
                                     src="/icons/search-icon.svg"
@@ -414,6 +415,7 @@ const Header = ({ userType }: { userType: string | null }) => {
                             </button>
                         </div>
                         <div className="mobile-menu-content">
+
                             <div className="mobile-menu-links">
                                 <Link href="/" onClick={handleMobileMenuClose}>
                                     <div className="mobile-menu-item">Главная</div>
@@ -447,8 +449,8 @@ const Header = ({ userType }: { userType: string | null }) => {
                             </div>
 
                             <div className="menu-info-section">
-                                <p className="work_shop_info">График работы: <br />с 9:00 до 19:00</p>
-                                <p className="work_shop_info">Телефон для связи: <br /><Link href="tel:+998 95 099 00 90">+998 95 099 00 90</Link></p>
+                                <p className="work_shop_info">График работы: <br></br>с 9:00 до 19:00</p>
+                                <p className="work_shop_info">Телефон для связи: <br></br><Link href="tel:+998 95 099 00 90">+998 95 099 00 90</Link></p>
                                 <p className="work_shop_info">Адрес: г. Ташкент, Мирабадский район, ул. Фидокор, 10</p>
 
                                 <div className="social-media">
@@ -491,6 +493,7 @@ const Header = ({ userType }: { userType: string | null }) => {
                                         </button>
                                     </div>
                                 </div>
+
 
                                 <div className="search-pop_content">
                                     {searchTerm.length >= 2 && searchComplete && searchResults.length === 0 && (
