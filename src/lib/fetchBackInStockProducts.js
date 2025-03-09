@@ -1,4 +1,4 @@
-// src/lib/fetchBackInStockProducts.ts
+// src/lib/fetchBackInStockProducts.js
 import { GraphQLClient, gql } from 'graphql-request';
 
 const endpoint = 'https://nuxt.vitaline.uz/graphql';
