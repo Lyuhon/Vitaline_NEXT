@@ -660,7 +660,8 @@ export async function POST(request: NextRequest) {
             payment_method: orderData.paymentMethod || 'cod',
             payment_method_title: orderData.paymentMethodTitle || 'Оплата при доставке',
             set_paid: orderData.isPaid || false,
-            status: 'processing',
+            // status: 'processing',
+            status: 'pending',
             billing: {
                 first_name: orderData.customerInfo?.firstName || '',
                 last_name: orderData.customerInfo?.shopName || '',
