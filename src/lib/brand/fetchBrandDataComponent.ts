@@ -51,7 +51,7 @@ const endpoint = 'https://nuxt.vitaline.uz/graphql';
 export async function fetchAllBrands() {
   const query = `
     query MyBrands {
-      brands(first: 50, where: {hideEmpty: true}) {
+      brands(first: 70, where: {hideEmpty: true}) {
         nodes {
           id
           name
