@@ -61,6 +61,10 @@
     box-shadow: 0px 4px 10px 0px #64B70433;
 }
 
+.checkout-form select.need_to_fill:active,
+.checkout-form select.need_to_fill:focus {
+    box-shadow: 0px 4px 10px 0px #b7040433;
+}
 
 .general_inputs .form-group {
     display: grid;

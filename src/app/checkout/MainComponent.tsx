@@ -654,6 +654,7 @@ export default function CheckoutPage() {
     // В компоненте CheckoutPage добавьте новые состояния
     const [isPopupVisible, setIsPopupVisible] = useState(false);
     const [popupStatus, setPopupStatus] = useState('processing');
+    const [citySubmittedEmpty, setCitySubmittedEmpty] = useState(false);
     /** ===================
      *  Подключение CartContext
      *  =================== */
@@ -745,6 +746,9 @@ export default function CheckoutPage() {
 
         if (checkoutFormRef.current && !checkoutFormRef.current.checkValidity()) {
             checkoutFormRef.current.reportValidity();
+            if (!deliveryAddress.city) { // Добавь эти строки
+                setCitySubmittedEmpty(true); // Включаем красную границу
+            } // Конец добавления
             return;
         }
 
@@ -793,6 +797,8 @@ export default function CheckoutPage() {
                     setComment={setComment}
                     handleSubmit={handleSubmit}
                     loading={loading}
+                    citySubmittedEmpty={citySubmittedEmpty} // Добавь эту строку
+                    setCitySubmittedEmpty={setCitySubmittedEmpty} // Добавь эту строку
                 />
             </div>
 
@@ -1085,6 +1091,8 @@ interface CheckoutFormProps {
     setComment: (comment: string) => void;
     handleSubmit: (e: React.FormEvent) => void;
     loading: boolean;
+    citySubmittedEmpty: boolean; // Добавь эту строку
+    setCitySubmittedEmpty: (value: boolean) => void; // Добавь эту строку
 }
 
 // Оборачиваем в forwardRef, чтобы родитель мог передать ref на форму
@@ -1103,6 +1111,8 @@ const CheckoutForm = forwardRef<HTMLFormElement, CheckoutFormProps>(
             setComment,
             handleSubmit,
             loading,
+            citySubmittedEmpty,
+            setCitySubmittedEmpty,
         },
         ref: ForwardedRef<HTMLFormElement>
     ) => {
@@ -1117,6 +1127,14 @@ const CheckoutForm = forwardRef<HTMLFormElement, CheckoutFormProps>(
                 setPhoneError('');
             } else {
                 setPhoneError('Неверный формат номера телефона.');
+            }
+        };
+
+        // Добавь эту функцию здесь
+        const handleCityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+            updateDeliveryAddress({ city: e.target.value });
+            if (e.target.value) {
+                setCitySubmittedEmpty(false); // Убираем красную границу, если выбрано
             }
         };
 
@@ -1163,11 +1181,13 @@ const CheckoutForm = forwardRef<HTMLFormElement, CheckoutFormProps>(
                         <label htmlFor="city">Город</label>
                         <select
                             value={deliveryAddress.city}
-                            onChange={(e) => updateDeliveryAddress({ city: e.target.value })}
+                            onChange={handleCityChange}
                             required
-                            className="quick_order_form"
+                            className={`quick_order_form ${citySubmittedEmpty
+                                ? 'border-red-500 focus:ring-2 focus:ring-red-500 focus:border-red-500 need_to_fill active:[box-shadow:0px_4px_10px_0px_#b7040433]'
+                                : 'filled_city'
+                                }`}
                             aria-required="true"
-                            aria-invalid="false"
                             name="your-region"
                             id="city"
                         >
