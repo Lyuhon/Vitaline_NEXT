@@ -724,9 +724,9 @@ export default function CheckoutPage() {
     // Если город НЕ "Город Ташкент", ставим 60 000, иначе 25 000
     useEffect(() => {
         if (deliveryAddress.city && deliveryAddress.city !== 'Город Ташкент') {
-            setMyDeliveryPrice(500); // было 60000 UZS
+            setMyDeliveryPrice(250); // было 60000 UZS
         } else {
-            setMyDeliveryPrice(200); // было 25000 UZS
+            setMyDeliveryPrice(250); // было 25000 UZS
         }
     }, [deliveryAddress.city]);
 

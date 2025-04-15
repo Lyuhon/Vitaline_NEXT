@@ -211,7 +211,7 @@ export const CartProvider = ({ children, initialCartItems }) => {
 
     // <-- Исходно у вас была доставка фиксированная: 25 000 сум,
     //     теперь будем динамически менять между 25 000 и 60 000
-    const [deliveryPrice, setDeliveryPrice] = useState(200); //было 25000
+    const [deliveryPrice, setDeliveryPrice] = useState(250); //было 25000
     const [finalPrice, setFinalPrice] = useState(0);
 
     // <-- Дополнительный стейт: какой город выбран?
@@ -222,9 +222,9 @@ export const CartProvider = ({ children, initialCartItems }) => {
     const handleCityChange = (city) => {
         setUserCity(city);
         if (city && city !== 'Город Ташкент') {
-            setDeliveryPrice(500); //было 60000
+            setDeliveryPrice(250); //было 60000
         } else {
-            setDeliveryPrice(200); //было 25000
+            setDeliveryPrice(250); //было 25000
         }
     };
 

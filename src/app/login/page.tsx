@@ -213,7 +213,7 @@ export default function LoginPage() {
             let userType = "";
             if (email === "Trade" && password === "v0090") {
                 userType = "full"; // Полный доступ
-            } else if (email === "Wholesale_v0010" && password === "VT_29_09") { // Новый логин и пароль
+            } else if (email === "Wholesale_v0010" && password === "090vitaline090") { // Новый логин и пароль
                 userType = "restricted"; // Ограниченный доступ
             } else {
                 setError("Неверный логин или пароль");

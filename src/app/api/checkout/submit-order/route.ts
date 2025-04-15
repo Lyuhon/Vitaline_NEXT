@@ -686,8 +686,8 @@ export async function POST(request: NextRequest) {
                     method_title:
                         orderData.myDeliveryPrice === 500
                             ? 'Доставка за город'
-                            : 'Доставка по Ташкенту',
-                    total: orderData.myDeliveryPrice === 500 ? '60000' : '25000',
+                            : 'Доставка',
+                    total: orderData.myDeliveryPrice === 500 ? '32500' : '32500',
                 },
             ],
             line_items: lineItems,
