@@ -1,22 +1,24 @@
-// pages/notification.js или pages/notification.tsx
+// pages/notification.js или pages/notification.tsx или app/notification/page.tsx
 import Head from 'next/head';
 import Image from 'next/image';
-// Простая SVG иконка телефона вместо импорта из библиотеки
 
 export default function NotificationPage() {
     return (
         <div className="min-h-screen bg-gradient-to-b from-white to-gray-100 flex flex-col items-center justify-center p-4">
-            <Head>
-                <title>VitaLine - Техническое обслуживание</title>
-                <meta name="description" content="Сайт временно не работает в связи с проведением инвентаризации" />
-            </Head>
+            {/* Используем Head только если это pages директория, а не app директория */}
+            {typeof Head !== 'undefined' && (
+                <Head>
+                    <title>VitaLine - Техническое обслуживание</title>
+                    <meta name="description" content="Сайт временно не работает в связи с проведением инвентаризации" />
+                </Head>
+            )}
 
             <div className="max-w-3xl w-full bg-white rounded-2xl shadow-xl overflow-hidden">
                 {/* Верхняя полоса с акцентным цветом */}
                 <div className="h-3 bg-[#ff7900]"></div>
 
                 <div className="p-8 md:p-12">
-                    {/* Лого */}
+                    {/* Лого - скрыто */}
                     <div className="hidden flex justify-center mb-8">
                         <div className="relative h-16 w-48">
                             <Image
@@ -47,13 +49,13 @@ export default function NotificationPage() {
                         {/* Разделитель */}
                         <hr className="border-gray-200" />
 
-                        {/* Узбекский текст */}
+                        {/* Узбекский текст - исправлен апостроф */}
                         <div className="text-center space-y-4">
                             <h2 className="text-2xl font-bold text-gray-800">Hurmatli mijozlar!</h2>
                             <p className="text-lg text-gray-700">
                                 Inventarizatsiya (qayta hisob-kitob) sababli saytimiz vaqtincha ishlamayapti.
                                 <br />
-                                Tez orada ishni yakunlab, yana sizga xizmat ko'rsatamiz!
+                                Tez orada ishni yakunlab, yana sizga xizmat ko&apos;rsatamiz!
                                 <br />
                                 Tushunganingiz uchun rahmat.
                             </p>
