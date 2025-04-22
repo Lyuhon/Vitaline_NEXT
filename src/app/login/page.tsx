@@ -213,8 +213,10 @@ export default function LoginPage() {
             let userType = "";
             if (email === "Trade" && password === "v0090") {
                 userType = "full"; // Полный доступ
-            } else if (email === "Wholesale_v0010" && password === "090vitaline090") { // Новый логин и пароль
+            } else if (email === "Wholesale_v0010" && password === "090vitaline090") {
                 userType = "restricted"; // Ограниченный доступ
+            } else if (email === "vt_user224" && password === "VITALINE_trade_0422") {
+                userType = "full"; // Еще один полный доступ
             } else {
                 setError("Неверный логин или пароль");
                 setIsLoading(false);
