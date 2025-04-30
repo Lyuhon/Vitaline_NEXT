@@ -17,7 +17,7 @@ const HomeAdvantages = () => {
                         backgroundImage: "url(https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Rectangle-50.png)",
                     }}
                 >
-                    <span>Халяль витамины из Америки</span>
+                    <span>Оригинальные витамины из Америки</span>
                 </div>
                 <div
                     className="grid_adv_item"
