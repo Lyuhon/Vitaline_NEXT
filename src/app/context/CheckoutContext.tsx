@@ -404,6 +404,15 @@ export const CheckoutProvider = ({ children }: { children: ReactNode }) => {
             const updatedCartItems = cartItems.filter((item) => !item.selected);
             updateLocalStorageCart(updatedCartItems);
 
+            // Хранение текущего заказа
+            localStorage.setItem('vitaline_last_order', JSON.stringify({
+                orderNumber,
+                orderDate,
+                totalAmount: myFinalPrice,
+                customerName: customerInfo.firstName,
+                customerPhone: customerInfo.phone
+            }));
+
             // Возвращаем успех, но НЕ делаем редирект здесь
             return { success: true };
 
