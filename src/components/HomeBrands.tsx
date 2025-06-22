@@ -95,13 +95,23 @@ export default async function AllBrandsPage() {
     return (
         <section className='home_brand_list'>
             <div className="home_categories_section_heading">
-                <div className="general_heading_block">
+                {/* <div className="general_heading_block">
                     <h2 className='active__'>Продукция по бренду</h2>
                     <Link className="section_read_more" href="/brand_list">
                         Все бренды
                     </Link>
                 </div>
-                <div className="orange_heading_divider"></div>
+                <div className="orange_heading_divider"></div> */}
+
+                <div className="general_heading_block">
+                    <Link className="section_read_more---- px-[7px] py-[3px] rounded-[5px] bg-[#f67800] text-[#fff] text-[14px]" href="/shop">
+                        Все товары
+                    </Link>
+                    <Link className="section_read_more---- px-[7px] py-[3px] rounded-[5px] bg-[#f67800] text-[#fff] text-[14px]" href="/brand_list">
+                        Все бренды
+                    </Link>
+                </div>
+                <div className='mb-[20px]'></div>
             </div>
 
             <div className="swiper brands_list_slider">
