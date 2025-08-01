@@ -5,11 +5,16 @@ import HomeSliderSwiper from './HomeSliderSwiper';
 const slides = [
     {
         id: 1,
+        background: "https://retail.vitaline.uz/wp-content/uploads/2025/07/califonria-gold-banner.jpg",
+        text: "California",
+    },
+    {
+        id: 2,
         background: "https://nuxt.vitaline.uz/wp-content/next_images/vitaline_trade_good_prices.webp",
         text: "Цены от дистрибьютора",
     },
     {
-        id: 2,
+        id: 4,
         background: "https://nuxt.vitaline.uz/wp-content/next_images/vitaline_trade_new_rpoducts.webp",
         text: "Новинки",
     },
