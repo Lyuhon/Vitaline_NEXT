@@ -275,7 +275,8 @@ const Header = ({ userType }: { userType: string | null }) => {
                     </div>
 
                     <div className="header__user-section">
-                        <Link href={isAuthenticated ? '/profile' : '/login'} className="header__account-link">
+                        {/* <Link href={isAuthenticated ? '/profile' : '/login'} className="header__account-link"> */}
+                        <Link href='/profile-wholesale' className="header__account-link">
                             <Image
                                 src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/avatar_male_man_people_person_profile_user_icon_123199-1.svg"
                                 alt="Личный кабинет"

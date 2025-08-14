@@ -118,10 +118,15 @@ export default function Footer() {
 
                 <div className="bottom-nav mobile_visible">
                     <div className="svg-block">
-                        <img src="https://nuxt.vitaline.uz/wp-content/uploads/2025/01/bottom_nav_figure.svg" alt="nav-bar" />
+                        {/* <img src="https://nuxt.vitaline.uz/wp-content/uploads/2025/01/bottom_nav_figure.svg" alt="nav-bar" /> */}
+
+                        <svg width="380" height="97" viewBox="0 0 380 97" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fillRule="evenodd" clipRule="evenodd" d="M140.823 29.0098C147.9 29.0098 153.606 23.4601 157.183 17.3536C163.228 7.03041 175.209 0 189 0C202.791 0 214.772 7.03041 220.817 17.3536C224.394 23.4601 230.1 29.0098 237.177 29.0098H374C377.314 29.0098 380 31.6961 380 35.0098V96.0004C380 96.5527 379.552 97.0004 379 97.0004H1.00001C0.447725 97.0004 0 96.5527 0 96.0004V35.0098C0 31.6961 2.68629 29.0098 6 29.0098H140.823Z" fill="white" />
+                        </svg>
+
                     </div>
 
-                    <div className="bottom-nav-link-block">
+                    <div className="bottom-nav-link-block bg-white">
                         <div className="bottom-nav-item">
                             <Link
                                 href="/"
@@ -200,8 +205,8 @@ export default function Footer() {
 
                         <div className="bottom-nav-item">
                             <Link
-                                href="/login"
-                                className={isActiveLink('/login') ? 'active_link' : ''}
+                                href="/profile-wholesale"
+                                className={isActiveLink('/profile-wholesale') ? 'active_link' : ''}
                             >
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clipPath="url(#clip0_450_3099)">

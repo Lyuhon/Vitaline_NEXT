@@ -1728,7 +1728,8 @@ h3.white_title {
   width: 100%;
 }
 
-.svg-block img {
+.svg-block img,
+.svg-block svg {
   width: 100%;
   /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); */
   filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.2));
