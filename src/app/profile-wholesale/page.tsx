@@ -1718,24 +1718,24 @@ export default function ProfilePage() {
                                 <div className="support_bottom_block">
                                     <h2 className='supp_page_head'>Служба поддержки Vitaline</h2>
                                     <div className="support_bottom_block_inner_wrap">
-                                        <a href="https://t.me/support_chat" className="tg_chat_btn" target="_blank" rel="noopener noreferrer">
+                                        <a href="https://t.me/abdelmansur" className="tg_chat_btn" target="_blank" rel="noopener noreferrer">
                                             <img alt="" src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Artboard.svg" />
                                             <span>Открыть чат</span>
                                         </a>
                                         <div className="support-contacts">
-                                            <p style={{ whiteSpace: "nowrap" }}>+998 90 906 69 99</p>
+                                            <p style={{ whiteSpace: "nowrap" }}>+998 95 099 00 90</p>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div className="contacts-social-links">
-                                    <a href="#" className="contacts_insta">
+                                    <a href="https://www.instagram.com/vitaline.optom/" className="contacts_insta">
                                         <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Socials.svg" alt="" />
-                                        <span>Инстаграм @vitaline.uz</span>
+                                        <span>Инстаграм</span>
                                     </a>
-                                    <a href="#" className="contacts_telegram">
+                                    <a href="https://t.me/abdelmansur" className="contacts_telegram">
                                         <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Artboard.svg" alt="" />
-                                        <span>Телеграм-канал Vitaline</span>
+                                        <span>Телеграм-чат</span>
                                     </a>
                                 </div>
                             </div>
