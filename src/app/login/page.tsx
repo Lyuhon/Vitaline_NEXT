@@ -331,7 +331,7 @@ export default function LoginPage() {
                             <Link className="px-[5px] text-[#FF7900]" target="_blank" href="https://t.me/abdelmansur">
                                 Telegram
                             </Link>
-                            orqali ro'yxatdan o'ting.
+                            orqali ro&apos;yxatdan o&apos;ting.
                         </span>
                     </div>
                 </div>
