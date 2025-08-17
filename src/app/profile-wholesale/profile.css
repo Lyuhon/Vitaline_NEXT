@@ -186,7 +186,7 @@ main.content-container {
 }
 
 .loyalty_image_block {
-    background-image: url(https://nuxt.vitaline.uz/wp-content/uploads/2024/12/loyalty_bcg-1.webp);
+    background-image: url('/images/loyalty_bcg-1.webp');
     background-size: cover;
     background-position: center;
     min-height: 400px;
@@ -262,7 +262,8 @@ main.content-container {
     /*Накопительная*/
     .loyalty_image_block {
         position: relative;
-        min-height: 240px;
+        min-height: 220px;
+        background-position: left;
     }
 
     .loyalty_image_block .billz_cart_number {
