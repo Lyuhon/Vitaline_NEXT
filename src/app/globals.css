@@ -576,6 +576,14 @@ legend {
 
   .home_brand_list .swiper-slide {
     min-height: 134px;
+    max-width: 16%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .home_brand_list .swiper-slide {
+    max-width: 12%;
+    margin-right: 6px;
   }
 }
 
@@ -865,7 +873,7 @@ section.home_product_section {
   padding: 0px;
 
   /* background-image: url(https://nuxt.vitaline.uz/wp-content/uploads/2024/12/76890fda4fc57fb382868edf06d666c7.jpg); */
-  background-image: url(https://nuxt.vitaline.uz/wp-content/uploads/2025/01/consultation_bcg.webp);
+  background-image: url('/images/consultation_bcg.webp');
 
   background-size: cover;
   background-position: center;
@@ -1114,7 +1122,7 @@ a.list_blog_item {
 /* footer */
 @media only screen and (min-width: 1450px) {
   .footer-container {
-    background-image: url('https://nuxt.vitaline.uz/wp-content/uploads/2024/12/44f927571bcf068453343ce1ea51646b-2.png'), url('https://nuxt.vitaline.uz/wp-content/uploads/2024/12/3f21f01556b7aaffa242f1b82fab710e.png');
+    background-image: url('/images/footer-right.webp'), url('/images/footer-left.webp');
     background-repeat: no-repeat;
     background-position: right bottom, left bottom;
     background-size: 250px;
@@ -1363,6 +1371,7 @@ footer .links-column ul {
   .home_brand_list .swiper-slide {
     padding: 5px !important;
     min-height: 85px;
+    max-width: 23%;
   }
 
 

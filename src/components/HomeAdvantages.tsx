@@ -14,7 +14,7 @@ const HomeAdvantages = () => {
                 <div
                     className="grid_adv_item"
                     style={{
-                        backgroundImage: "url(https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Rectangle-50.png)",
+                        backgroundImage: "url(/images/advantages-image-6.webp)",
                     }}
                 >
                     <span>Оригинальные витамины из Америки</span>
@@ -22,7 +22,7 @@ const HomeAdvantages = () => {
                 <div
                     className="grid_adv_item"
                     style={{
-                        backgroundImage: "url(https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Rectangle-57.png)",
+                        backgroundImage: "url(/images/advantages-image-5.webp)",
                     }}
                 >
                     <span>Большой ассортимент</span>
@@ -30,7 +30,7 @@ const HomeAdvantages = () => {
                 <div
                     className="grid_adv_item"
                     style={{
-                        backgroundImage: "url(https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Rectangle-67.png)",
+                        backgroundImage: "url(/images/advantages-image-4.webp)",
                     }}
                 >
                     <span>Различные методы оплаты</span>
@@ -38,7 +38,7 @@ const HomeAdvantages = () => {
                 <div
                     className="grid_adv_item"
                     style={{
-                        backgroundImage: "url(https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Rectangle-71.png)",
+                        backgroundImage: "url(/images/advantages-image-3.webp)",
                     }}
                 >
                     <span>Приемлемые цены</span>
@@ -46,7 +46,7 @@ const HomeAdvantages = () => {
                 <div
                     className="grid_adv_item"
                     style={{
-                        backgroundImage: "url(https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Rectangle-69.png)",
+                        backgroundImage: "url(/images/advantages-image-2.webp)",
                     }}
                 >
                     <span>Быстрая и надежная доставка</span>
@@ -54,7 +54,7 @@ const HomeAdvantages = () => {
                 <div
                     className="grid_adv_item"
                     style={{
-                        backgroundImage: "url(https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Rectangle-73.png)",
+                        backgroundImage: "url(/images/advantages-image-1.webp)",
                     }}
                 >
                     <span>Наличие сертифицированного склада</span>

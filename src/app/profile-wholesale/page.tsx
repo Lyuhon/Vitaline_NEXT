@@ -1656,14 +1656,15 @@ export default function ProfilePage() {
                             <h2>Ваша накопительная карта</h2>
                             <div className="current_balance">
                                 Текущий баланс: <span className='billz_point_value'>
-                                    {clientData.client.balance?.Valid ?
-                                        new Intl.NumberFormat('ru-RU').format(clientData.client.balance.Float64) : '0'
+                                    {clientData.client.balance?.Valid
+                                        ? `${(clientData.client.balance.Float64 / 12800).toFixed(2)} $`
+                                        : '0.00 $'
                                     }
-                                </span> баллов
+                                </span>
                             </div>
 
                             <div className="loyalty_image_block">
-                                <img className='billz_cart_barcode' src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/913b2275733069210a8b889e89467b57.png" alt="barcode" />
+                                {/* <img className='billz_cart_barcode' src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/913b2275733069210a8b889e89467b57.png" alt="barcode" /> */}
                                 <span className='billz_cart_number'>
                                     {clientData.clientCard?.[0]?.cardNumber || clientData.client.cardNumbers}
                                 </span>

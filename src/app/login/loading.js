@@ -1,3 +1,4 @@
+// /login/loading.js
 'use client';
 
 import Image from 'next/image';

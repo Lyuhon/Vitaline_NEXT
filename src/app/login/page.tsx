@@ -179,47 +179,54 @@ export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-    const [isLoading, setIsLoading] = useState(true);
+    const [isSubmitting, setIsSubmitting] = useState(false); // Только для отправки формы
     const [rememberMe, setRememberMe] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
+        let isMounted = true;
+
         const checkAuth = async () => {
             try {
                 const response = await fetch("/api/auth_temp/check", {
                     credentials: "include",
                 });
-                const data = await response.json();
 
-                if (data.authenticated) {
-                    router.replace("/");
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.authenticated && isMounted) {
+                        router.replace("/");
+                        return;
+                    }
                 }
             } catch (error) {
                 console.error("Auth check failed:", error);
-            } finally {
-                setIsLoading(false);
             }
         };
 
         checkAuth();
+
+        return () => {
+            isMounted = false;
+        };
     }, [router]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError("");
-        setIsLoading(true);
+        setIsSubmitting(true);
 
         try {
             let userType = "";
             if (email === "Trade" && password === "v0090") {
-                userType = "full"; // Полный доступ
+                userType = "full";
             } else if (email === "Wholesale_v0010" && password === "090vitaline090") {
-                userType = "restricted"; // Ограниченный доступ
+                userType = "restricted";
             } else if (email === "vt_user224--1" && password === "VITALINE_trade_0422--1") {
-                userType = "full"; // Еще один полный доступ
+                userType = "full";
             } else {
                 setError("Неверный логин или пароль");
-                setIsLoading(false);
+                setIsSubmitting(false);
                 return;
             }
 
@@ -231,38 +238,27 @@ export default function LoginPage() {
                 credentials: "include",
                 body: JSON.stringify({
                     username: email,
-                    userType, // Передаем тип пользователя
+                    userType,
                     rememberMe,
                 }),
             });
 
             const data = await response.json();
-            if (data.success) {
-                const checkResponse = await fetch("/api/auth_temp/check", {
-                    credentials: "include",
-                });
-                const checkData = await checkResponse.json();
 
-                if (checkData.authenticated) {
-                    router.push("/");
-                    router.refresh();
-                } else {
-                    setError("Куки не установились корректно");
-                }
+            if (data.success) {
+                router.push("/");
             } else {
-                setError("Ошибка при сохранении сессии");
+                setError(data.message || "Ошибка при входе");
+                setIsSubmitting(false);
             }
         } catch (err) {
             console.error("Login error:", err);
             setError("Ошибка подключения к серверу");
-        } finally {
-            setIsLoading(false);
+            setIsSubmitting(false);
         }
     };
 
-    if (isLoading) {
-        return <div>Загрузка...</div>;
-    }
+    // Убираем полностью проверку if (isInitialLoading) - форма всегда показывается!
 
     return (
         <AnimatedWrapper>
@@ -280,7 +276,7 @@ export default function LoginPage() {
                                 placeholder="Введите вашу почту"
                                 required
                                 autoComplete="username"
-                                disabled={isLoading}
+                                disabled={isSubmitting}
                             />
                         </div>
 
@@ -293,11 +289,12 @@ export default function LoginPage() {
                                 placeholder="Введите ваш пароль"
                                 required
                                 autoComplete="current-password"
-                                disabled={isLoading}
+                                disabled={isSubmitting}
                             />
                         </div>
 
                         {error && <div className="alert">{error}</div>}
+                        {isSubmitting && <div className="alert loading-alert">Выполняется вход...</div>}
 
                         <div className="form-group remb_forg">
                             <div className="remeber_me">
@@ -306,7 +303,7 @@ export default function LoginPage() {
                                     type="checkbox"
                                     checked={rememberMe}
                                     onChange={(e) => setRememberMe(e.target.checked)}
-                                    disabled={isLoading}
+                                    disabled={isSubmitting}
                                 />
                                 <label htmlFor="remeber">Запомнить меня</label>
                             </div>
@@ -317,8 +314,8 @@ export default function LoginPage() {
                             </div>
                         </div>
 
-                        <button type="submit" className="button_login" disabled={isLoading}>
-                            {isLoading ? "Вход..." : "Войти"}
+                        <button type="submit" className="button_login" disabled={isSubmitting}>
+                            {isSubmitting ? "Вход..." : "Войти"}
                         </button>
                     </form>
 
@@ -334,7 +331,7 @@ export default function LoginPage() {
                             <Link className="px-[5px] text-[#FF7900]" target="_blank" href="https://t.me/abdelmansur">
                                 Telegram
                             </Link>
-                            orqali ro‘yxatdan o‘ting.
+                            orqali ro'yxatdan o'ting.
                         </span>
                     </div>
                 </div>

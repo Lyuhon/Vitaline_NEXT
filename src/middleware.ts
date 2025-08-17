@@ -57,7 +57,8 @@ export function middleware(request: NextRequest) {
         path.startsWith("/icons/") ||
         path.startsWith("/_next/") ||
         path.startsWith("/api/") ||
-        path === "/vitaline-logo.webp"
+        path === "/vitaline-logo.webp" ||
+        path.startsWith("/images/")
     ) {
         return NextResponse.next();
     }

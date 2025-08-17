@@ -147,3 +147,27 @@ h2.login-header {
         transform: translateY(0);
     }
 } */
+
+
+
+
+
+
+
+
+
+.loading-alert {
+    background-color: #d4f8d4 !important;
+    /* Нежно-зеленый фон */
+    color: #2d5a2d !important;
+    /* Темно-зеленый текст */
+    border: 1px solid #a8e6a8 !important;
+    /* Зеленая граница */
+}
+
+/* Или если у вас есть базовый стиль .alert, можете добавить модификатор */
+.alert.loading-alert {
+    background-color: #d4f8d4;
+    color: #2d5a2d;
+    border-color: #a8e6a8;
+}

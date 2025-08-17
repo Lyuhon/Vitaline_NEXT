@@ -2,6 +2,7 @@
 'use client'
 import Consultation from "@/components/FooterConsultation";
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 import Link from 'next/link'
 import CartCounter from '@/components/CartCounter';
 
@@ -126,7 +127,7 @@ export default function Footer() {
 
                     </div>
 
-                    <div className="bottom-nav-link-block bg-white">
+                    <div className="bottom-nav-link-block">
                         <div className="bottom-nav-item">
                             <Link
                                 href="/"
@@ -236,9 +237,11 @@ export default function Footer() {
                 <div className="footer-container">
                     <div className="footer-top">
                         <div className="footer-logo">
-                            <img
-                                src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/8e3bc2dcd6d2b7628adf6e926f325187.png"
+                            <Image
+                                src="/vitaline-logo.webp"
                                 alt="Vitaline Logo"
+                                width={872}
+                                height={166}
                             />
                             <p className="shop_info">
                                 Интернет-магазин витаминов и БАДов от лучших мировых брендов
@@ -249,16 +252,36 @@ export default function Footer() {
 
                             <div className="social-media">
                                 <Link href="https://www.instagram.com/vitaline.uz/">
-                                    <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Rectangle-85.svg" alt="Instagram" />
+                                    <Image
+                                        src="/icons/insta.png"
+                                        alt="Instagram"
+                                        width={60}
+                                        height={60}
+                                    />
                                 </Link>
                                 <Link href="https://t.me/vitalineuz_admin">
-                                    <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Rectangle-86.svg" alt="Telegram" />
+                                    <Image
+                                        src="/icons/telegram.svg"
+                                        alt="Telegram"
+                                        width={60}
+                                        height={60}
+                                    />
                                 </Link>
                                 <Link href="https://wa.me/message/4LJSJMNTMHQOC1">
-                                    <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Rectangle-87.svg" alt="WhatsApp" />
+                                    <Image
+                                        src="/icons/whatsapp.svg"
+                                        alt="WhatsApp"
+                                        width={60}
+                                        height={60}
+                                    />
                                 </Link>
                                 <Link href="https://www.facebook.com/vitalineuz">
-                                    <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Rectangle-84.svg" alt="Facebook" />
+                                    <Image
+                                        src="/icons/facebook.svg"
+                                        alt="Facebook"
+                                        width={60}
+                                        height={60}
+                                    />
                                 </Link>
                             </div>
                         </div>
@@ -299,20 +322,14 @@ export default function Footer() {
                             </ul>
                         </div>
 
-                        <div className="links-column">
+                        {/* <div className="links-column">
                             <h4>Полезное</h4>
                             <ul>
                                 <li>
                                     <Link href="/blog">Блог</Link>
                                 </li>
-                                {/* <li>
-                                    <Link href="#">Готовые схемы</Link>
-                                </li>
-                                <li>
-                                    <Link href="/loyalty-program">Программа лояльности</Link>
-                                </li> */}
                             </ul>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </footer>
