@@ -246,7 +246,8 @@ export default function LoginPage() {
             const data = await response.json();
 
             if (data.success) {
-                router.push("/");
+                // router.push("/");
+                window.location.href = "/";
             } else {
                 setError(data.message || "Ошибка при входе");
                 setIsSubmitting(false);
