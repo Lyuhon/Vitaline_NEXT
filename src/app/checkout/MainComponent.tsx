@@ -624,6 +624,8 @@
 
 // src/app/checkout/MainComponent.tsx
 'use client';
+import axios from 'axios';  // ДОБАВИТЬ
+import LoyaltyPopup from './LoyaltyPopup';  // ДОБАВИТЬ
 
 import React, {
     useContext,
@@ -1062,8 +1064,16 @@ interface CheckoutFormProps {
         firstName: string;
         shopName: string;
         phone: string;
+        bonusCard?: string;        // поинты биллз
+        pointsToUse?: number;      // поинты биллз
     };
-    updateCustomerInfo: (info: Partial<{ firstName: string; shopName: string; phone: string }>) => void;
+    updateCustomerInfo: (info: Partial<{
+        firstName: string;
+        shopName: string;
+        phone: string;
+        bonusCard?: string;        // поинты биллз
+        pointsToUse?: number;      // поинты биллз
+    }>) => void;
 
     deliveryAddress: {
         full_address: string;
@@ -1118,15 +1128,135 @@ const CheckoutForm = forwardRef<HTMLFormElement, CheckoutFormProps>(
     ) => {
         const [phoneError, setPhoneError] = useState('');
 
+        // поинты биллз
+        const [isLoyaltyPopupOpen, setIsLoyaltyPopupOpen] = useState(false);
+        const [availablePoints, setAvailablePoints] = useState<number | null>(null);
+        const [pointsToUse, setPointsToUse] = useState<string>('');
+        const [pointsError, setPointsError] = useState<string>('');
+        const [isCheckingLoyalty, setIsCheckingLoyalty] = useState<boolean>(false);
+        const [isCardFieldReadOnly, setIsCardFieldReadOnly] = useState<boolean>(false);
+
+
+        // для долларовых накопительных биллз
+        const [pointsInputValue, setPointsInputValue] = useState<string>('');
+
+        // ДОБАВИТЬ ИНТЕРФЕЙС:
+        interface ClientResponse {
+            result?: {
+                clients?: Array<{
+                    client: {
+                        balance?: {
+                            Valid: boolean;
+                            Float64: number;
+                        };
+                        cardNumbers?: string;
+                    }
+                }>
+            };
+        }
+
+        // ДОБАВИТЬ ФУНКЦИИ:
+        const openLoyaltyPopup = () => {
+            setIsLoyaltyPopupOpen(true);
+        };
+
+        const closeLoyaltyPopup = () => {
+            setIsLoyaltyPopupOpen(false);
+        };
+
+        const cleanPhoneNumber = (input: string): string => {
+            return input.replace(/[\s\-\(\)+]/g, '');
+        };
+
+        const fetchLoyaltyPoints = async (phoneNumber: string): Promise<void> => {
+            setIsCheckingLoyalty(true);
+
+            try {
+                const apiKey: string = process.env.BILLZ_LOYALTY_API || 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC93b28uYmlsbHoudXpcL2JpbGx6IiwiaWF0IjoxNTM5ODQ2MjIxLCJleHAiOjI1MjYzNzA0MzEsInN1YiI6InZpdGFsaW5lLnZpdGFsaW5ldXoifQ.fGGbJRrKsKT4AezeD2fB6sC9cKNL9Sxn33TNGiUExKQ';
+
+                const requestData = {
+                    jsonrpc: '2.0',
+                    method: 'client.search',
+                    params: {
+                        phoneNumber: phoneNumber.startsWith('+') ? phoneNumber : `+${phoneNumber}`,
+                    },
+                    id: '1'
+                };
+
+                const response = await axios.post<ClientResponse>(
+                    'https://api.billz.uz/v1/',
+                    requestData,
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${apiKey}`,
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        }
+                    }
+                );
+
+                if (response.data.result && response.data.result.clients && response.data.result.clients.length > 0) {
+                    const client = response.data.result.clients[0].client;
+
+                    if (client.balance && client.balance.Valid) {
+                        setAvailablePoints(client.balance.Float64);
+                        setPointsError('');
+
+                        if (client.cardNumbers && client.cardNumbers.trim() !== '') {
+                            updateCustomerInfo({ bonusCard: client.cardNumbers });
+                            setIsCardFieldReadOnly(true);
+                        } else {
+                            updateCustomerInfo({ bonusCard: cleanPhoneNumber(phoneNumber) });
+                            setIsCardFieldReadOnly(true);
+                        }
+                    } else {
+                        setAvailablePoints(null);
+                        updateCustomerInfo({ bonusCard: '', pointsToUse: undefined });
+                        setIsCardFieldReadOnly(false);
+                    }
+                } else {
+                    setAvailablePoints(null);
+                    updateCustomerInfo({ bonusCard: '', pointsToUse: undefined });
+                    setIsCardFieldReadOnly(false);
+                }
+            } catch (error) {
+                console.error('Ошибка при получении баллов:', error);
+                setAvailablePoints(null);
+                updateCustomerInfo({ bonusCard: '', pointsToUse: undefined });
+                setPointsError('Не удалось загрузить данные о баллах');
+                setIsCardFieldReadOnly(false);
+            } finally {
+                setIsCheckingLoyalty(false);
+            }
+        };
+
+        // поинты биллз (закончил функции)
+
+
+        // const handlePhoneChange = (formattedValue: string) => {
+        //     updateCustomerInfo({ phone: formattedValue });
+
+        //     // Валидация номера
+        //     const phoneRegex = /^\+998\s\(\d{2}\)\s\d{3}-\d{2}-\d{2}$/;
+        //     if (phoneRegex.test(formattedValue)) {
+        //         setPhoneError('');
+        //     } else {
+        //         setPhoneError('Неверный формат номера телефона.');
+        //     }
+        // };
+
+        // ЗАМЕНИТЬ ТЕКУЩУЮ handlePhoneChange НА ЭТУ:
         const handlePhoneChange = (formattedValue: string) => {
             updateCustomerInfo({ phone: formattedValue });
-
-            // Валидация номера
             const phoneRegex = /^\+998\s\(\d{2}\)\s\d{3}-\d{2}-\d{2}$/;
             if (phoneRegex.test(formattedValue)) {
                 setPhoneError('');
+                const cleanedPhone = cleanPhoneNumber(formattedValue);
+                fetchLoyaltyPoints(cleanedPhone);
             } else {
                 setPhoneError('Неверный формат номера телефона.');
+                setAvailablePoints(null);
+                updateCustomerInfo({ pointsToUse: undefined });
             }
         };
 
@@ -1137,6 +1267,18 @@ const CheckoutForm = forwardRef<HTMLFormElement, CheckoutFormProps>(
                 setCitySubmittedEmpty(false); // Убираем красную границу, если выбрано
             }
         };
+
+        // для долларовых накопительных биллз
+        // Синхронизируем локальное состояние с pointsToUse
+        useEffect(() => {
+            if (customerInfo.pointsToUse) {
+                const dollarValue = Math.floor(customerInfo.pointsToUse / 128) / 100;
+                // НЕ ФОРМАТИРУЕМ - показываем как есть
+                setPointsInputValue(dollarValue.toString());
+            } else {
+                setPointsInputValue('');
+            }
+        }, [customerInfo.pointsToUse]);
 
         return (
             <form ref={ref} onSubmit={handleSubmit} className="checkout-form">
@@ -1166,6 +1308,145 @@ const CheckoutForm = forwardRef<HTMLFormElement, CheckoutFormProps>(
                     </div>
 
                     <PhoneInput value={customerInfo.phone} onChange={handlePhoneChange} error={phoneError} />
+
+                    {/* // поинты биллз */}
+                    <div className="form-group">
+                        <label htmlFor="bonus-card">Накопительная {isCheckingLoyalty && (
+                            <span className="ml-2 inline-block animate-pulse text-orange-500">
+                                <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                </svg>
+                                проверка
+                            </span>
+                        )}</label>
+                        <input
+                            type="text"
+                            id="bonus-card"
+                            value={customerInfo.bonusCard || ''}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                if (!isCardFieldReadOnly) {
+                                    updateCustomerInfo({ bonusCard: e.target.value });
+                                }
+                            }}
+                            readOnly={isCardFieldReadOnly}
+                            className={`mt-1 block w-full rounded-md shadow-sm focus:ring ${isCardFieldReadOnly ? 'bg-gray-100' : ''}`}
+                        />
+                    </div>
+
+                    {availablePoints === null && (
+                        <div className="abot_notify_block">
+                            <p>
+                                У вас еще нет накопительной карты? <span
+                                    onClick={openLoyaltyPopup}
+                                    style={{ color: "#ff7900", textDecoration: "underline", cursor: "pointer" }}>
+                                    Оформите её прямо сейчас</span>{' '} в нашем Telegram-боте!
+                            </p>
+                            <p style={{ marginTop: "10px", color: "#555" }}>
+                                Sizda hali chegirma kartasi yo&apos;qmi? <span
+                                    onClick={openLoyaltyPopup}
+                                    style={{ color: "#ff7900", textDecoration: "underline", cursor: "pointer" }}
+                                >Uni hoziroq</span>{' '} Telegram-botimizda rasmiylashtiring!
+                            </p>
+
+                            <LoyaltyPopup
+                                isOpen={isLoyaltyPopupOpen}
+                                onClose={closeLoyaltyPopup}
+                            />
+                        </div>
+                    )}
+
+                    {availablePoints !== null && (
+                        <div className="billz_card_section">
+                            <p style={{ marginBottom: "20px" }}>Доступно баллов: <span style={{ fontWeight: "500" }}>{Math.floor(availablePoints / 128) / 100} $</span></p>
+                            <div className="form-group">
+                                <label htmlFor="points-to-use">Снимаемое количество</label>
+                                <input
+                                    type="text"
+                                    id="points-to-use"
+                                    value={pointsInputValue}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                        let value = e.target.value;
+
+                                        // Заменяем запятую на точку
+                                        value = value.replace(/,/g, '.');
+
+                                        // Удаляем недопустимые символы, но сохраняем структуру
+                                        value = value.replace(/[^\d.]/g, '');
+
+                                        // Разрешаем только одну точку
+                                        const dotCount = (value.match(/\./g) || []).length;
+                                        if (dotCount > 1) {
+                                            value = value.substring(0, value.lastIndexOf('.'));
+                                        }
+
+                                        // Если значение заканчивается точкой, сохраняем её
+                                        const endsWithDot = value.endsWith('.');
+
+                                        // Ограничиваем до 2 знаков после запятой
+                                        if (value.includes('.') && !endsWithDot) {
+                                            const parts = value.split('.');
+                                            if (parts[1] && parts[1].length > 2) {
+                                                value = parts[0] + '.' + parts[1].substring(0, 2);
+                                            }
+                                        }
+
+                                        // Особый случай: если удаляем цифры после точки, но точка остается
+                                        if (endsWithDot && value.length > 1) {
+                                            // Сохраняем точку даже если после неё ничего нет
+                                            value = value; // оставляем как есть, например "1."
+                                        }
+
+                                        setPointsInputValue(value);
+
+                                        // Обновляем состояние только если есть валидное число
+                                        if (value === '' || value === '.') {
+                                            updateCustomerInfo({ pointsToUse: undefined });
+                                        } else if (!value.endsWith('.')) {
+                                            const dollarValue = parseFloat(value);
+                                            if (!isNaN(dollarValue) && dollarValue >= 0) {
+                                                const uzsValue = Math.floor(dollarValue * 12800);
+                                                const maxUzsValue = Math.floor(availablePoints / 128) * 128;
+
+                                                if (uzsValue > maxUzsValue) {
+                                                    const maxDollars = Math.floor(maxUzsValue / 128) / 100;
+                                                    updateCustomerInfo({ pointsToUse: maxUzsValue });
+                                                    setPointsInputValue(maxDollars.toString());
+                                                } else {
+                                                    updateCustomerInfo({ pointsToUse: uzsValue });
+                                                }
+                                            }
+                                        }
+                                        // Если заканчивается точкой, не обновляем pointsToUse, ждем ввода дальше
+                                    }}
+                                    onBlur={() => {
+                                        // НЕ ФОРМАТИРУЕМ - оставляем как есть
+                                        // Только проверяем корректность и лимиты
+                                        if (pointsInputValue && !isNaN(parseFloat(pointsInputValue))) {
+                                            const dollarValue = parseFloat(pointsInputValue);
+                                            const uzsValue = Math.floor(dollarValue * 12800);
+                                            const maxUzsValue = Math.floor(availablePoints / 128) * 128;
+
+                                            if (uzsValue > maxUzsValue) {
+                                                const maxDollars = Math.floor(maxUzsValue / 128) / 100;
+                                                updateCustomerInfo({ pointsToUse: maxUzsValue });
+                                                setPointsInputValue(maxDollars.toString());
+                                            } else {
+                                                updateCustomerInfo({ pointsToUse: uzsValue });
+                                                // НЕ МЕНЯЕМ ОТОБРАЖЕНИЕ - оставляем как ввел пользователь
+                                            }
+                                        }
+                                    }}
+                                    onFocus={() => {
+                                        // При фокусе тоже не меняем - оставляем как есть
+                                    }}
+                                    placeholder="0.00"
+                                    className="mt-1 block w-full rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                />
+                            </div>
+                        </div>
+                    )}
+
+                    <div className="abot_notify_block"></div>
 
                     <div className="abot_notify_block">
                         Мы пришлем уведомление о статусе заказа на указанный вами телефон.

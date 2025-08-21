@@ -258,6 +258,8 @@ interface CustomerInfo {
     shopName: string;
     phone: string;
     email?: string;
+    bonusCard?: string;        // поинты биллз
+    pointsToUse?: number;      // поинты биллз
 }
 
 interface DeliveryAddress {
@@ -372,7 +374,15 @@ export const CheckoutProvider = ({ children }: { children: ReactNode }) => {
         const orderNumber = generateRandomOrderNumber();
 
         const orderData = {
-            customerInfo,
+            // customerInfo,
+            customerInfo: {
+                ...customerInfo,
+                bonusCard: customerInfo.bonusCard?.trim() || undefined,
+                // pointsToUse: customerInfo.pointsToUse && customerInfo.pointsToUse > 0 ?
+                //     parseFloat((customerInfo.pointsToUse / 12800).toFixed(2)) : undefined
+                pointsToUse: customerInfo.pointsToUse ?
+                    parseFloat((customerInfo.pointsToUse / 128).toFixed(2)) : undefined
+            },
             deliveryAddress,
             deliveryMethod,
             paymentMethod,
@@ -410,7 +420,9 @@ export const CheckoutProvider = ({ children }: { children: ReactNode }) => {
                 orderDate,
                 totalAmount: myFinalPrice,
                 customerName: customerInfo.firstName,
-                customerPhone: customerInfo.phone
+                customerPhone: customerInfo.phone,
+                pointsUsed: customerInfo.pointsToUse && customerInfo.pointsToUse > 0 ?
+                    parseFloat((customerInfo.pointsToUse / 12800).toFixed(2)) : null
             }));
 
             // Возвращаем успех, но НЕ делаем редирект здесь
