@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   // Настройка компиляции для современных браузеров
   compiler: {
     // Удаляет console.log в продакшене
-    removeConsole: process.env.NODE_ENV === 'production',
+    // removeConsole: process.env.NODE_ENV === 'production',
   },
 
   images: {
