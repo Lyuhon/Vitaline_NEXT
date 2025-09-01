@@ -54,7 +54,8 @@ export async function POST(request: Request) {
         // Проверка логина и пароля
         if (
             (username === "Trade" && userType === "full") ||
-            (username === "Wholesale_v0010" && userType === "restricted") ||
+            // (username === "Wholesale_v0010" && userType === "restricted") ||
+            (username === "Vitaline" && userType === "restricted") ||
             (username === "vt_user224" && userType === "full")
         ) {
             const expiresIn = rememberMe ? 60 * 60 * 24 * 14 : 60 * 60 * 24; // 14 дней или 1 день
