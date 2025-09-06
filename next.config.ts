@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  productionBrowserSourceMaps: true,
+
   // Настройка компиляции для современных браузеров
   compiler: {
     // Удаляет console.log в продакшене
