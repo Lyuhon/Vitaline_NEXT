@@ -589,6 +589,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                         mainImage={mainImage}
                         mainImageAlt={mainImageAlt}
                         gallery={gallery}
+                        sku={product.sku || ''}
                     />
 
                     <div className="product_short_info_block">

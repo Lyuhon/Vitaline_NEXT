@@ -2,6 +2,8 @@
 // "use client";
 
 // import { useState } from "react";
+// import Image from 'next/image';
+
 
 // interface ImageNode {
 //     sourceUrl: string;
@@ -42,7 +44,7 @@
 //         <div className="gallery_product_block">
 //             <div className="current_image_block" style={{ position: "relative", overflow: "hidden" }}>
 
-//                 <img
+//                 <Image
 //                     src={currentImage.sourceUrl}
 //                     alt={currentImage.altText || productName}
 //                     className={`fade-image ${isTransitioning ? "transitioning" : ""}`}
@@ -51,18 +53,22 @@
 //                         width: "100%",
 //                         height: "auto",
 //                     }}
+//                     width={300} // Задайте подходящие размеры
+//                     height={300}
 //                 />
 //             </div>
 
 //             <div className="gallery_list">
 //                 {images.map((img, idx) => (
-//                     <img
+//                     <Image
 //                         key={idx}
 //                         src={img.sourceUrl}
 //                         alt={img.altText || productName}
 //                         className={idx === activeIndex ? "active_gallery_product_item" : ""}
 //                         onClick={() => handleThumbClick(idx)}
 //                         style={{ cursor: "pointer" }}
+//                         width={300} // Задайте подходящие размеры
+//                         height={300}
 //                     />
 //                 ))}
 //             </div>
@@ -77,7 +83,7 @@
 
 import { useState } from "react";
 import Image from 'next/image';
-
+import ExpirationDateDisplay from './ExpirationDateDisplay';
 
 interface ImageNode {
     sourceUrl: string;
@@ -89,9 +95,10 @@ interface Props {
     mainImage: string;
     mainImageAlt: string;
     gallery: ImageNode[];
+    sku?: string;
 }
 
-export default function ProductGalleryClient({ productName, mainImage, mainImageAlt, gallery }: Props) {
+export default function ProductGalleryClient({ productName, mainImage, mainImageAlt, gallery, sku }: Props) {
     // Включаем главное изображение в начало списка
     const images = [
         { sourceUrl: mainImage, altText: mainImageAlt },
@@ -130,6 +137,15 @@ export default function ProductGalleryClient({ productName, mainImage, mainImage
                     width={300} // Задайте подходящие размеры
                     height={300}
                 />
+
+                {/* КНОПКА СРОКА ГОДНОСТИ */}
+                {sku && (
+                    <ExpirationDateDisplay
+                        sku={sku}
+                        productName={productName}
+                        productImage={mainImage}
+                    />
+                )}
             </div>
 
             <div className="gallery_list">
