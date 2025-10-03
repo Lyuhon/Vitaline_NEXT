@@ -213,7 +213,7 @@ export default function CartItemsClient() {
 
             {/* Список товаров в корзине */}
             {items.map(item => (
-                <div className="item" key={item.id}>
+                <div className="relative item" key={item.id}>
                     <input
                         type="checkbox"
                         className="item-select"
@@ -289,7 +289,16 @@ export default function CartItemsClient() {
                     </div>
 
                     <RemoveItemButton productId={item.id} />
+
+                    {/* ОТОБРАЖЕНИЕ МАКС. КОЛ-ВА НА ЗАКАЗ */}
+                    {item.maxOrderQty && item.maxOrderQty < item.stockQuantity && (
+                        <div className="absolute bottom-[-10px] right-[-7px] px-2 py-1 bg-amber-50 border border-amber-200 rounded-[7px] text-xs text-amber-800 mt-1"
+                            style={{ border: '1px solid' }}>
+                            ⚠️ Макс. {item.maxOrderQty} шт. в заказе
+                        </div>
+                    )}
                 </div>
+
             ))}
         </>
     );

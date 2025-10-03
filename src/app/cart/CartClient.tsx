@@ -175,6 +175,7 @@ interface Product {
     convertedPrice: string;
     stockStatus: string;
     stockQuantity: number;
+    maxOrderQty?: number | null;
     image: ProductImage;
 }
 
@@ -239,12 +240,31 @@ export default function CartClient() {
                     return isNaN(num) ? 0 : num;
                 };
 
+                // const cartItemsDetailed = products.map(p => {
+                //     const item = cart.items.find(i => i.productId === p.id);
+                //     const qty = item?.qty || 1;
+                //     const maxQty = p.stockQuantity || 0;
+                //     const priceNumUSD = parsePrice(p.convertedPrice || '0');
+                //     return { ...p, qty, maxQty, total: qty * priceNumUSD, selected: true };
+                // });
+
                 const cartItemsDetailed = products.map(p => {
                     const item = cart.items.find(i => i.productId === p.id);
                     const qty = item?.qty || 1;
-                    const maxQty = p.stockQuantity || 0;
+
+                    // Вычисляем эффективное ограничение
+                    const effectiveMaxQty = p.maxOrderQty
+                        ? Math.min(p.maxOrderQty, p.stockQuantity || 0)
+                        : (p.stockQuantity || 0);
+
                     const priceNumUSD = parsePrice(p.convertedPrice || '0');
-                    return { ...p, qty, maxQty, total: qty * priceNumUSD, selected: true };
+                    return {
+                        ...p,
+                        qty,
+                        maxQty: effectiveMaxQty, // ← ИСПОЛЬЗУЕМ ЭФФЕКТИВНОЕ ОГРАНИЧЕНИЕ
+                        total: qty * priceNumUSD,
+                        selected: true
+                    };
                 });
 
                 setCartItems(cartItemsDetailed);

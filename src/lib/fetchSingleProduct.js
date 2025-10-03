@@ -129,6 +129,7 @@ const query = gql`
         convertedPrice
         stockStatus
         stockQuantity
+        maxOrderQty
         brands {
           nodes {
             id

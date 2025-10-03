@@ -479,6 +479,7 @@ type Product = {
     convertedPrice?: string;
     stockStatus?: string; // 'IN_STOCK' или 'OUT_OF_STOCK'
     stockQuantity?: number; // Добавлено для ясности
+    maxOrderQty?: number | null;
     productCategories?: {
         nodes: {
             name: string;
@@ -538,6 +539,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
     const inStock = product.stockStatus === 'IN_STOCK';
     const maxQuantity = product.stockQuantity || 0;
+
+    // Вычисляем эффективное ограничение
+    const effectiveMaxQty = product.maxOrderQty
+        ? Math.min(product.maxOrderQty, maxQuantity)
+        : maxQuantity;
 
     // Функция для парсинга цены в число
     const parsePrice = (p: string) => {
@@ -651,6 +657,13 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                                 {product.convertedPrice}
                             </div>
 
+
+                            {product.maxOrderQty && product.maxOrderQty < maxQuantity && (
+                                <div className="md:mx-[unset] mx-auto max-order-limit px-3 mb-4 md:mt-[-15px] w-[fit-content] py-2 bg-amber-50 border border-amber-200 rounded-md text-sm text-amber-800">
+                                    ⚠️ Максимум {product.maxOrderQty} шт. в одном заказе
+                                </div>
+                            )}
+
                             <MiniCartProvider>
                                 {inStock && (
                                     <AddToCartSection
@@ -658,7 +671,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                                         productName={product.name}
                                         productImage={mainImage}
                                         productPrice={numericPrice}
-                                        maxQuantity={maxQuantity}
+                                        maxQuantity={effectiveMaxQty}
                                         stock={inStock}
                                     />
                                 )}
