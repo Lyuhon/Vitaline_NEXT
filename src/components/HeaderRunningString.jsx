@@ -95,7 +95,7 @@ export default function RunningLine() {
 
     const TextContent = () => (
         <>
-            📦 <span className="font-medium">Yangi mahsulotlar</span> va yangiliklar haqida ma'lumotni botimizda bilib olishingiz mumkin <span className="font-medium">@vt_trade_news_bot</span> <span className="px-2">|</span> 📦 Новости о <span className="font-medium">пополнении ассортимента и новых поступлениях</span> можно узнать в нашем боте <span className="font-medium">@vt_trade_news_bot</span> <span className="px-2">|</span>
+            📦 <span className="font-medium">Yangi mahsulotlar</span> va yangiliklar haqida ma&apos;lumotni botimizda bilib olishingiz mumkin <span className="font-medium">@vt_trade_news_bot</span> <span className="px-2">|</span> 📦 Новости о <span className="font-medium">пополнении ассортимента и новых поступлениях</span> можно узнать в нашем боте <span className="font-medium">@vt_trade_news_bot</span> <span className="px-2">|</span>
         </>
     );
 
