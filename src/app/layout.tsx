@@ -160,6 +160,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 // import PageTransition from '@/components/PageTransition';
 // import AnimatedWrapper from '@/components/animation/AnimatedWrapper';
+import HeaderRunningString from '@/components/HeaderRunningString';
 
 import Script from 'next/script';
 
@@ -216,6 +217,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta property="og:image:alt" content="Vitaline Trade - Оптовый магазин витаминов в Ташкенте"></meta>
       </head>
       <body>
+        <HeaderRunningString />
         {/* <Header /> */}<HeaderWrapper />
         {/* <AnimatedWrapper> */}
         {/* Был рабочий */}
