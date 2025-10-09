@@ -219,11 +219,14 @@ export default function LoginPage() {
         try {
             let userType = "";
             if (email === "Trade" && password === "v0090") {
-                userType = "full";
+                // userType = "full";
+                userType = "restricted";
                 // } else if (email === "Wholesale_v0010" && password === "090vitaline090") {
             } else if (email === "Vitaline" && password === "1234567") {
                 userType = "restricted";
             } else if (email === "vt_user224--1" && password === "VITALINE_trade_0422--1") {
+                userType = "full";
+            } else if (email === "TradeExtended" && password === "v0090") {
                 userType = "full";
             } else {
                 setError("Неверный логин или пароль");

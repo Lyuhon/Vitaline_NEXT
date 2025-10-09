@@ -53,7 +53,11 @@ export async function POST(request: Request) {
 
         // Проверка логина и пароля
         if (
-            (username === "Trade" && userType === "full") ||
+            // (username === "Trade" && userType === "full") ||
+            (username === "Trade" && userType === "restricted") ||
+            (username === "TradeExtended" && userType === "full") ||
+
+
             // (username === "Wholesale_v0010" && userType === "restricted") || 
             (username === "Vitaline" && userType === "restricted") ||
             (username === "vt_user224" && userType === "full")
