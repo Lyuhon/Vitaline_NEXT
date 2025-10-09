@@ -66,7 +66,7 @@ export function middleware(request: NextRequest) {
     const authToken = request.cookies.get("auth_token")?.value;
     const userType = request.cookies.get("user_type")?.value; // Добавляем чтение user_type
 
-    const isAuthenticated = authToken === "authenticated";
+    const isAuthenticated = authToken === "authenticated_2";
 
     // Если не авторизован и не на странице логина, редиректим
     if (path !== "/login" && !isAuthenticated) {

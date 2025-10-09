@@ -70,7 +70,7 @@ export async function POST(request: Request) {
             // Устанавливаем auth_token
             cookieStore.set({
                 name: "auth_token",
-                value: "authenticated",
+                value: "authenticated_2",
                 httpOnly: true,
                 path: "/",
                 expires: expiration,
