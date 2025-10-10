@@ -35,6 +35,9 @@ export async function fetchAllBrands() {
   if (userType === "restricted") {
     const restrictedBrands = ['carlson-labs', 'childlife']; // Slug-ы брендов
     brands = brands.filter((brand: { slug: string }) => !restrictedBrands.includes(brand.slug));
+  } else if (userType === "without_cl") {
+    const restrictedBrands = ['childlife'];
+    brands = brands.filter((brand: { slug: string }) => !restrictedBrands.includes(brand.slug));
   }
 
   return brands;
