@@ -272,8 +272,25 @@ export async function fetchWooProducts(page: number = 1, perPage: number = 20): 
         const userType = headersList.get("x-user-type") as string | null;
 
         // Фильтрация товаров только для ограниченных пользователей
+        // if (userType === "restricted") {
+        //     const restrictedBrands = ['carlson-labs', 'childlife'];
+        //     allProducts = allProducts.filter((product: WooProduct) => {
+        //         const hasRestrictedBrand = product.brands?.some((brand: { slug: string }) =>
+        //             restrictedBrands.includes(brand.slug)
+        //         );
+        //         return !hasRestrictedBrand; // Исключаем товары с запрещёнными брендами
+        //     });
+        // }
+        // Фильтрация товаров в зависимости от типа пользователя
+        let restrictedBrands: string[] = [];
         if (userType === "restricted") {
-            const restrictedBrands = ['carlson-labs', 'childlife'];
+            restrictedBrands = ['carlson-labs', 'childlife']; // Исключаем оба бренда
+        } else if (userType === "without_cl") {
+            restrictedBrands = ['childlife']; // Исключаем только childlife
+        }
+
+        // Применяем фильтрацию, если есть ограничения
+        if (restrictedBrands.length > 0) {
             allProducts = allProducts.filter((product: WooProduct) => {
                 const hasRestrictedBrand = product.brands?.some((brand: { slug: string }) =>
                     restrictedBrands.includes(brand.slug)

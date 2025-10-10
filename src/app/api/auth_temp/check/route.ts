@@ -31,7 +31,7 @@ export async function GET() {
         const authToken = cookieStore.get("auth_token")?.value;
         const userType = cookieStore.get("user_type")?.value;
 
-        if (authToken === "authenticated_2" && userType) {
+        if (authToken === "authenticated_3" && userType) {
             return NextResponse.json({ authenticated: true, userType });
         }
 

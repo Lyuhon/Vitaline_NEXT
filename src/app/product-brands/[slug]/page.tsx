@@ -175,6 +175,8 @@
 // }
 
 
+
+// my-app\src\app\product-brands\[slug]\page.tsx
 import Link from 'next/link';
 import Image from 'next/image';
 import { Metadata } from 'next';
@@ -194,10 +196,22 @@ export async function generateMetadata({
     const brandInfo = await fetchBrandInfo(slug);
 
     // ОГРАНИЧЕНИЕ ПО БРЕНДАМ: Проверка userType для SEO
+    // const headersList = await headers();
+    // const userType = headersList.get("x-user-type") as string | null;
+    // const restrictedBrands = ['carlson-labs', 'childlife'];
+    // if (userType === "restricted" && restrictedBrands.includes(slug)) {
     const headersList = await headers();
     const userType = headersList.get("x-user-type") as string | null;
-    const restrictedBrands = ['carlson-labs', 'childlife'];
-    if (userType === "restricted" && restrictedBrands.includes(slug)) {
+
+    // Определяем список запрещённых брендов в зависимости от типа пользователя
+    let restrictedBrands: string[] = [];
+    if (userType === "restricted") {
+        restrictedBrands = ['carlson-labs', 'childlife'];
+    } else if (userType === "without_cl") {
+        restrictedBrands = ['childlife'];
+    }
+
+    if (restrictedBrands.length > 0 && restrictedBrands.includes(slug)) {
         return {
             title: 'Бренд не найден',
             description: 'Указанного бренда не существует',
@@ -225,10 +239,22 @@ export default async function BrandPage({
     const after = (searchParams?.after as string) || '';
 
     // ОГРАНИЧЕНИЕ ПО БРЕНДАМ: Проверка userType и блокировка доступа
+    // const headersList = await headers();
+    // const userType = headersList.get("x-user-type") as string | null;
+    // const restrictedBrands = ['carlson-labs', 'childlife'];
+    // if (userType === "restricted" && restrictedBrands.includes(slug)) {
     const headersList = await headers();
     const userType = headersList.get("x-user-type") as string | null;
-    const restrictedBrands = ['carlson-labs', 'childlife'];
-    if (userType === "restricted" && restrictedBrands.includes(slug)) {
+
+    // Определяем список запрещённых брендов в зависимости от типа пользователя
+    let restrictedBrands: string[] = [];
+    if (userType === "restricted") {
+        restrictedBrands = ['carlson-labs', 'childlife'];
+    } else if (userType === "without_cl") {
+        restrictedBrands = ['childlife'];
+    }
+
+    if (restrictedBrands.length > 0 && restrictedBrands.includes(slug)) {
         return (
             <div className="shop_page">
                 <div className="shop_page_wrapper">

@@ -197,13 +197,30 @@ export async function fetchProductsByCategory(categorySlug: string, after?: stri
     // ОГРАНИЧЕНИЕ ПО БРЕНДАМ: Проверка userType и фильтрация товаров
     const headersList = await headers();
     const userType = headersList.get("x-user-type") as string | null;
+    // if (userType === "restricted") {
+    //   const restrictedBrands = ['carlson-labs', 'childlife'];
+    //   products.nodes = products.nodes.filter((node) => {
+    //     const hasRestrictedBrand = node.brands?.nodes?.some((brand) =>
+    //       restrictedBrands.includes(brand.slug)
+    //     );
+    //     return !hasRestrictedBrand; // Исключаем товары с запрещёнными брендами
+    //   });
+    // }
     if (userType === "restricted") {
       const restrictedBrands = ['carlson-labs', 'childlife'];
       products.nodes = products.nodes.filter((node) => {
         const hasRestrictedBrand = node.brands?.nodes?.some((brand) =>
           restrictedBrands.includes(brand.slug)
         );
-        return !hasRestrictedBrand; // Исключаем товары с запрещёнными брендами
+        return !hasRestrictedBrand;
+      });
+    } else if (userType === "without_cl") {
+      const restrictedBrands = ['childlife'];
+      products.nodes = products.nodes.filter((node) => {
+        const hasRestrictedBrand = node.brands?.nodes?.some((brand) =>
+          restrictedBrands.includes(brand.slug)
+        );
+        return !hasRestrictedBrand;
       });
     }
 

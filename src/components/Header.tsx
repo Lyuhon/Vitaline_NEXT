@@ -74,7 +74,16 @@ const Header = ({ userType }: { userType: string | null }) => {
         );
 
         // Выбор индекса на основе userType
-        const indexName = userType === 'restricted' ? 'vt_trade_cuted_' : 'vt_trade_';
+        // const indexName = userType === 'restricted' ? 'vt_trade_cuted_' : 'vt_trade_';
+        // console.log(`Header using Algolia index: ${indexName} for user type: ${userType || 'default'}`);
+        let indexName = 'vt_trade_'; // По умолчанию - полный доступ
+
+        if (userType === 'restricted') {
+            indexName = 'vt_trade_cuted_'; // Без carlson-labs И childlife
+        } else if (userType === 'without_cl') {
+            indexName = 'vt_trade_without_cl_'; // Без childlife, с carlson-labs
+        }
+
         console.log(`Header using Algolia index: ${indexName} for user type: ${userType || 'default'}`);
 
         const search = instantsearch({

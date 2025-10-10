@@ -54,7 +54,7 @@ export async function POST(request: Request) {
         // Проверка логина и пароля
         if (
             // (username === "Trade" && userType === "full") ||
-            (username === "Trade" && userType === "restricted") ||
+            (username === "Trade" && userType === "without_cl") ||
             (username === "TradeExtended" && userType === "full") ||
 
 
@@ -70,7 +70,7 @@ export async function POST(request: Request) {
             // Устанавливаем auth_token
             cookieStore.set({
                 name: "auth_token",
-                value: "authenticated_2",
+                value: "authenticated_3",
                 httpOnly: true,
                 path: "/",
                 expires: expiration,

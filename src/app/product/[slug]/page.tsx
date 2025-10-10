@@ -510,11 +510,23 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     // ОГРАНИЧЕНИЕ ПО БРЕНДАМ: Проверка userType и бренда товара
     const headersList = await headers();
     const userType = headersList.get("x-user-type") as string | null;
-    const restrictedBrands = ['carlson-labs', 'childlife'];
+    // const restrictedBrands = ['carlson-labs', 'childlife'];
+    // const hasRestrictedBrand = product?.brands?.nodes?.some((brand) =>
+    //     restrictedBrands.includes(brand.slug)
+    // );
+    // if (!product || (userType === "restricted" && hasRestrictedBrand)) {
+    let restrictedBrands: string[] = [];
+    if (userType === "restricted") {
+        restrictedBrands = ['carlson-labs', 'childlife']; // Исключаем оба бренда
+    } else if (userType === "without_cl") {
+        restrictedBrands = ['childlife']; // Исключаем только childlife
+    }
+
     const hasRestrictedBrand = product?.brands?.nodes?.some((brand) =>
         restrictedBrands.includes(brand.slug)
     );
-    if (!product || (userType === "restricted" && hasRestrictedBrand)) {
+
+    if (!product || (restrictedBrands.length > 0 && hasRestrictedBrand)) {
         return (
             <section className="product-not-found">
                 <h1>Товар не найден</h1>

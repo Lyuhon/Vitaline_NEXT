@@ -220,7 +220,7 @@ export default function LoginPage() {
             let userType = "";
             if (email === "Trade" && password === "v0090") {
                 // userType = "full";
-                userType = "restricted";
+                userType = "without_cl";
                 // } else if (email === "Wholesale_v0010" && password === "090vitaline090") {
             } else if (email === "Vitaline" && password === "1234567") {
                 userType = "restricted";

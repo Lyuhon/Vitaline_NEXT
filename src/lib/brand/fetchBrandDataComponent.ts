@@ -77,10 +77,17 @@ export async function fetchAllBrands() {
   const userType = headersList.get("x-user-type") as string | null;
 
   // Фильтруем бренды для ограниченного аккаунта
+  // if (userType === "restricted") {
+  //   const restrictedBrands = ['carlson-labs', 'childlife']; // Slug-ы брендов
+  //   brands = brands.filter((brand: { slug: string }) => !restrictedBrands.includes(brand.slug));
+  // }
   if (userType === "restricted") {
-    const restrictedBrands = ['carlson-labs', 'childlife']; // Slug-ы брендов
+    const restrictedBrands = ['carlson-labs', 'childlife'];
+    brands = brands.filter((brand: { slug: string }) => !restrictedBrands.includes(brand.slug));
+  } else if (userType === "without_cl") {
+    const restrictedBrands = ['childlife'];
     brands = brands.filter((brand: { slug: string }) => !restrictedBrands.includes(brand.slug));
   }
 
   return brands;
-}
+} 
