@@ -1,5 +1,4 @@
 // ShopBrandsSlider.tsx
-// app/brands/page.tsx
 import Link from 'next/link';
 import Image from 'next/image';
 import { fetchAllBrands } from '@/lib/brand/fetchBrandDataComponent';

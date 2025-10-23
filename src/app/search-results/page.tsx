@@ -1,28 +1,3 @@
-// // src/app/search-results/page.tsx
-// import { headers } from 'next/headers';
-// import ClientSearchResults from './ClientSearchResults';
-
-// export const dynamic = 'force-dynamic';
-
-// export default async function SearchResultsPage({
-//     searchParams
-// }: {
-//     searchParams: Record<string, string | string[] | undefined>
-// }) {
-//     const headersList = await headers();
-//     const userType = headersList.get("x-user-type") || null;
-
-//     return (
-//         <ClientSearchResults
-//             searchParams={searchParams}
-//             userType={userType}
-//         />
-//     );
-// }
-
-
-
-
 // src/app/search-results/page.tsx
 import { headers } from 'next/headers';
 import ClientSearchResults from './ClientSearchResults';
