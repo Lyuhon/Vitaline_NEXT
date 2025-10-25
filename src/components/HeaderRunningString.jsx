@@ -1,14 +1,18 @@
-// HeaderRunningString.jsx
 'use client'
-import React from 'react';
 
-export default function RunningLine() {
+import React from 'react';
+import { useTranslations, useLocale } from 'next-intl';
+
+export default function HeaderRunningString() {
+    const t = useTranslations('runningString');
+    const locale = useLocale();
+
     const handleClick = () => {
         window.open('https://t.me/vt_trade_news_bot', '_blank');
     };
 
     const BellIcon = () => (
-        <span className="relative inline-flex items-center justify-center w-8 h-8 border border-black rounded-full"
+        <span className="relative inline-flex items-center justify-center w-8 h-8 border border-black rounded-full bg-[#eeeeee] z-[2]"
             style={{ border: '1px solid #000', borderRadius: '50%' }}>
             <svg
                 width="16"
@@ -28,26 +32,44 @@ export default function RunningLine() {
         </span>
     );
 
-    const TextContent = () => (
-        <>
-            📦 <span className="font-medium">Yangi mahsulotlar</span> va yangiliklar haqida ma&apos;lumotni botimizda bilib olishingiz mumkin <span className="font-medium">@vt_trade_news_bot</span> <span className="px-2">|</span> 📦 Новости о <span className="font-medium">пополнении ассортимента и новых поступлениях</span> можно узнать в нашем боте <span className="font-medium">@vt_trade_news_bot</span> <span className="px-2">|</span>
-        </>
-    );
+    const TextContent = () => {
+        if (locale === 'uz') {
+            return (
+                <>
+                    {t('icon')} <span className="font-medium">{t('newProducts')}</span> {t('and')} {t('newsAbout')} {t('inOurBot')} <span className="font-medium">{t('botName')}</span> <span className="px-2">{t('separator')}</span>
+                </>
+            );
+        }
+
+        // Русский (по умолчанию)
+        return (
+            <>
+                {t('icon')} {t('news')} <span className="font-medium">{t('assortment')}</span> {t('canLearn')} <span className="font-medium">{t('botName')}</span> <span className="px-2">{t('separator')}</span>
+            </>
+        );
+    };
 
     return (
         <div
             onClick={handleClick}
-            className="w-full bg-[#eeeeee] md:pt-3 pt-4 py-3 overflow-hidden shadow-lg cursor-pointer hover:bg-gray-200 transition-colors relative"
+            className="w-full bg-[#eeeeee] pl-2 md:pl-[unset] md:pt-3 pt-4 py-3 overflow-hidden shadow-lg cursor-pointer hover:bg-gray-200 transition-colors relative"
         >
-            <div className="flex items-center">
+            <div className="flex items-center md:pl-8">
                 {/* Фиксированный колокольчик слева */}
-                <div className="absolute left-0 z-10 bg-[#eeeeee] pl-2">
+                <div className="absolute left-0 bg-[#eeeeee] pl-2"
+                    style={{ borderRadius: '0 50% 50% 0' }}>
                     <BellIcon />
                 </div>
 
                 {/* Прокручивающийся текст */}
                 <div className="flex overflow-hidden w-full">
                     <div className="flex animate-scroll whitespace-nowrap">
+                        <span className="text-black font-normal text-sm md:text-sm">
+                            <TextContent />
+                        </span>
+                        <span className="text-black font-normal text-sm md:text-sm">
+                            <TextContent />
+                        </span>
                         <span className="text-black font-normal text-sm md:text-sm">
                             <TextContent />
                         </span>

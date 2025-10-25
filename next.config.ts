@@ -3,9 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   productionBrowserSourceMaps: true,
 
-  // Настройка компиляции для современных браузеров
   compiler: {
-    // Удаляет console.log в продакшене
     // removeConsole: process.env.NODE_ENV === 'production',
   },
 
@@ -14,20 +12,28 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "nuxt.vitaline.uz",
-        pathname: "**", // Разрешить любой путь
+        pathname: "**",
       },
       {
         protocol: "https",
         hostname: "dev.vitaline.uz",
-        pathname: "**", // Разрешить любой путь
+        pathname: "**",
       },
       {
         protocol: "https",
         hostname: "retail.vitaline.uz",
-        pathname: "**", // Разрешить любой путь
+        pathname: "**",
       },
     ],
   },
+
+  // ДОБАВЛЯЕМ КОНФИГУРАЦИЮ ДЛЯ next-intl
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '2mb',
+    },
+  },
 };
 
+// ВАЖНО: добавляем конфигурацию для next-intl
 export default nextConfig;

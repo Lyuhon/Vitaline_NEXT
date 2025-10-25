@@ -6,7 +6,7 @@ import { ProductNode } from '@/lib/fetchProductsByCategory';
 import Link from 'next/link';
 
 import AddToCartButtonInList from '@/components/add_to_cart_popup/AddToCartButtonInList';
-import { MiniCartProvider } from '@/app/context/MiniCartContext';
+import { MiniCartProvider } from '@/app/[locale]/context/MiniCartContext';
 
 interface LoadMoreClientProps {
     initialProducts: ProductNode[];

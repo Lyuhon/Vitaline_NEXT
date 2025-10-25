@@ -7,7 +7,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import AddToCartButtonInList from '@/components/add_to_cart_popup/AddToCartButtonInList';
-import { MiniCartProvider } from '@/app/context/MiniCartContext';
+import { MiniCartProvider } from '@/app/[locale]/context/MiniCartContext';
 
 type Brand = {
     id: string;

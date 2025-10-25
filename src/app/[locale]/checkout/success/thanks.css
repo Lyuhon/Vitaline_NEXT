@@ -1,0 +1,218 @@
+.thanks_page {
+    max-width: 1180px;
+    margin: 0 auto;
+    margin-bottom: 60px;
+    margin-top: 60px;
+}
+
+.thanks_page h1 {
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 40px;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.thanks_wrapper {
+    display: flex;
+    gap: 60px;
+    align-items: stretch;
+}
+
+.hello_image {
+    min-width: 45%;
+    min-height: 100%;
+
+    background-image: url(https://nuxt.vitaline.uz/wp-content/uploads/2025/01/success-page.webp);
+    border-radius: 20px;
+    background-size: cover;
+    background-position: bottom;
+}
+
+.text_thanks_block {
+    margin-top: 10px;
+    padding-bottom: 100px;
+}
+
+.line_block .first_info {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 22px;
+    margin-top: -10px;
+}
+
+.tg_button {
+    color: #fff;
+    border-radius: 15px;
+    padding: 15px 20px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 22px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    transition: transform 0.3s;
+    width: fit-content;
+
+    margin-top: 15px;
+    /* margin-bottom: 50px; */
+    margin-bottom: 30px;
+
+    background: linear-gradient(180deg, #2aabee 0%, #229ed9 100%);
+}
+
+.s_econd {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 20px;
+    /* margin-bottom: 30px; */
+    margin-top: 50px;
+    margin-bottom: -30px;
+    padding-top: 1px;
+}
+
+.line_block {
+    display: flex;
+    gap: 35px;
+    margin-bottom: 30px;
+}
+
+.line {
+    border-left: 1px solid #142500;
+    padding-top: 5px;
+}
+
+p.first_info,
+.s_econd {
+    position: relative;
+}
+
+p.first_info::before,
+.s_econd::before {
+    content: '•';
+    position: absolute;
+    left: -40px;
+}
+
+.support_bottom_block {
+    margin-top: 60px;
+    width: fit-content;
+}
+
+.thanks_page .support_bottom_block .tg_chat_btn {
+    width: 55%;
+}
+
+.thanks_page .support_bottom_block_inner_wrap {
+    gap: 30px;
+}
+
+.support_bottom_block_inner_wrap .support-contacts {
+    white-space: nowrap;
+}
+
+
+.first_info strong {
+    display: block;
+}
+
+.back-home-link {
+    display: inline-block;
+    font-weight: 500;
+    color: #FFF;
+    background-color: #ff7900;
+    border-radius: 10px;
+    margin-top: 30px;
+    width: fit-content;
+    padding: 8px 15px;
+}
+
+@media only screen and (max-width: 768px) {
+    .thanks_page {
+        padding: 0 22px;
+    }
+
+    .thanks_page h1 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 25x;
+    }
+
+    .thanks_wrapper {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .hello_image {
+        min-height: 250px;
+    }
+
+    .line_block {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .line_block .first_info,
+    p.first_info,
+    .s_econd {
+        font-size: 17px;
+        line-height: 19px;
+    }
+
+    .first_info strong {
+        display: inline;
+    }
+
+    p.first_info::before,
+    .s_econd::before {
+        content: '•';
+        position: absolute;
+        left: -43px;
+        font-size: 30px;
+    }
+
+    .s_econd {
+        margin-bottom: -45px;
+    }
+
+    .support_bottom_block {
+        margin-top: 80px;
+    }
+
+    .support_bottom_block_inner_wrap .support-contacts {
+        display: block !important;
+    }
+
+    .thanks_page .support_bottom_block .tg_chat_btn {
+        width: fit-content;
+        padding-left: 20px;
+        padding-right: 20px;
+        border-radius: 15px;
+    }
+
+    .thanks_page .support_bottom_block_inner_wrap {
+        gap: 20px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .text_thanks_block {
+        padding-bottom: 30px;
+    }
+
+    .support_bottom_block {
+        width: 100%;
+    }
+
+    .tg_button {
+        font-size: 17px;
+        white-space: nowrap;
+        width: 100%;
+    }
+
+    .back-home-link {
+        width: 100%;
+        text-align: center;
+    }
+}

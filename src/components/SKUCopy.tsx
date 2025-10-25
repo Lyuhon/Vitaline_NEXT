@@ -1,19 +1,23 @@
 "use client";
 
+import { useTranslations } from 'next-intl';
+
 interface SKUCopyProps {
     sku: string;
 }
 
 const SKUCopy: React.FC<SKUCopyProps> = ({ sku }) => {
+    const t = useTranslations('product');
+
     const handleCopy = () => {
         navigator.clipboard.writeText(sku.trim())
-            .then(() => alert("Артикул скопирован в буфер обмена!"))
-            .catch(() => alert("Ошибка при копировании артикула."));
+            .then(() => alert(t('skuCopied')))
+            .catch(() => alert(t('skuCopyError')));
     };
 
     return (
         <div className="sku_here" style={{ marginBottom: "20px" }}>
-            <span style={{ fontWeight: "600" }}>Артикул: </span>
+            <span style={{ fontWeight: "600" }}>{t('skuLabel')} </span>
             <span
                 className="sku_copy_click"
                 style={{ cursor: "pointer" }}
