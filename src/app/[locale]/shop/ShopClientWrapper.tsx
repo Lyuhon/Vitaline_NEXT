@@ -193,7 +193,7 @@ export function ShopClientWrapper({
                         <button
                             onClick={loadMore}
                             disabled={isLoadingMore}
-                            className="load_more_button"
+                            className="load_more_button hover:bg-[#ebebeb] bg-[#ebebeb] text-black"
                         >
                             {isLoadingMore ? t('loading') : t('loadMore')}
                         </button>
