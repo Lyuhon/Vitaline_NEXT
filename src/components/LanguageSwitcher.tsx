@@ -68,7 +68,7 @@ export default function LanguageSwitcher() {
                             <button
                                 key={locale}
                                 onClick={() => switchLanguage(locale)}
-                                className={`w-full flex items-center gap-3 px-4 py-2 hover:bg-gray-50 transition-colors ${currentLocale === locale ? 'bg-orange-50 text-[#FF7900]' : ''
+                                className={`w-full flex items-center gap-3 px-4 py-2 hover:bg-gray-50 transition-colors ${currentLocale === locale ? 'bg-orange-50 text-[#FF7900]' : 'text-gray-900 bg-white'
                                     }`}
                             >
                                 <Image
