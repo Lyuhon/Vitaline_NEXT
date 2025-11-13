@@ -160,6 +160,17 @@ input.quantity-value {
         animation: fadeIn 0.5s forwards;
     }
 
+    .cart_flex_block .not-instock .quantity-button.dis_increment:after {
+        content: '';
+        padding: 0px;
+    }
+
+    .not-instock .cart_item_price,
+    .not-instock .quantity-block {
+        filter: blur(4px);
+        pointer-events: none;
+    }
+
     /* Анимация для изменения opacity */
     @keyframes fadeIn {
         0% {
@@ -387,6 +398,12 @@ h3.cart_brand_name {
 
 
 @media only screen and (max-width: 768px) {
+
+    .not-instock .quantity-block,
+    .not-instock .cart_item_price {
+        display: none;
+    }
+
     .cart_wrapper {
         padding: 0 60px;
     }

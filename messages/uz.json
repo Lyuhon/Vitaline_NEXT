@@ -129,7 +129,9 @@
         "delivery": "Yetkazib berish",
         "minOrderMessage": "Buyurtma uchun minimal summa 100 $ dan kam bo'lmasligi kerak",
         "goToCheckout": "Buyurtmani rasmiylashtirishga o'ting",
-        "terms": "Tugmani bosish bilan siz sotib olish qoidalari va qaytarish shartlari bilan rozisiz."
+        "terms": "Tugmani bosish bilan siz sotib olish qoidalari va qaytarish shartlari bilan rozisiz.",
+        "outOfStock": "Mavjud emas",
+        "itemsOutOfStock": "Ba’zi mahsulotlar yo‘q — ularni buyurtmaga qo‘shib bo‘lmaydi."
     },
     "shop": {
         "title": "Tovarlar katalogi",
