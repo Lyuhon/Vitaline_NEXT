@@ -41,7 +41,7 @@ export async function fetchSingleProductByID(id: string): Promise<Product | null
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query, variables: { id } }),
-      next: { revalidate: 1800 },
+      next: { revalidate: 300 },
       // cache: 'force-cache'
     });
 
