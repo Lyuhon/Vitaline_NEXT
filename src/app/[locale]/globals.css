@@ -1743,3 +1743,57 @@ h3.white_title {
   /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); */
   filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.2));
 }
+
+
+
+
+
+
+
+
+
+
+/*404*/
+/*Блок товар не найден*/
+.product-not-found {
+  max-width: 1220px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin: 0 auto;
+  margin-bottom: 60px;
+  margin-top: 60px;
+  border-radius: 30px;
+
+  text-align: center;
+}
+
+.product-not-found h1 {
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 30px;
+  margin-bottom: 40px;
+}
+
+.product-not-found a.catalog-link {
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+  width: fit-content;
+  padding: 6px 15px;
+  color: #fff;
+  border-radius: 10px;
+  background: #ff7900;
+  transition: transform 0.3s;
+}
+
+.product-not-found a.catalog-link:hover {
+  transform: scale(1.05);
+}
+
+.product-not-found .home_brand_list {
+  margin-top: 30px;
+}
+
+.product-not-found .home_categories_section_heading {
+  display: none;
+}

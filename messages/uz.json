@@ -499,5 +499,11 @@
         "refreshPage": "sahifani yangilash",
         "ifProblemPersists": "Agar muammo takrorlansa,",
         "contactSupport": "qo'llab-quvvatlashga murojaat qiling"
+    },
+    "NotFound": {
+        "title": "Sahifa topilmadi!",
+        "description": "Kechirasiz, bu havola bo'yicha vitaminlar yo'q.",
+        "suggestion": "Katalogimizda vitaminlar assortimenti bilan tanishing!",
+        "catalogButton": "Katalogga o'tish"
     }
 }
