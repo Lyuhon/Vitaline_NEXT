@@ -216,14 +216,11 @@
 
 
 
-
-// new locale
 // middleware.ts
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { locales, defaultLocale, type Locale } from "@/i18n/config";
 
-// Функция для извлечения локали из pathname
 function getLocaleFromPathname(pathname: string): Locale | null {
     for (const locale of locales) {
         if (pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`) {
@@ -233,15 +230,12 @@ function getLocaleFromPathname(pathname: string): Locale | null {
     return null;
 }
 
-// Функция для определения языка из различных источников (fallback)
 function getDefaultLocale(request: NextRequest): Locale {
-    // 1. Проверяем cookie
     const cookieLocale = request.cookies.get("NEXT_LOCALE")?.value;
     if (cookieLocale && locales.includes(cookieLocale as Locale)) {
         return cookieLocale as Locale;
     }
 
-    // 2. Проверяем Accept-Language header
     const acceptLanguage = request.headers.get("accept-language");
     if (acceptLanguage) {
         for (const locale of locales) {
@@ -251,14 +245,12 @@ function getDefaultLocale(request: NextRequest): Locale {
         }
     }
 
-    // 3. Возвращаем дефолтный язык
     return defaultLocale;
 }
 
 export function middleware(request: NextRequest) {
     const path = request.nextUrl.pathname;
 
-    // Пропускаем статические файлы
     if (
         path.startsWith("/icons/") ||
         path.startsWith("/_next/") ||
@@ -272,20 +264,20 @@ export function middleware(request: NextRequest) {
         return NextResponse.next();
     }
 
-    // Извлекаем локаль из URL (приоритет!)
     const localeFromPath = getLocaleFromPathname(path);
-
-    // Если локаль есть в URL - используем её, иначе - fallback
     const locale = localeFromPath || getDefaultLocale(request);
 
-    // Проверяем авторизацию
     const authToken = request.cookies.get("auth_token")?.value;
     const userType = request.cookies.get("user_type")?.value;
     const isAuthenticated = authToken === "authenticated_4";
 
     // Если не авторизован и не на странице логина
     if (path !== `/${locale}/login` && path !== "/login" && !isAuthenticated) {
-        const response = NextResponse.redirect(new URL(`/${locale}/login`, request.url));
+        // Сохраняем текущий URL как redirect_after_login
+        const redirectUrl = new URL(`/${locale}/login`, request.url);
+        redirectUrl.searchParams.set("redirect", path);
+
+        const response = NextResponse.redirect(redirectUrl);
         response.cookies.set("NEXT_LOCALE", locale, { path: "/" });
         response.headers.set("x-locale", locale);
         return response;
@@ -293,13 +285,16 @@ export function middleware(request: NextRequest) {
 
     // Если авторизован и на странице логина
     if ((path === `/${locale}/login` || path === "/login") && isAuthenticated) {
-        const response = NextResponse.redirect(new URL(`/${locale}`, request.url));
+        // Проверяем, есть ли сохраненный redirect URL
+        const redirectPath = request.nextUrl.searchParams.get("redirect");
+        const redirectTo = redirectPath && redirectPath !== "/" ? redirectPath : `/${locale}`;
+
+        const response = NextResponse.redirect(new URL(redirectTo, request.url));
         response.cookies.set("NEXT_LOCALE", locale, { path: "/" });
         response.headers.set("x-locale", locale);
         return response;
     }
 
-    // Если путь не начинается с локали, редиректим
     const pathnameIsMissingLocale = locales.every(
         (locale) => !path.startsWith(`/${locale}/`) && path !== `/${locale}`
     );
@@ -313,7 +308,6 @@ export function middleware(request: NextRequest) {
         return response;
     }
 
-    // Обновляем cookie только если локаль изменилась
     const response = NextResponse.next();
     response.cookies.set("NEXT_LOCALE", locale, { path: "/" });
 
@@ -321,7 +315,6 @@ export function middleware(request: NextRequest) {
         response.headers.set("x-user-type", userType);
     }
 
-    // ВАЖНО: передаём локаль через header для next-intl
     response.headers.set("x-locale", locale);
 
     return response;
