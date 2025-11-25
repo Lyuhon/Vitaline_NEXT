@@ -603,9 +603,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                             <span className={inStock ? '' : 'out_of_stock'}>{inStock ? t('inStock') : t('outOfStock')}</span>
                         </div>
 
-                        <div className="product_price mobile_visible">
-                            {product.convertedPrice}
-                        </div>
+                        {inStock && (
+                            <div className="product_price mobile_visible">
+                                {product.convertedPrice}
+                            </div>
+                        )}
 
                         <div className="prod_meta_list">
                             {product.sku && <SKUCopy sku={product.sku} />}
@@ -622,9 +624,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                                 </div>
                             </div>
 
-                            <div className="product_price pc_visible">
-                                {product.convertedPrice}
-                            </div>
+                            {inStock && (
+                                <div className="product_price pc_visible">
+                                    {product.convertedPrice}
+                                </div>
+                            )}
 
 
                             {product.maxOrderQty && product.maxOrderQty < maxQuantity && (
@@ -646,10 +650,19 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                                 )}
                             </MiniCartProvider>
 
-                            {!inStock && (
+                            {/* {!inStock && (
                                 <div className="product_buttons_block">
                                     <div className="one_click_order">
                                         <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/РЎРРѕР№_1-2.svg" alt="Корзина" />
+                                        <span>{inStock ? t('buyInOneClick') : t('preOrder')}</span>
+                                    </div>
+                                </div>
+                            )} */}
+
+                            {!inStock && (
+                                <div className="product_buttons_block" style={{ display: 'none' }}>
+                                    <div className="one_click_order">
+                                        {/* <img src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/РЎРРѕР№_1-2.svg" alt="Корзина" /> */}
                                         <span>{inStock ? t('buyInOneClick') : t('preOrder')}</span>
                                     </div>
                                 </div>
@@ -663,7 +676,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                                         <p>{t('paymentOnDelivery')}</p>
                                     </div>
                                     <img className="pay_methd_img"
-                                        src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/Screenshot_20.png"
+                                        src="/images/pay_method.png"
                                         alt={t('paymentMethods')} />
                                 </div>
                             )}

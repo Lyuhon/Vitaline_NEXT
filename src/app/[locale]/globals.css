@@ -281,6 +281,10 @@ legend {
   width: 16px;
 }
 
+.product_item.grayscale .add_to_cart {
+  display: none;
+}
+
 /* Анимация для изменения opacity */
 @keyframes fadeIn {
   0% {

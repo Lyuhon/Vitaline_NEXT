@@ -139,11 +139,11 @@ export default async function BrandPage({
 
                     {products.length > 0 && (
                         <p className="brandsCount" style={{ marginTop: '10px' }}>
-                            Товаров в наличии: <strong>{products.length}</strong>
+                            Товаров всего: <strong>{products.length}</strong>
                         </p>
                     )}
 
-                    <div className="shop_page_prod_grid">
+                    {/* <div className="shop_page_prod_grid">
                         {products.map((p: any) => {
                             const formattedPrice = formatPrice(p.price);
                             return (
@@ -171,6 +171,62 @@ export default async function BrandPage({
                                             {p.name}
                                         </Link>
                                         <span className="product_item__price">{p.convertedPrice}</span>
+                                    </div>
+
+                                    <MiniCartProvider>
+                                        <AddToCartButtonInList
+                                            productId={p.id}
+                                            productName={p.name}
+                                            productImage={p.image?.sourceUrl ?? '/images/products/default.jpg'}
+                                            productPrice={p.convertedPrice}
+                                            maxQuantity={p.stockQuantity || 0}
+                                        />
+                                    </MiniCartProvider>
+                                </div>
+                            );
+                        })}
+                    </div> */}
+
+                    <div className="shop_page_prod_grid">
+                        {products.map((p: any) => {
+                            const formattedPrice = formatPrice(p.price);
+                            const isOutOfStock = p.stockStatus !== 'IN_STOCK' || (p.stockQuantity || 0) <= 0;
+
+                            return (
+                                <div
+                                    className={`product_item ${isOutOfStock ? 'grayscale opacity-80' : ''}`}
+                                    key={p.id}
+                                >
+                                    <Link href={`/product/${p.slug}`}>
+                                        <Image
+                                            className="product_item__image"
+                                            src={p.image?.sourceUrl || '/images/products/default.jpg'}
+                                            alt={p.image?.altText || p.name}
+                                            width={200}
+                                            height={200}
+                                        />
+                                    </Link>
+
+                                    <div className="product_meta_box">
+                                        <Link
+                                            href={`/product-brands/${p.brands.nodes[0]?.slug || ''}`}
+                                            className="product_item__brand"
+                                        >
+                                            {p.brands.nodes[0]?.name || 'Бренд не указан'}
+                                        </Link>
+
+                                        <div className="line_highlight"></div>
+                                        <Link href={`/product/${p.slug}`} className="product_item__name">
+                                            {p.name}
+                                        </Link>
+                                        <div>
+                                            {!isOutOfStock && (
+                                                <span className="product_item__price">
+                                                    {p.convertedPrice}
+                                                </span>
+                                            )}
+                                        </div>
+
                                     </div>
 
                                     <MiniCartProvider>

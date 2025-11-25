@@ -181,7 +181,7 @@ import { addToCart as addToLocalStorage } from '@/app/[locale]/utils/cartStorage
 import { useTranslations } from 'next-intl';
 
 // Константа для переключения между двойным хранением и только localStorage
-const USE_COOKIES = true; // true - двойное хранение (cookies + localStorage), false - только localStorage
+const USE_COOKIES = false; // true - двойное хранение (cookies + localStorage), false - только localStorage
 
 interface AddToCartButtonInListProps {
     productId: string;
@@ -191,6 +191,7 @@ interface AddToCartButtonInListProps {
     maxQuantity: number;
     initialQty?: number;
     stock?: boolean;
+    disabled?: boolean;
 }
 
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
@@ -203,12 +204,17 @@ export default function AddToCartButtonInList({
     maxQuantity,
     initialQty = 1,
     stock = true,
+    disabled,
 }: AddToCartButtonInListProps) {
     const t = useTranslations('common');
     const [loading, setLoading] = useState(false);
     const { setLastAddedItem, clearLastAddedItem } = useMiniCart();
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [addedQuantity, setAddedQuantity] = useState(initialQty);
+
+    const isAvailable = disabled !== undefined
+        ? !disabled
+        : (stock && maxQuantity > 0);
 
     const closePopup = useCallback(() => {
         setIsPopupOpen(false);
@@ -259,7 +265,7 @@ export default function AddToCartButtonInList({
 
     // Основная логика добавления в корзину
     const addToCart = async () => {
-        if (!stock) return;
+        if (!isAvailable) return;
 
         setLoading(true);
 
@@ -319,9 +325,9 @@ export default function AddToCartButtonInList({
     return (
         <>
             <div
-                className={`add_to_cart product_item__add_to_cart ${!stock ? 'disabled' : ''}`}
-                onClick={stock && !loading ? addToCart : undefined}
-                style={{ cursor: stock && !loading ? 'pointer' : 'not-allowed' }}
+                className={`add_to_cart product_item__add_to_cart ${!isAvailable ? 'disabled' : ''}`}
+                onClick={isAvailable && !loading ? addToCart : undefined}
+                style={{ cursor: isAvailable && !loading ? 'pointer' : 'not-allowed' }}
             >
                 <img
                     src="https://nuxt.vitaline.uz/wp-content/uploads/2024/12/shopping-cart_icon-icons.com_72552-1-1.svg"
